@@ -1,0 +1,54 @@
+@CHARSET "UTF-8";
+
+.ui-dialog.ui-tabbed-dialog {
+	
+}
+
+.ui-dialog.ui-tabbed-dialog .tabs-info {
+    border: none;
+    padding: 0;
+    height: 100%;
+}
+.ui-dialog.ui-tabbed-dialog .tabs-info .ui-tabs-panel{
+    height: 97%;
+    padding: 0;
+    border-radius:0;
+    overflow: hidden;
+}
+
+.ui-dialog.ui-tabbed-dialog .tabs-info .ui-tabs-panel textarea{
+	height: 97%;
+	width: 97%;
+	white-space:nowrap;
+	overflow:auto;
+}
+
+.ui-dialog.ui-tabbed-dialog .ui-dialog-titlebar {
+    padding-left:0;
+    padding-top:0;
+    padding-bottom:0;
+}
+
+.ui-dialog.ui-tabbed-dialog .ui-dialog-titlebar .ui-tabs{
+	padding-left:0;  
+	padding-bottom:0;
+	padding-top:0;
+	padding-right:0;
+  margin-right:10px;
+	border:0;
+}
+
+.ui-dialog.ui-tabbed-dialog .ui-dialog-titlebar .ui-tabs .ui-tabs-nav{
+    display:block;
+    white-space:nowrap;
+    background: none;
+    padding:0;
+    padding-left:10px;
+    text-align:left;
+    border:0;
+}
+
+
+.ui-dialog.ui-tabbed-dialog .ui-dialog-content{
+    padding:0;
+}

@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>TITULO</title>
+	
+	
+
+	<style>
+		* {
+			padding:0;
+			margin:0;
+			border:0;
+		}
+		p {
+			padding:20px;
+		}
+	</style>
+<script type="text/javascript" src="lib/descartes.js"></script>
+</head>	
+
+<body>
+	<p align="center"></p>
+
+	<applet width="790" height="680" archive="lib/Descartes5.jar"
+		codebase="./" code="Descartes.class" name="Descartes"
+		class="DescartesJS">
+		<param name="size" value="790x680">
+		<param name="decimal_symbol" value=".">
+		<param name="antialias" value="true">
+		<param name="deshacer" value="false">
+		<param name="version" value="6.0, 2013-12-06">
+		<param name="language" value="español">
+		<param value="about='false' config='false' init='false' clear='false'"
+			name="Buttons">
+		<param value="" name="Animation">
+		<param
+			value="id='E1' type='R2' height='520' fixed='true' scale='1' O.x='-50%' O.y='-50%' bg_display='topleft' background='ffffff' net='false' net10='false' axes='false' text='false' x='E1.x' y='E1.y'"
+			name="E_00">
+		<param
+			value="id='PropWin' type='R2' width='270' height='370' draw-if='PropWin.visble' fixed='true' scale='1' O.x='-50%' O.y='-50%' bg_display='topleft' background='ff0000' net='false' net10='false' axes='false' text='false' x='PropWin.x' y='PropWin.y'"
+			name="E_01">
+		<param
+			value="id='PropWinPos' type='R2' width='270' height='340' draw-if='PropWinPos.visible&amp;PropWin.visble' bg_display='topleft' background='ff0000' net='false' net10='false' axes='false' text='false' x='PropWinPos.x' y='PropWinPos.y'"
+			name="E_02">
+		<param
+			value="id='PropWinColor' type='R2' width='270' height='340' draw-if='PropWinColor.visible&amp;PropWin.visble' bg_display='topleft' background='ff0000' net='false' net10='false' axes='false' text='false' x='PropWinColor.x' y='PropWinColor.y'"
+			name="E_03">
+		<param
+			value="id='PropWinCont' type='R2' width='270' height='340' draw-if='PropWinCont.visible&amp;PropWin.visble' bg_display='topleft' background='ff0000' net='false' net10='false' axes='false' text='false' x='PropWinCont.x' y='PropWinCont.y'"
+			name="E_04">
+		<param
+			value="id='PropWinVerif' type='R2' width='270' height='340' draw-if='PropWinVerif.visible&amp;PropWin.visble' bg_display='topleft' background='ff0000' net='false' net10='false' axes='false' text='false' x='PropWinVerif.x' y='PropWinVerif.y'"
+			name="E_05">
+		<param
+			value="id='toolBarUp' type='R2' width='100%' height='80' draw-if='toolBarUp.visible' fixed='true' bg_display='topleft' background='3a746b' net='false' net10='false' axes='false' text='false' x='toolBarUp.x' y='toolBarUp.y'"
+			name="E_06">
+		<param
+			value="id='toolbar' type='R2' width='toolbar.w' height='80' draw-if='toolbar.visible' fixed='true' bg_display='topleft' background='3a746b' net='false' net10='false' axes='false' text='false' x='toolbar.x' y='toolbar.y'"
+			name="E_07">
+		<param
+			value="id='mask' type='R2' draw-if='PropEjercicio.visible|verMsgGetCorr|verModal|menuPlantillas.visible' fixed='true' bg_display='topleft' background='5a000000' net='false' net10='false' axes='false' text='false'"
+			name="E_08">
+		<param
+			value="id='PropEjercicio' type='R2' width='80%' height='80%' draw-if='PropEjercicio.visible' fixed='true' bg_display='topleft' net='false' net10='false' axes='false' text='false' x='PropEjercicio.x' y='PropEjercicio.y'"
+			name="E_09">
+		<param
+			value="id='WinMsg' type='R2' width='300' height='200' draw-if='verMsgGetCorr' bg_display='topleft' net='false' net10='false' axes='false' text='false' x='WinMsg.x' y='WinMsg.y'"
+			name="E_10">
+		<param
+			value="id='menuPlantillas' type='R2' width='500' height='250' draw-if='menuPlantillas.visible' fixed='true' bg_display='topleft' net='false' net10='false' axes='false' text='false' x='menuPlantillas.x' y='menuPlantillas.y'"
+			name="E_11">
+		<param
+			value="id='EditarPrueba' type='numeric' gui='button' region='interior' space='toolBarUp' name='Probar' expresion='(enEditor.x,enEditor.y,enEditor.w,enEditor.h)' value='1' fixed='false' visible='false' color='ffffff' int-colour='009100' options='Interactivo,Edición' action='calculate' parameter='enEditor=0\ntt=(enEditor)?0:(storeConfig(ejercicioActReal)+desactivaEditor())\nponEjercicio(ejercicioActReal)\n\n' draw-if='enEditor==1'"
+			name="C_00">
+		<param
+			value="id='PruebaEditar' type='numeric' gui='button' region='interior' space='E1' name='Salir' expresion='(E1._w-100,0,100,20)' fixed='false' visible='false' color='ffffff' int-colour='a50000' options='Interactivo,Edición' action='calculate' parameter='enEditor=1\ntt=(enEditor)?0:(storeConfig(ejercicioActReal)+desactivaEditor())\nponEjercicio(ejercicioActReal)\n\n' draw-if='enEditor==0' msg_pos='center'"
+			name="C_01">
+		<param
+			value="id='file' name='Archivo' type='numeric' expresion='(file.x,file.y,file.w,file.h)' gui='textfield' space='toolBarUp' value='&amp;squot;datos2/cfgEjer.txt&amp;squot;' fixed='true' visible='true' region='interior' only_text='true' msg_pos='center'"
+			name="C_02">
+		<param
+			value="id='openBtn' type='numeric' gui='button' region='interior' space='toolBarUp' expresion='(openBtn.x,openBtn.y,openBtn.w,openBtn.h)' fixed='true' visible='true' image='images/edicion/icons/white/png/folder_open_icon&amp;24.png' action='calculate' parameter='_Open_(&amp;squot;file&amp;squot;,&amp;squot;initEjercicios&amp;squot;)' msg_pos='center'"
+			name="C_03">
+		<param
+			value="id='loadBtn' type='numeric' gui='button' region='interior' space='toolBarUp' expresion='(loadBtn.x,loadBtn.y,loadBtn.w,loadBtn.h)' fixed='true' visible='true' image='images/edicion/icons/white/png/doc_import_icon&amp;24.png' action='calculate' parameter='initEjercicios()' msg_pos='center'"
+			name="C_04">
+		<param
+			value="id='guarBtn' type='numeric' gui='button' region='interior' space='toolBarUp' expresion='(guarBtn.x,guarBtn.y,guarBtn.w,guarBtn.h)' fixed='true' visible='true' image='images/edicion/icons/white/png/save_icon&amp;24.png' action='calculate' parameter='actionGuardBtn()' msg_pos='center'"
+			name="C_05">
+		<param
+			value="id='EditarEjercicio' type='numeric' gui='button' region='interior' space='toolbar' name='Cfg ejercicio' expresion='(EditarEjercicio.x,EditarEjercicio.y,EditarEjercicio.w,EditarEjercicio.h)' fixed='true' visible='false' options='INTER_OBJ,MODIF_OBJ' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_06">
+		<param
+			value="id='Editar' type='numeric' gui='button' region='interior' space='toolbar' name='Editar' expresion='(Editar.x,Editar.y,Editar.w,Editar.h)' fixed='true' visible='false' options='INTER_OBJ,MODIF_OBJ' action='calculate' parameter.font='Monospaced,PLAIN,12' active-if='(activoCtr2&gt;-1)' msg_pos='center'"
+			name="C_07">
+		<param
+			value="id='GetCorr_ini' type='numeric' gui='button' region='interior' space='toolbar' name='Acomodar correctos' expresion='(GetCorrecto.x,GetCorrecto.y,GetCorrecto.w,GetCorrecto.h)' fixed='true' visible='true' action='calculate' parameter='tt=(opciones.edicion!=0)?ponParaEditar():0\nopciones.edicion=0\nacomodandoCorectos=0\nPropWin.visble=0\nopciones.activo=-1\nE1.mouse_pressed=0\nisInitEdit=0\neditarGols2=0\nactivoCtr2=-1\neditarGols=editarGols2\nactivoCtr=activoCtr2\nacomodandoCorectos=1' draw-if='(!acomodandoCorectos)' msg_pos='center'"
+			name="C_08">
+		<param
+			value="id='GetCorr_fin' type='numeric' gui='button' region='interior' space='toolbar' name='Captura correcto' expresion='(GetCorrecto.x,GetCorrecto.y,GetCorrecto.w,GetCorrecto.h)' fixed='true' visible='true' int-colour='578bc5' action='calculate' parameter='captuaraPosCorrecto()\nverMsgGetCorr=1\nacomodandoCorectos=0' draw-if='(acomodandoCorectos)' msg_pos='center'"
+			name="C_09">
+		<param
+			value="id='editarGols2' type='numeric' gui='menu' region='interior' space='toolbar' expresion='(editarGols.x,editarGols.y,editarGols.w,editarGols.h)' value='editarGols' fixed='false' visible='false' options='Control,Gol,Otro' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_10">
+		<param
+			value="id='activoCtr2' name='número' type='numeric' expresion='(activoCtr.x,activoCtr.y,activoCtr.w,activoCtr.h)' gui='spinner' space='toolbar' value='activoCtr' max='getMaxIdxForActivo()' min='-1' incr='1' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_11">
+		<param
+			value="id='addBtn' type='numeric' gui='button' region='interior' space='toolbar' name='+' expresion='(addBtn.x,addBtn.y,addBtn.w,addBtn.h)' fixed='true' visible='true' action='calculate' parameter='tt=(editarGols2)?addGol():addCtr()' active-if='(editarGols2&lt;2)' msg_pos='center'"
+			name="C_12">
+		<param
+			value="id='rmBtn' type='numeric' gui='button' region='interior' space='toolbar' name='-' expresion='(rmBtn.x,rmBtn.y,rmBtn.w,rmBtn.h)' fixed='true' visible='true' action='calculate' parameter='tt=(editarGols)?rmGol(activoCtr):rmCtr(activoCtr)' draw-if='(editarGols&lt;2)&amp;(activoCtr&gt;-1)' active-if='(editarGols==1)?(opciones.n_gols&gt;1):(opciones.n_ctr&gt;1)' msg_pos='center'"
+			name="C_13">
+		<param
+			value="id='enGolMargen' name='En gol' type='numeric' expresion='(enGolMargen.x,enGolMargen.y,enGolMargen.w,enGolMargen.h)' gui='spinner' space='PropWinVerif' value='enGolMargen' min='-1' incr='1' draw-if='editarGols==0' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_14">
+		<param
+			value="id='actMargenX' name='Margen X' type='numeric' expresion='(actMargenX.x,actMargenX.y,actMargenX.w,actMargenX.h)' gui='spinner' space='PropWinVerif' value='actMargenX' min='0' incr='1' draw-if='editarGols==1' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_15">
+		<param
+			value="id='actMargenY' name='Margen Y' type='numeric' expresion='(actMargenY.x,actMargenY.y,actMargenY.w,actMargenY.h)' gui='spinner' space='PropWinVerif' value='actMargenY' min='0' incr='1' draw-if='editarGols==1' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_16">
+		<param
+			value="id='activoGAPX' name='X' type='numeric' expresion='(activoGAPX.x,activoGAPX.y,activoGAPX.w,activoGAPX.h)' gui='spinner' space='PropWinVerif' value='activoGAPX' max='30' min='-20' incr='1' draw-if='editarGols==1' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_17">
+		<param
+			value="id='activoGAPY' name='Y' type='numeric' expresion='(activoGAPY.x,activoGAPY.y,activoGAPY.w,activoGAPY.h)' gui='spinner' space='PropWinVerif' value='activoGAPY' max='30' min='-20' incr='1' draw-if='editarGols==1' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_18">
+		<param
+			value="id='activoX' name='Pos X' type='numeric' expresion='(activoX.x,activoX.y,activoX.w,activoX.h)' gui='spinner' space='PropWinPos' value='activoX' max='E1._w-10' min='0' incr='1' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_19">
+		<param
+			value="id='activoY' name='Pos Y' type='numeric' expresion='(activoY.x,activoY.y,activoY.w,activoY.h)' gui='spinner' space='PropWinPos' value='activoY' max='E1._h-10' min='0' incr='1' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_20">
+		<param
+			value="id='activoW' name='Ancho' type='numeric' expresion='(activoW.x,activoW.y,activoW.w,activoW.h)' gui='spinner' space='PropWinPos' value='activoW' min='0' incr='1' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_21">
+		<param
+			value="id='activoH' name='Alto' type='numeric' expresion='(activoH.x,activoH.y,activoH.w,activoH.h)' gui='spinner' space='PropWinPos' value='activoH' min='0' incr='1' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_22">
+		<param
+			value="id='activoTXT' name='Texto' type='numeric' expresion='(activoTXT.x,activoTXT.y,activoTXT.w,activoTXT.h)' gui='textfield' space='PropWinCont' value='&amp;squot;&amp;squot;' incr='1' fixed='true' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' only_text='true' msg_pos='center'"
+			name="C_23">
+		<param
+			value="id='activoDX' name='X' type='numeric' expresion='(activoDX.x,activoDX.y,activoDX.w,activoDX.h)' gui='spinner' space='PropWinCont' value='activoDX' max='(editarGols&lt;2)*activoH+(editarGols&gt;1)*1000' min='0' incr='1' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_24">
+		<param
+			value="id='activoDY' name='Y' type='numeric' expresion='(activoDY.x,activoDY.y,activoDY.w,activoDY.h)' gui='spinner' space='PropWinCont' value='activoDY' max='(editarGols&lt;2)*activoW+(editarGols&gt;1)*1000' min='0' incr='1' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_25">
+		<param
+			value="id='activoIMG' name='Fondo' type='numeric' expresion='(activoIMG.x,activoIMG.y,activoIMG.w,activoIMG.h)' gui='textfield' space='PropWinCont' value='&amp;squot;asdasd&amp;squot;' incr='1' fixed='true' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' only_text='true' msg_pos='center'"
+			name="C_26">
+		<param
+			value="id='activoIMG_DX' name='X' type='numeric' expresion='(activoIMG_DX.x,activoIMG_DX.y,activoIMG_DX.w,activoIMG_DX.h)' gui='spinner' space='PropWinCont' value='activoIMG_DX' max='activoW' min='0' incr='1' active-if='(editarGols&lt;2)' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_27">
+		<param
+			value="id='activoIMG_DY' name='Y' type='numeric' expresion='(activoIMG_DY.x,activoIMG_DY.y,activoIMG_DY.w,activoIMG_DY.h)' gui='spinner' space='PropWinCont' value='activoIMG_DY' max='activoH' min='0' incr='1' active-if='(editarGols&lt;2)' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_28">
+		<param
+			value="id='activoImgRot' name='Rota' type='numeric' expresion='(activoImgRot.x,activoImgRot.y,activoImgRot.w,activoImgRot.h)' gui='spinner' space='PropWinCont' value='1' max='359' min='0' incr='1' active-if='(editarGols&lt;2)' fixed='true' visible='true' region='interior' action='calculate' parameter='enTiempoReal=1' msg_pos='center'"
+			name="C_29">
+		<param
+			value="id='activoIMG_INFO' name='Información' type='numeric' expresion='(activoIMG_INFO.x,activoIMG_INFO.y,activoIMG_INFO.w,activoIMG_INFO.h)' gui='textfield' space='PropWinCont' value='&amp;squot;asdasd&amp;squot;' incr='1' draw-if='(editarGols&lt;2)' fixed='true' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' only_text='true' msg_pos='center'"
+			name="C_30">
+		<param
+			value="id='activoA' name='Opacidad' type='numeric' expresion='(activoA.x,activoA.y,activoA.w,activoA.h)' gui='spinner' space='PropWinColor' value='activoA' max='1' min='0' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_31">
+		<param
+			value="id='activoR' name='Rojo' type='numeric' expresion='(activoR.x,activoR.y,activoR.w,activoR.h)' gui='spinner' space='PropWinColor' value='activoR' max='1' min='0' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_32">
+		<param
+			value="id='activoG' name='Verde' type='numeric' expresion='(activoG.x,activoG.y,activoG.w,activoG.h)' gui='spinner' space='PropWinColor' value='activoG' max='1' min='0' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_33">
+		<param
+			value="id='activoB' name='Azul' type='numeric' expresion='(activoB.x,activoB.y,activoB.w,activoB.h)' gui='spinner' space='PropWinColor' value='activoB' max='1' min='0' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_34">
+		<param
+			value="id='activoBW' name='Ancho' type='numeric' expresion='(activoBW.x,activoBW.y,activoBW.w,activoBW.h)' gui='spinner' space='PropWinColor' value='activoBW' min='0' incr='1' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_35">
+		<param
+			value="id='activoBA' name='Opacidad' type='numeric' expresion='(activoBA.x,activoBA.y,activoBA.w,activoBA.h)' gui='spinner' space='PropWinColor' value='activoBA' max='1' min='0' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_36">
+		<param
+			value="id='activoBR' name='Rojo' type='numeric' expresion='(activoBR.x,activoBR.y,activoBR.w,activoBR.h)' gui='spinner' space='PropWinColor' value='activoBR' max='1' min='0' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_37">
+		<param
+			value="id='activoBG' name='Verde' type='numeric' expresion='(activoBG.x,activoBG.y,activoBG.w,activoBG.h)' gui='spinner' space='PropWinColor' value='activoBG' max='1' min='0' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_38">
+		<param
+			value="id='activoBB' name='Azul' type='numeric' expresion='(activoBB.x,activoBB.y,activoBB.w,activoBB.h)' gui='spinner' space='PropWinColor' value='activoBB' max='1' min='0' fixed='false' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' msg_pos='center'"
+			name="C_39">
+		<param
+			value="id='tab1' type='numeric' gui='button' region='interior' space='PropWin' name='Posición' expresion='(tabP.x,tabP.y,tabP.w,tabP.h)' fixed='true' visible='true' action='calculate' parameter='setVisibleTab(0)' draw-if='getPosTab(0)' msg_pos='center'"
+			name="C_40">
+		<param
+			value="id='tab2' type='numeric' gui='button' region='interior' space='PropWin' name='Color' expresion='(tabP.x,tabP.y,tabP.w,tabP.h)' fixed='true' visible='true' action='calculate' parameter='setVisibleTab(1)' draw-if='getPosTab(1)&amp;(editarGols&lt;2)' msg_pos='center'"
+			name="C_41">
+		<param
+			value="id='tab3' type='numeric' gui='button' region='interior' space='PropWin' name='Contenido' expresion='(tabP.x,tabP.y,tabP.w,tabP.h)' fixed='true' visible='true' action='calculate' parameter='setVisibleTab(2)' draw-if='getPosTab(2)' msg_pos='center'"
+			name="C_42">
+		<param
+			value="id='tab4' type='numeric' gui='button' region='interior' space='PropWin' name='Acomodo' expresion='(tabP.x,tabP.y,tabP.w,tabP.h)' fixed='true' visible='true' action='calculate' parameter='setVisibleTab(3)' draw-if='getPosTab(3)&amp;(editarGols==1)' msg_pos='center'"
+			name="C_43">
+		<param
+			value="id='tab4' type='numeric' gui='button' region='interior' space='PropWin' name='Verif' expresion='(tabP.x,tabP.y,tabP.w,tabP.h)' fixed='true' visible='true' action='calculate' parameter='setVisibleTab(3)' draw-if='getPosTab(3)&amp;(editarGols&lt;2)' msg_pos='center'"
+			name="C_44">
+		<param
+			value="id='opciones.n_gols' name='N Destinos' type='numeric' expresion='(nGoles.x,nGoles.y,nGoles.w,nGoles.h)' gui='spinner' space='PropEjercicio' value='opciones.n_gols' min='0' incr='1' active-if='0' fixed='true' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' discrete='true' options='SEL_UNICA[1001],SEL_MULTIPLE[1002]' msg_pos='center'"
+			name="C_45">
+		<param
+			value="id='opciones.n_ctr' name='N Elementos' type='numeric' expresion='(nControles.x,nControles.y,nControles.w,nControles.h)' gui='spinner' space='PropEjercicio' value='opciones.n_gols' min='0' incr='1' active-if='0' fixed='true' visible='true' region='interior' action='calculate' parameter.font='Monospaced,PLAIN,12' discrete='true' options='SEL_UNICA[1001],SEL_MULTIPLE[1002]' msg_pos='center'"
+			name="C_46">
+		<param
+			value="id='btnClosePE' type='numeric' gui='button' region='interior' space='PropEjercicio' name='X' expresion='(btnClosePE.x,btnClosePE.y,btnClosePE.w,btnClosePE.h)' fixed='true' visible='true' bold='true' action='calculate' parameter='sync_txtEscena()\nponParaEditarEscena()' msg_pos='center'"
+			name="C_47">
+		<param
+			value="id='textoInstrucciones2' name='Texto' type='numeric' expresion='(textoInstrucciones.x,textoInstrucciones.y,textoInstrucciones.w,textoInstrucciones.h)' gui='textfield' space='PropEjercicio' fixed='true' visible='true' region='interior' action='calculate' parameter='textoInstrucciones=textoInstrucciones2' only_text='true' msg_pos='center'"
+			name="C_48">
+		<param
+			value="id='imagenFondoPleca2' name='Fondo' type='numeric' expresion='(imagenFondoPleca.x,imagenFondoPleca.y,imagenFondoPleca.w,imagenFondoPleca.h)' gui='textfield' space='PropEjercicio' fixed='true' visible='true' region='interior' action='calculate' parameter='imagenFondoPleca=imagenFondoPleca2' only_text='true' msg_pos='center'"
+			name="C_49">
+		<param
+			value="id='imagenFondo2' name='Fondo' type='numeric' expresion='(imagenFondo.x,imagenFondo.y,imagenFondo.w,imagenFondo.h)' gui='textfield' space='PropEjercicio' fixed='true' visible='true' region='interior' action='calculate' parameter='imagenFondo=imagenFondo2' only_text='true' msg_pos='center'"
+			name="C_50">
+		<param
+			value="id='ctrRand' type='numeric' gui='menu' region='interior' space='PropEjercicio' name='Orden controles' expresion='(ctrRand.x,ctrRand.y,ctrRand.w,ctrRand.h)' value='ctrRand' fixed='false' visible='false' options='Normal, Aleatorio' msg_pos='center'"
+			name="C_51">
+		<param
+			value="id='retroBien' type='graphic' space='E1' color='0000ff' fixed='true' int-colour='009000' expresion='(retroBien.x,retroBien.y)' draw-if='opciones.edicion==1' active-if='opciones.edicion==1'"
+			name="C_52">
+		<param
+			value="id='retroMal' type='graphic' space='E1' color='0000ff' fixed='true' int-colour='ff0000' expresion='(retroMal.x,retroMal.y)' draw-if='opciones.edicion==1' active-if='opciones.edicion==1'"
+			name="C_53">
+		<param
+			value="id='btnVerificar' type='graphic' space='E1' color='0000ff' size='8' fixed='true' int-colour='ff0000' expresion='(btnVerificar.x,btnVerificar.y)' draw-if='opciones.edicion==1' active-if='opciones.edicion==1'"
+			name="C_54">
+		<param
+			value="id='btnVerificar' type='numeric' gui='button' region='interior' space='E1' expresion='(btnVerificar.x,-btnVerificar.y,btnVerificar.w,btnVerificar.h)' fixed='true' visible='true' color='ffffff' bold='true' image='vacio.gif' action='calculate' parameter.font='Monospaced,PLAIN,12' draw-if='(opciones.edicion==0)&amp;(btnVerificar.visible)' msg_pos='center'"
+			name="C_55">
+		<param
+			value="id='btnOtroEjer' type='graphic' space='E1' color='7d0000' fixed='true' int-colour='8e00ff' expresion='(btnOtroEjer.x,btnOtroEjer.y)' draw-if='opciones.edicion==1' active-if='opciones.edicion==1'"
+			name="C_56">
+		<param
+			value="id='btnOtroEjer' type='numeric' gui='button' region='interior' space='E1' expresion='(btnOtroEjer.x,-btnOtroEjer.y,btnOtroEjer.w,btnOtroEjer.h)' fixed='true' visible='true' color='ffffff' bold='true' image='vacio.gif' action='calculate' parameter.font='Monospaced,PLAIN,12' draw-if='(opciones.edicion==0)&amp;(btnOtroEjer.visible)' msg_pos='center'"
+			name="C_57">
+		<param
+			value="id='btnSig' type='graphic' space='E1' size='6' fixed='true' int-colour='85ff5100' expresion='(btnSig.x,btnSig.y)' draw-if='opciones.edicion==1' active-if='opciones.edicion==1'"
+			name="C_58">
+		<param
+			value="id='btnSig' type='numeric' gui='button' region='interior' space='E1' expresion='(btnSig.x,-btnSig.y,btnSig.w,btnSig.h)' fixed='true' visible='true' color='ffffff' bold='true' puntos='18' image='vacio.gif' action='calculate' parameter.font='Monospaced,PLAIN,12' draw-if='(opciones.edicion==0)&amp;(btnSig.visible)' active-if='btnSig.activo_si' msg_pos='center'"
+			name="C_59">
+		<param
+			value="id='btnNavTxt' type='graphic' space='E1' size='8' fixed='true' int-colour='85ff5100' expresion='(btnNavTxt.x,btnNavTxt.y)' draw-if='opciones.edicion==1' active-if='opciones.edicion==1'"
+			name="C_60">
+		<param
+			value="id='btnAnt' type='graphic' space='E1' size='8' fixed='true' int-colour='85ff5100' expresion='(btnAnt.x,btnAnt.y)' draw-if='opciones.edicion==1' active-if='opciones.edicion==1'"
+			name="C_61">
+		<param
+			value="id='btnAnt' type='numeric' gui='button' region='interior' space='E1' expresion='(btnAnt.x,-btnAnt.y,btnAnt.w,btnAnt.h)' fixed='true' visible='true' color='ffffff' bold='true' puntos='18' image='vacio.gif' action='calculate' parameter.font='Monospaced,PLAIN,12' draw-if='(opciones.edicion==0)&amp;(btnAnt.visible)' active-if='btnAnt.activo_si' msg_pos='center'"
+			name="C_62">
+		<param
+			value="id='winTitle' type='graphic' space='E1' fixed='true' image='images/edicion/winTitleProp_invi.png' expresion='(600,-100)' draw-if='opciones.edicion==1' active-if='opciones.edicion==1'"
+			name="C_63">
+		<param
+			value="id='toolbarBtn' type='numeric' gui='button' region='interior' space='E1' name='^' expresion='(toolbarBtn.x,toolbarBtn.y,toolbarBtn.w,toolbarBtn.h)' fixed='true' visible='true' action='calculate' parameter='tt=(toolbar.visible)?ocultaToolBar():muestraToolBar()' draw-if='0&amp;(enEditor)' msg_pos='center'"
+			name="C_64">
+		<param
+			value="id='openToolBarUp' type='numeric' gui='button' region='interior' space='E1' name='v' expresion='(openToolBarUp.x,openToolBarUp.y,openToolBarUp.w,openToolBarUp.h)' fixed='true' visible='true' action='calculate' parameter='tt=(toolBarUp.visible)?ocultaToolBarUp():muestraToolBarUp()\n' draw-if='(enEditor)&amp;0' msg_pos='center'"
+			name="C_65">
+		<param
+			value="id='msgOkBtn' type='numeric' gui='button' region='interior' space='WinMsg' name='Aceptar' expresion='(msgOkBtn.x,msgOkBtn.y,msgOkBtn.w,msgOkBtn.h)' fixed='true' visible='true' action='calculate' parameter='verMsgGetCorr=0' msg_pos='center'"
+			name="C_66">
+		<param
+			value="id='ejerRndOrder' type='numeric' gui='menu' region='interior' space='toolBarUp' name='Orden ejercicios' expresion='(ejerRndOrder.x,ejerRndOrder.y,ejerRndOrder.w,ejerRndOrder.h)' fixed='false' visible='false' options='Normal, Aleatorio' msg_pos='center'"
+			name="C_67">
+		<param
+			value="id='addEjerBtn' type='numeric' gui='button' region='interior' space='toolBarUp' name='+' expresion='(addEjerBtn.x,addEjerBtn.y,addEjerBtn.w,addEjerBtn.h)' fixed='true' visible='true' action='calculate' parameter='addEjercicio()\n' msg_pos='center'"
+			name="C_68">
+		<param
+			value="id='rmEjerBtn' type='numeric' gui='button' region='interior' space='toolBarUp' name='-' expresion='(rmEjerBtn.x,rmEjerBtn.y,rmEjerBtn.w,rmEjerBtn.h)' fixed='true' visible='true' action='calculate' parameter='rmEjercicio(ejercicioActReal)\nejercicioActReal=min(ejercicioActReal,numEjerc-1)\nejercicioAct=ejercicioActReal\ngetConfig(ejercicioActReal)\n' active-if='numEjerc&gt;1' msg_pos='center'"
+			name="C_69">
+		<param
+			value="id='idxMvEjer' name='Índice del ejercicio' type='numeric' expresion='(idxMvEjer.x,idxMvEjer.y,idxMvEjer.w,idxMvEjer.h)' gui='spinner' space='toolBarUp' draw-if='0' fixed='true' visible='true' region='interior' msg_pos='center'"
+			name="C_70">
+		<param
+			value="id='btnCancelPlan' type='numeric' gui='button' region='interior' space='menuPlantillas' name='Cancelar' expresion='(btnCancelPlan.x,btnCancelPlan.y,btnCancelPlan.w,btnCancelPlan.h)' fixed='true' visible='true' action='calculate' parameter='menuPlantillas.visible=0' msg_pos='center'"
+			name="C_71">
+		<param
+			value="id='golsRand' type='numeric' gui='menu' region='interior' space='PropEjercicio' name='Orden goles' expresion='(golsRand.x,golsRand.y,golsRand.w,golsRand.h)' value='golsRand' fixed='false' visible='false' options='Normal, Aleatorio' msg_pos='center'"
+			name="C_72">
+		<param
+			value="id='verifMode' type='numeric' gui='menu' region='interior' space='PropEjercicio' name='Cómo verificar' expresion='(verifMode.x,verifMode.y,verifMode.w,verifMode.h)' value='golsRand' fixed='false' visible='false' options='Con botón,Al soltar' msg_pos='center'"
+			name="C_73">
+		<param
+			value="id='txtImgBien2' name='Correcto' type='numeric' expresion='(txtImgBien.x,txtImgBien.y,txtImgBien.w,txtImgBien.h)' gui='textfield' space='PropEjercicio' fixed='true' visible='true' region='interior' action='calculate' parameter='txtImgBien=txtImgBien2' only_text='true' msg_pos='center'"
+			name="C_74">
+		<param
+			value="id='txtImgMal2' name='Incorrecto' type='numeric' expresion='(txtImgMal.x,txtImgMal.y,txtImgMal.w,txtImgMal.h)' gui='textfield' space='PropEjercicio' fixed='true' visible='true' region='interior' action='calculate' parameter='txtImgMal=txtImgMal2' only_text='true' msg_pos='center'"
+			name="C_75">
+		<param
+			value="id='test' name='test' type='numeric' expresion='(0,0,0,0)' gui='textfield' space='E1' value='&amp;squot;&amp;squot;' draw-if='0 &amp; &amp;squot;Hack para el metodo _NUM_. Parece que solo funciona con controles&amp;squot;' fixed='true' visible='true' region='interior' only_text='true' msg_pos='center'"
+			name="C_76">
+		<param
+			value="id='btnPlant_00' type='numeric' gui='button' region='interior' space='menuPlantillas' expresion='(_btn.x,_btn.y,_btn.w,_btn.h)' fixed='true' visible='true' image='vacio.gif' action='calculate' parameter='addEjerFromPlantilla(0)' draw-if='getConfigBtnPantilla(0)' active-if='_btn.activo' msg_pos='center'"
+			name="C_77">
+		<param
+			value="id='btnPlant_01' type='numeric' gui='button' region='interior' space='menuPlantillas' expresion='(_btn.x,_btn.y,_btn.w,_btn.h)' fixed='true' visible='true' image='vacio.gif' action='calculate' parameter='addEjerFromPlantilla(1)' draw-if='getConfigBtnPantilla(1)' active-if='_btn.activo' msg_pos='center'"
+			name="C_78">
+		<param
+			value="id='btnPlant_02' type='numeric' gui='button' region='interior' space='menuPlantillas' expresion='(_btn.x,_btn.y,_btn.w,_btn.h)' fixed='true' visible='true' image='vacio.gif' action='calculate' parameter='addEjerFromPlantilla(2)' draw-if='getConfigBtnPantilla(2)' active-if='_btn.activo' msg_pos='center'"
+			name="C_79">
+		<param value="id='__PLANTILLAS__'" name="A_00">
+		<param
+			value="id='plantillasCfg' expresion=';' evaluate='only-once' matrix='true' array='true' columns='10' rows='5000'"
+			name="A_01">
+		<param
+			value="id='loadPlantillas()' expresion='1' do='nPlantillas=-1;filePlantilla=&amp;squot;datos2/plantillas.txt&amp;squot;;_GetValues_(filePlantilla,&amp;squot;cfgPlantillas&amp;squot;);_GetMatrix_(filePlantilla,&amp;squot;plantillasCfg&amp;squot;);;' algorithm='true' array='true' matrix='true'"
+			name="A_02">
+		<param
+			value="id='getConfigBtnPantilla(idxP)' expresion='_btn.visible' local='gapX,gapY,nCols,isIdx' init='gapX=10;gapY=10;nCols=3' do='isIdx=(idxP&gt;-1)&amp;(idxP&lt;nPlantillas);idxP=(isIdx)?idxP:0;_btn.w=150;_btn.h=100;_btn.x=10+(idxP%nCols)*(_btn.w+gapX);_btn.y=40+ent(idxP/nCols)*(_btn.h+gapY);;_btn.img=plantillasCfg[s,0];_btn.txt=plantillasCfg[s,1];_btn.txt.x=_btn.x+5;_btn.txt.y=_btn.y+_btn.h+1;_btn.txt.w=max(60,_btn.w-10);;_btn.visible=isIdx;_btn.activo=1' algorithm='true'"
+			name="A_03">
+		<param value="id='__GUARDAR__'" name="A_04">
+		<param
+			value="id='nombresCtrRetro' expresion='nombresCtrRetro[0]=&amp;squot;retroBien&amp;squot;;nombresCtrRetro[1]=&amp;squot;retroMal&amp;squot;;nombresCtrRetro[2]=&amp;squot;btnVerificar&amp;squot;;nombresCtrRetro[3]=&amp;squot;btnOtroEjer&amp;squot;;nombresCtrRetro[4]=&amp;squot;btnAnt&amp;squot;;nombresCtrRetro[5]=&amp;squot;btnSig&amp;squot;;nombresCtrRetro[6]=&amp;squot;btnNavTxt&amp;squot;;nCtrRetro=7' evaluate='only-once' array='true' size='7'"
+			name="A_05">
+		<param
+			value="id='allCfg' expresion=';' evaluate='only-once' matrix='true' array='true' columns='20' rows='5500'"
+			name="A_06">
+		<param
+			value="id='storeConfig(_idxCfg)' local='idx,nIdx' init='idx=_idxCfg;_strDBG=&amp;squot;_SAVE_&amp;squot;+idx+&amp;squot;___&amp;squot;' do='allCfg[idx,1]=opciones.n_ctr;allCfg[idx,2]=opciones.n_gols;allCfg[idx,3]=imagenFondo;allCfg[idx,4]=textoInstrucciones;allCfg[idx,5]=imagenFondoPleca;allCfg[idx,6]=ctrRand;allCfg[idx,7]=golsRand;allCfg[idx,8]=verifMode;allCfg[idx,9]=txtImgBien;allCfg[idx,10]=txtImgMal;nIdx=11;;_strDBG=_strDBG+&amp;squot;_&amp;squot;+nIdx;nIdx=storeRetro(idx,nIdx);;_strDBG=_strDBG+&amp;squot;_&amp;squot;+nIdx;nIdx=storeCtrs(idx,nIdx);;_strDBG=_strDBG+&amp;squot;_&amp;squot;+nIdx;;nIdx=storeGols(idx,nIdx);_strDBG=_strDBG+&amp;squot;_&amp;squot;+nIdx+&amp;squot;__________&amp;squot;;;allCfg[idx,0]=nIdx+&amp;squot;+&amp;squot;+_strDBG' while='0' algorithm='true'"
+			name="A_07">
+		<param
+			value="id='storeRetro(idxCfg,initIdx)' expresion='_idxSt+1' local='idxCG,_var,nParamsRetro' init='idxCG=0;nParamsRetro=8' do='_varName=nombresCtrRetro[idxCG];_idxSt=initIdx+idxCG*nParamsRetro;;_var=_varName+&amp;squot;.x&amp;squot;;_var=_Eval_(_var);_idxSt=_idxSt+0;allCfg[idxCfg,_idxSt]=_var;;_var=_varName+&amp;squot;.y&amp;squot;;_var=_Eval_(_var);_idxSt=_idxSt+1;allCfg[idxCfg,_idxSt]=_var;;_var=_varName+&amp;squot;.w&amp;squot;;_idxSt=_idxSt+1;_var=_Eval_(_var);allCfg[idxCfg,_idxSt]=_var;;_var=_varName+&amp;squot;.h&amp;squot;;_var=_Eval_(_var);_idxSt=_idxSt+1;allCfg[idxCfg,_idxSt]=_var;;_var=_varName+&amp;squot;.img&amp;squot;;_var=_Eval_(_var);_idxSt=_idxSt+1;allCfg[idxCfg,_idxSt]=_var;;_var=_varName+&amp;squot;.txt&amp;squot;;_var=_Eval_(_var);_idxSt=_idxSt+1;allCfg[idxCfg,_idxSt]=_var;;_var=_varName+&amp;squot;.txt.dx&amp;squot;;_var=_Eval_(_var);_idxSt=_idxSt+1;allCfg[idxCfg,_idxSt]=_var;;_var=_varName+&amp;squot;.txt.dy&amp;squot;;_var=_Eval_(_var);_idxSt=_idxSt+1;allCfg[idxCfg,_idxSt]=_var;;idxCG=idxCG+1' while='idxCG&lt;nCtrRetro' algorithm='true'"
+			name="A_08">
+		<param
+			value="id='storeCtrs(idxCfg,idxInitSt)' expresion='idxS' local='idxC,tmpVal,idxS,nProp' init='idxC=0;idxP=0;nProp=idxEnGol+1;idxS=idxInitSt+idxC*nProp+idxP' do='allCfg[idxCfg,idxS]=opciones.ctrProp[idxC,idxP];idxP=(idxP+1)%nProp;idxC=idxC+(idxP==0);idxS=idxInitSt+idxC*nProp+idxP' while='idxC&lt;opciones.n_ctr' algorithm='true'"
+			name="A_09">
+		<param
+			value="id='storeGols(idxCfg,idxInitSt)' expresion='idxS' local='idxG,tmpVal,idxS,nProp' init='idxG=0;idxP=0;nProp=idxEnGol+1;idxS=idxInitSt+idxG*nProp+idxP' do='allCfg[idxCfg,idxS]=opciones.golsProp[idxG,idxP];idxP=(idxP+1)%nProp;idxG=idxG+(idxP==0);idxS=idxInitSt+idxG*nProp+idxP' while='idxG&lt;opciones.n_gols' algorithm='true'"
+			name="A_10">
+		<param
+			value="id='saveAllCfg()' local='idxE,idxS,nProp,_cont,qt,br,_val,_val2,iter' init='idxE=0;idxS=0;nProp=_Eval_(allCfg[idxE,0]);br=&amp;squot;\n&amp;squot;;qt=&amp;squot;\q&amp;squot;;sM=&amp;squot;¦&amp;squot;;s_M=&amp;squot;~&amp;squot;;_strRes=&amp;squot;&amp;squot;;iter=0' do='_val=allCfg[idxE,idxS];_val=test+_val;_val2=_Num_(_val);_val3=(_val2==&amp;squot;NaN&amp;squot;)?(qt+_val+qt):_val;;_strRes=_strRes+_val3+sM;;idxS=(idxS+1)%nProp;_salto=(idxS==0);_strRes=_strRes+((_salto)?br:&amp;squot;&amp;squot;);;idxE=idxE+(_salto);nProp=(_salto)?_Eval_(allCfg[idxE,0]):nProp;iter=iter+1;_cont=(idxE&lt;numEjerc)&amp;(nProp&gt;0)' while='_cont' algorithm='true'"
+			name="A_11">
+		<param
+			value="id='actionGuardBtn()' local='strCgfGen,strCfgEjers,strResAll' do='(ejercicioAct&gt;-1)?storeConfig(ejercicioActReal):0;;;strCgfGen=&amp;squot;\nnumEjerc=&amp;squot;+numEjerc;strCgfGen=strCgfGen+&amp;squot;\nejerRndOrder=&amp;squot;+ejerRndOrder+&amp;squot;\n&amp;squot;;strCgfGen=&amp;squot;&lt;datosEscena&gt;&amp;squot;+strCgfGen+&amp;squot;&lt;/datosEscena&gt;\n&amp;squot;;;saveAllCfg();strCfgEjers=&amp;squot;\n&lt;allCfg&gt;\n&amp;squot;+_strRes+&amp;squot;&lt;/allCfg&gt;&amp;squot;;;strResAll=strCgfGen+strCfgEjers;;tt=_Save_(file,strResAll)' algorithm='true'"
+			name="A_12">
+		<param
+			value="id='randomPosGols()' local='iter,ctrX1,ctrX2,ctrY1,ctrY2' init='iter=0' do='idx1=ent(rnd*opciones.n_gols);idx2=ent(rnd*opciones.n_gols);ctrX1=opciones.golsProp[idx1,opciones.X];ctrY1=opciones.golsProp[idx1,opciones.Y];ctrX2=opciones.golsProp[idx2,opciones.X];ctrY2=opciones.golsProp[idx2,opciones.Y];;opciones.golsProp[idx1,opciones.X]=ctrX2;opciones.golsProp[idx1,opciones.Y]=ctrY2;;opciones.golsProp[idx2,opciones.X]=ctrX1;opciones.golsProp[idx2,opciones.Y]=ctrY1;iter=iter+1' while='iter&lt;2*opciones.n_gols' algorithm='true'"
+			name="A_13">
+		<param
+			value="id='randomPosCtr()' local='iter' init='iter=0' do='idx1=ent(rnd*opciones.n_ctr);idx2=ent(rnd*opciones.n_ctr);ctrX1=opciones.ctrProp[idx1,opciones.initX];ctrY1=opciones.ctrProp[idx1,opciones.initY];ctrX2=opciones.ctrProp[idx2,opciones.initX];ctrY2=opciones.ctrProp[idx2,opciones.initY];;opciones.ctrProp[idx1,opciones.initX]=ctrX2;opciones.ctrProp[idx1,opciones.initY]=ctrY2;;opciones.ctrProp[idx2,opciones.initX]=ctrX1;opciones.ctrProp[idx2,opciones.initY]=ctrY1;iter=iter+1' while='iter&lt;2*opciones.n_ctr' algorithm='true'"
+			name="A_14">
+		<param value="id='__LEER__'" name="A_15">
+		<param
+			value="id='loadAllCfg()' do='numEjerc=0;_GetValues_(file,&amp;squot;datosEscena&amp;squot;);_GetMatrix_(file,&amp;squot;allCfg&amp;squot;);' algorithm='true'"
+			name="A_16">
+		<param
+			value="id='getGols(idxCfg,initIdx)' expresion='idxS' local='idxG,tmpVal,idxS,nProp' init='idxG=0;idxP=0;nProp=idxEnGol+1;idxS=initIdx+idxG*nProp+idxP' do='opciones.golsProp[idxG,idxP]=allCfg[idxCfg,idxS];idxP=(idxP+1)%nProp;idxG=idxG+(idxP==0);idxS=initIdx+idxG*nProp+idxP' while='idxG&lt;opciones.n_gols' algorithm='true'"
+			name="A_17">
+		<param
+			value="id='getCtrs(idxCfg,initIdx)' expresion='idxS' local='idxC,tmpVal,idxS,nProp' init='idxC=0;idxP=0;nProp=idxEnGol+1;idxS=initIdx+idxC*nProp+idxP' do='opciones.ctrProp[idxC,idxP]=allCfg[idxCfg,idxS];;idxP=(idxP+1)%nProp;idxC=idxC+(idxP==0);idxS=initIdx+idxC*nProp+idxP' while='idxC&lt;opciones.n_ctr' algorithm='true'"
+			name="A_18">
+		<param
+			value="id='getRetro(idxCfg,initIdx)' expresion='initIdx+8*nCtrRetro' local='idxCG,_var' init='idxCG=0;' do='retroBien.x		= allCfg[idxCfg,initIdx+00];retroBien.y		= allCfg[idxCfg,initIdx+01];retroBien.w		= allCfg[idxCfg,initIdx+02];retroBien.h		= allCfg[idxCfg,initIdx+03];retroBien.img		= allCfg[idxCfg,initIdx+04];retroBien.txt		= allCfg[idxCfg,initIdx+05];retroBien.txt.dx	= allCfg[idxCfg,initIdx+06];retroBien.txt.dy	= allCfg[idxCfg,initIdx+07];;retroMal.x		= allCfg[idxCfg,initIdx+08];retroMal.y		= allCfg[idxCfg,initIdx+09];retroMal.w		= allCfg[idxCfg,initIdx+10];retroMal.h		= allCfg[idxCfg,initIdx+11];retroMal.img		= allCfg[idxCfg,initIdx+12];retroMal.txt		= allCfg[idxCfg,initIdx+13];retroMal.txt.dx		= allCfg[idxCfg,initIdx+14];retroMal.txt.dy		= allCfg[idxCfg,initIdx+15];;btnVerificar.x		= allCfg[idxCfg,initIdx+16];btnVerificar.y		= allCfg[idxCfg,initIdx+17];btnVerificar.w		= allCfg[idxCfg,initIdx+18];btnVerificar.h		= allCfg[idxCfg,initIdx+19];btnVerificar.img	= allCfg[idxCfg,initIdx+20];btnVerificar.txt	= allCfg[idxCfg,initIdx+21];btnVerificar.txt.dx	= allCfg[idxCfg,initIdx+22];btnVerificar.txt.dy	= allCfg[idxCfg,initIdx+23];;btnOtroEjer.x		= allCfg[idxCfg,initIdx+24];btnOtroEjer.y		= allCfg[idxCfg,initIdx+25];btnOtroEjer.w		= allCfg[idxCfg,initIdx+26];btnOtroEjer.h		= allCfg[idxCfg,initIdx+27];btnOtroEjer.img		= allCfg[idxCfg,initIdx+28];btnOtroEjer.txt		= allCfg[idxCfg,initIdx+29];btnOtroEjer.txt.dx	= allCfg[idxCfg,initIdx+30];btnOtroEjer.txt.dy	= allCfg[idxCfg,initIdx+31];;btnAnt.x		= allCfg[idxCfg,initIdx+32];btnAnt.y		= allCfg[idxCfg,initIdx+33];btnAnt.w		= allCfg[idxCfg,initIdx+34];btnAnt.h		= allCfg[idxCfg,initIdx+35];btnAnt.img		= allCfg[idxCfg,initIdx+36];btnAnt.txt		= allCfg[idxCfg,initIdx+37];btnAnt.txt.dx		= allCfg[idxCfg,initIdx+38];btnAnt.txt.dy		= allCfg[idxCfg,initIdx+39];;btnSig.x		= allCfg[idxCfg,initIdx+40];btnSig.y		= allCfg[idxCfg,initIdx+41];btnSig.w		= allCfg[idxCfg,initIdx+42];btnSig.h		= allCfg[idxCfg,initIdx+43];btnSig.img		= allCfg[idxCfg,initIdx+44];btnSig.txt		= allCfg[idxCfg,initIdx+45];btnSig.txt.dx		= allCfg[idxCfg,initIdx+46];btnSig.txt.dy		= allCfg[idxCfg,initIdx+47];;btnNavTxt.x		= allCfg[idxCfg,initIdx+48];btnNavTxt.y		= allCfg[idxCfg,initIdx+49];btnNavTxt.w		= allCfg[idxCfg,initIdx+50];btnNavTxt.h		= allCfg[idxCfg,initIdx+51];btnNavTxt.img		= allCfg[idxCfg,initIdx+52];btnNavTxt.txt		= allCfg[idxCfg,initIdx+53];btnNavTxt.txt.dx	= allCfg[idxCfg,initIdx+54];btnNavTxt.txt.dy	= allCfg[idxCfg,initIdx+55];;' algorithm='true'"
+			name="A_19">
+		<param
+			value="id='getConfig(_idxCfg)' local='idx,nIdx' init='idx=_idxCfg;_strDBG2=&amp;squot;_LOAD_&amp;squot;+idx+&amp;squot;___&amp;squot;' do='opciones.n_ctr		= allCfg[idx,1];opciones.n_gols		= allCfg[idx,2];imagenFondo		= allCfg[idx,3];textoInstrucciones	= allCfg[idx,4];imagenFondoPleca	= allCfg[idx,5];ctrRand			= allCfg[idx,6];golsRand		= allCfg[idx,7];verifMode		= allCfg[idx,8];txtImgBien		= allCfg[idx,9];txtImgMal		= allCfg[idx,10];nIdx=11;;opciones.n_ctr=max(opciones.n_ctr,1);opciones.n_gols=max(opciones.n_gols,1);;_strDBG2=_strDBG2+&amp;squot;_&amp;squot;+nIdx;nIdx=getRetro(idx,nIdx);_strDBG2=_strDBG2+&amp;squot;_&amp;squot;+nIdx;nIdx=getCtrs(idx,nIdx);_strDBG2=_strDBG2+&amp;squot;_&amp;squot;+nIdx;nIdx=getGols(idx,nIdx);_strDBG2=_strDBG2+&amp;squot;_&amp;squot;+nIdx;;' while='0' algorithm='true'"
+			name="A_20">
+		<param
+			value="id='ponEjercicio(_iEjer)' expresion='x' do='ejercicioActReal=_iEjer;getConfig(_iEjer);;;tt=((!enEditor)&amp;(ctrRand))?randomPosCtr():0;tt=((!enEditor)&amp;(golsRand))?randomPosGols():0;;opciones.limpiaRel();opciones.enabled=1;correcto=0;nVerificadas=0;verificado=0;imgModal=0;verModal=0' algorithm='true'"
+			name="A_21">
+		<param
+			value="id='cargaEjercicios()' local='sinCfg,' do='loadAllCfg();sinCfg=(numEjerc==0);tt=(sinCfg)?addEjercicioDefault():0;tt=(sinCfg)?storeConfig(0):0' algorithm='true'"
+			name="A_22">
+		<param value="id='__SYNC_MACRO_CTRS__'" name="A_23">
+		<param
+			value="id='copiaLabelToCtr(_ilabel)' do='activoCtr=_ilabel;editarGols=0;selGC=-1;editarGols2=editarGols;activoCtr2=activoCtr;;;activoIMG=opciones.ctrProp[_ilabel,opciones.IMG];activoIMG_INFO=&amp;squot;&amp;squot;+opciones.ctrProp[_ilabel,idxImgInfo];activoTXT=opciones.ctrProp[_ilabel,opciones.TXT];enGolMargen=opciones.ctrProp[_ilabel,idxEnGol];;activoDX=opciones.ctrProp[_ilabel,opciones.TXT_Dx];activoDY=opciones.ctrProp[_ilabel,opciones.TXT_Dy];;activoIMG_DX=opciones.ctrProp[_ilabel,opciones.IMG_Dx];activoIMG_DY=opciones.ctrProp[_ilabel,opciones.IMG_Dy];activoImgRot=opciones.ctrProp[_ilabel,opciones.IMG_Rot];;activoX=opciones.ctrProp[_ilabel,opciones.X];activoY=opciones.ctrProp[_ilabel,opciones.Y];activoW=opciones.ctrProp[_ilabel,opciones.W];activoH=opciones.ctrProp[_ilabel,opciones.H];;activoA=opciones.ctrProp[_ilabel,opciones.A];activoR=opciones.ctrProp[_ilabel,opciones.R];activoG=opciones.ctrProp[_ilabel,opciones.G];activoB=opciones.ctrProp[_ilabel,opciones.B];;activoBA=opciones.ctrProp[_ilabel,opciones.borde.A];activoBR=opciones.ctrProp[_ilabel,opciones.borde.R];activoBG=opciones.ctrProp[_ilabel,opciones.borde.G];activoBB=opciones.ctrProp[_ilabel,opciones.borde.B];activoBW=opciones.ctrProp[_ilabel,opciones.borde.W];;' algorithm='true'"
+			name="A_24">
+		<param
+			value="id='copiaCtrToLabel(_ilabel)' do='opciones.ctrProp[_ilabel,opciones.IMG]=activoIMG;opciones.ctrProp[_ilabel,idxImgInfo]=activoIMG_INFO;;opciones.ctrProp[_ilabel,opciones.TXT]=activoTXT;opciones.ctrProp[_ilabel,idxEnGol]=enGolMargen;;opciones.ctrProp[_ilabel,opciones.TXT_Dx]=activoDX;opciones.ctrProp[_ilabel,opciones.TXT_Dy]=activoDY;;opciones.ctrProp[_ilabel,opciones.IMG_Dx]=activoIMG_DX;opciones.ctrProp[_ilabel,opciones.IMG_Dy]=activoIMG_DY;opciones.ctrProp[_ilabel,opciones.IMG_Rot]=activoImgRot;;opciones.ctrProp[_ilabel,opciones.X]=activoX;opciones.ctrProp[_ilabel,opciones.Y]=activoY;opciones.ctrProp[_ilabel,opciones.initX]=activoX;opciones.ctrProp[_ilabel,opciones.initY]=activoY;;opciones.ctrProp[_ilabel,opciones.W]=activoW;opciones.ctrProp[_ilabel,opciones.H]=activoH;;opciones.ctrProp[_ilabel,opciones.A]=activoA;opciones.ctrProp[_ilabel,opciones.R]=activoR;opciones.ctrProp[_ilabel,opciones.G]=activoG;opciones.ctrProp[_ilabel,opciones.B]=activoB;;opciones.ctrProp[_ilabel,opciones.borde.A]=activoBA;opciones.ctrProp[_ilabel,opciones.borde.R]=activoBR;opciones.ctrProp[_ilabel,opciones.borde.G]=activoBG;opciones.ctrProp[_ilabel,opciones.borde.B]=activoBB;opciones.ctrProp[_ilabel,opciones.borde.W]=activoBW;;' algorithm='true'"
+			name="A_25">
+		<param
+			value="id='copiaGolToCtr(_ilabel)' do='activoCtr=_ilabel;editarGols=1;selGC=-1;editarGols2=editarGols;activoCtr2=activoCtr;;;activoIMG=opciones.golsProp[_ilabel,opciones.IMG];activoIMG_INFO=&amp;squot;&amp;squot;+opciones.golsProp[_ilabel,idxImgInfo];activoTXT=opciones.golsProp[_ilabel,opciones.TXT];;actMargenX=opciones.golsProp[_ilabel,opciones.margenX];actMargenY=opciones.golsProp[_ilabel,opciones.margenY];activoGAPX=opciones.golsProp[_ilabel,opciones.GAPX];activoGAPY=opciones.golsProp[_ilabel,opciones.GAPY];;;activoDX=opciones.golsProp[_ilabel,opciones.TXT_Dx];activoDY=opciones.golsProp[_ilabel,opciones.TXT_Dy];;activoIMG_DX=opciones.golsProp[_ilabel,opciones.IMG_Dx];activoIMG_DY=opciones.golsProp[_ilabel,opciones.IMG_Dy];activoImgRot=opciones.golsProp[_ilabel,opciones.IMG_Rot];;activoX=opciones.golsProp[_ilabel,opciones.X];activoY=opciones.golsProp[_ilabel,opciones.Y];activoW=opciones.golsProp[_ilabel,opciones.W];activoH=opciones.golsProp[_ilabel,opciones.H];;activoA=opciones.golsProp[_ilabel,opciones.A];activoR=opciones.golsProp[_ilabel,opciones.R];activoG=opciones.golsProp[_ilabel,opciones.G];activoB=opciones.golsProp[_ilabel,opciones.B];;activoBA=opciones.golsProp[_ilabel,opciones.borde.A];activoBR=opciones.golsProp[_ilabel,opciones.borde.R];activoBG=opciones.golsProp[_ilabel,opciones.borde.G];activoBB=opciones.golsProp[_ilabel,opciones.borde.B];activoBW=opciones.golsProp[_ilabel,opciones.borde.W]' algorithm='true'"
+			name="A_26">
+		<param
+			value="id='copiaCtrToGol(_ilabel)' do='opciones.golsProp[_ilabel,opciones.IMG]=activoIMG;opciones.golsProp[_ilabel,idxImgInfo]=activoIMG_INFO;opciones.golsProp[_ilabel,opciones.TXT]=activoTXT;;opciones.golsProp[_ilabel,opciones.margenX]=actMargenX;opciones.golsProp[_ilabel,opciones.margenY]=actMargenY;opciones.golsProp[_ilabel,opciones.GAPX]=activoGAPX;opciones.golsProp[_ilabel,opciones.GAPY]=activoGAPY;;opciones.golsProp[_ilabel,opciones.TXT_Dx]=activoDX;opciones.golsProp[_ilabel,opciones.TXT_Dy]=activoDY;;opciones.golsProp[_ilabel,opciones.IMG_Dx]=activoIMG_DX;opciones.golsProp[_ilabel,opciones.IMG_Dy]=activoIMG_DY;opciones.golsProp[_ilabel,opciones.IMG_Rot]=activoImgRot;;opciones.golsProp[_ilabel,opciones.X]=activoX;opciones.golsProp[_ilabel,opciones.Y]=activoY;opciones.golsProp[_ilabel,opciones.initX]=activoX;opciones.golsProp[_ilabel,opciones.initY]=activoY;;opciones.golsProp[_ilabel,opciones.W]=activoW;opciones.golsProp[_ilabel,opciones.H]=activoH;;opciones.golsProp[_ilabel,opciones.A]=activoA;opciones.golsProp[_ilabel,opciones.R]=activoR;opciones.golsProp[_ilabel,opciones.G]=activoG;opciones.golsProp[_ilabel,opciones.B]=activoB;;opciones.golsProp[_ilabel,opciones.borde.A]=activoBA;opciones.golsProp[_ilabel,opciones.borde.R]=activoBR;opciones.golsProp[_ilabel,opciones.borde.G]=activoBG;opciones.golsProp[_ilabel,opciones.borde.B]=activoBB;opciones.golsProp[_ilabel,opciones.borde.W]=activoBW' algorithm='true'"
+			name="A_27">
+		<param
+			value="id='copiaCGToCtr(idxCG)' local='strCG' init='strCG=nombresCtrRetro[idxCG]+&amp;squot;.&amp;squot;;' do='activoCtr=selCG;editarGols=2;editarGols2=editarGols;activoCtr2=activoCtr;;varN=strCG+&amp;squot;x&amp;squot;;activoX=_Eval_(varN);;varN=strCG+&amp;squot;y&amp;squot;;activoY=abs(_Eval_(varN));;varN=strCG+&amp;squot;w&amp;squot;;activoW=(_Eval_(varN));;varN=strCG+&amp;squot;h&amp;squot;;activoH=_Eval_(varN);;varN=strCG+&amp;squot;img&amp;squot;;activoIMG=_Eval_(varN);;varN=strCG+&amp;squot;txt&amp;squot;;activoTXT=_Eval_(varN);;varN=strCG+&amp;squot;txt.dx&amp;squot;;activoDX=_Eval_(varN);;varN=strCG+&amp;squot;txt.dy&amp;squot;;activoDY=_Eval_(varN)' algorithm='true'"
+			name="A_28">
+		<param
+			value="id='copiaCtrToCG_Bien()' do='retroBien.x=activoX;retroBien.y=-activoY;retroBien.w=activoW;retroBien.h=activoH;retroBien.img=activoIMG;retroBien.txt=activoTXT;retroBien.txt.dx=activoDX;retroBien.txt.dy=activoDY;;' algorithm='true'"
+			name="A_29">
+		<param
+			value="id='copiaCtrToCG_Mal()' do='retroMal.x=activoX;retroMal.y=-activoY;retroMal.w=activoW;retroMal.h=activoH;retroMal.img=activoIMG;retroMal.txt=activoTXT;retroMal.txt.dx=activoDX;retroMal.txt.dy=activoDY;;' algorithm='true'"
+			name="A_30">
+		<param
+			value="id='copiaCtrToCG_Verif()' do='btnVerificar.x=activoX;btnVerificar.y=-activoY;btnVerificar.w=activoW;btnVerificar.h=activoH;btnVerificar.img=activoIMG;btnVerificar.txt=activoTXT;btnVerificar.txt.dx=activoDX;btnVerificar.txt.dy=activoDY;;' algorithm='true'"
+			name="A_31">
+		<param
+			value="id='copiaCtrToCG_Otro()' do='btnOtroEjer.x=activoX;btnOtroEjer.y=-activoY;btnOtroEjer.w=activoW;btnOtroEjer.h=activoH;btnOtroEjer.img=activoIMG;btnOtroEjer.txt=activoTXT;btnOtroEjer.txt.dx=activoDX;btnOtroEjer.txt.dy=activoDY;;' algorithm='true'"
+			name="A_32">
+		<param
+			value="id='copiaCtrToCG_Ant()' do='btnAnt.x=activoX;btnAnt.y=-activoY;btnAnt.w=activoW;btnAnt.h=activoH;btnAnt.img=activoIMG;btnAnt.txt=activoTXT;btnAnt.txt.dx=activoDX;btnAnt.txt.dy=activoDY;;' algorithm='true'"
+			name="A_33">
+		<param
+			value="id='copiaCtrToCG_Sig()' do='btnSig.x=activoX;btnSig.y=-activoY;btnSig.w=activoW;btnSig.h=activoH;btnSig.img=activoIMG;btnSig.txt=activoTXT;btnSig.txt.dx=activoDX;btnSig.txt.dy=activoDY;;' algorithm='true'"
+			name="A_34">
+		<param
+			value="id='copiaCtrToCG_NavTxt()' do='btnNavTxt.x=activoX;btnNavTxt.y=-activoY;btnNavTxt.w=activoW;btnNavTxt.h=activoH;btnNavTxt.img=activoIMG;btnNavTxt.txt=activoTXT;btnNavTxt.txt.dx=activoDX;btnNavTxt.txt.dy=activoDY;;' algorithm='true'"
+			name="A_35">
+		<param
+			value="id='copiaCtrToCG(idxCG)' do='tt=(idxCG==0)?copiaCtrToCG_Bien():0;tt=(idxCG==1)?copiaCtrToCG_Mal():0;tt=(idxCG==2)?copiaCtrToCG_Verif():0;tt=(idxCG==3)?copiaCtrToCG_Otro():0;tt=(idxCG==4)?copiaCtrToCG_Ant():0;tt=(idxCG==5)?copiaCtrToCG_Sig():0;tt=(idxCG==6)?copiaCtrToCG_NavTxt():0' algorithm='true'"
+			name="A_36">
+		<param
+			value="id='captuaraPosCorrectoAux()' expresion='_sinColocar' local='_index,_sinColocar' init='_index=0;_sinColocar=0' do='_rel=opciones.ctrProp[_index,opciones.enGol];opciones.ctrProp[_index,idxEnGol]=_rel;_sinColocar=_sinColocar|(_rel &lt; 0);_index=_index+1' while='(_index&lt;opciones.n_ctr)' algorithm='true'"
+			name="A_37">
+		<param
+			value="id='captuaraPosCorrecto()' do='captuaraPosCorrectoAux()' algorithm='true'"
+			name="A_38">
+		<param value="id='__EDICION__'" name="A_39">
+		<param
+			value="id='desactivaEditor()' expresion='x' do='PropEjercicio.visible=0;opciones.edicion=0;;editarGols2=0;activoCtr2=-1;editarGols=editarGols2;activoCtr=activoCtr2;;PropWin.visble=0;setVisibleTab(0);ocultaToolBar();ocultaToolBarUp();;verMsgGetCorr=0;E1.mouse_x=-10000;E1.mouse_pressed=0' algorithm='true'"
+			name="A_40">
+		<param
+			value="id='forzarEdicion()' do='isInitEdit=1;Xant=-1000;Yant=-1000;opciones.edicion=1;editarGols=(opciones.activoGol&gt;opciones.activo);activoCtr=max(opciones.activo,opciones.activoGol);ponParaEditar();activoCtr2=activoCtr;editarGols2=editarGols;;;' algorithm='true'"
+			name="A_41">
+		<param
+			value="id='ponParaEditar()' local='strObj,idxObj,hideCfg' do='PropEjercicio.visible=0;hideCfg=(activoCtr==activoCtr2)&amp;(editarGols2==editarGols)&amp;(opciones.edicion);opciones.edicion=(!hideCfg);acomodandoCorectos=0;;editarGols=editarGols2;activoCtr=activoCtr2;;PropWin.visble=(opciones.edicion==1);setVisibleTab(0);;winTitle.x=600;winTitle.y=-100;mvVentanaProp();opciones.limpiaRel();idxObj=max(activoCtr,0);strObj=(editarGols==0)?&amp;squot;opciones.ctrProp[&amp;squot;:&amp;squot;opciones.golsProp[&amp;squot;;E1.mouse_x=strObj+idxObj+&amp;squot;,opciones.X]+1&amp;squot;;E1.mouse_y=strObj+idxObj+&amp;squot;,opciones.Y]+1&amp;squot;;E1.mouse_x=_Eval_(E1.mouse_x);E1.mouse_y=-1*_Eval_(E1.mouse_y);E1.mouse_pressed=(editarGols&lt;2)' algorithm='true'"
+			name="A_42">
+		<param
+			value="id='limpiaParaEditarInit()' do='opciones.activo=-1;E1.mouse_pressed=0;isInitEdit=0;sync_esp();editarGols=editarGols2;activoCtr=activoCtr2' algorithm='true'"
+			name="A_43">
+		<param
+			value="id='ponParaEditarEscena()' do='PropEjercicio.visible=!PropEjercicio.visible;opciones.edicion=0;acomodandoCorectos=0;PropWin.visble=0' algorithm='true'"
+			name="A_44">
+		<param
+			value="id='getGrafCfgFor(idxRetro)' expresion='_btnRetro.visible' do='_name=nombresCtrRetro[idxRetro];_prop=_name+&amp;squot;.x&amp;squot;;_btnRetro.x=_Eval_(_prop);_prop=&amp;squot;-1*&amp;squot;+_name+&amp;squot;.y&amp;squot;;_btnRetro.y=_Eval_(_prop);_prop=_name+&amp;squot;.w&amp;squot;;_btnRetro.w=_Eval_(_prop);_prop=_name+&amp;squot;.h&amp;squot;;_btnRetro.h=_Eval_(_prop);_prop=_name+&amp;squot;.img&amp;squot;;_btnRetro.img=_Eval_(_prop);_prop=_name+&amp;squot;.txt&amp;squot;;_btnRetro.txt=_Eval_(_prop);;_prop=_name+&amp;squot;.txt.dx&amp;squot;;_btnRetro.txt.dx=_Eval_(_prop);;_prop=_name+&amp;squot;.txt.dy&amp;squot;;_btnRetro.txt.dy=_Eval_(_prop);;_btnRetro.txt.x=_btnRetro.x+_btnRetro.txt.dx;_btnRetro.txt.y=_btnRetro.y+_btnRetro.txt.dy;;_btnRetro.txt.w=(_btnRetro.w-_btnRetro.txt.dx);_btnRetro.txt.h=(_btnRetro.h-_btnRetro.txt.dy);_btnRetro.txt.w=max(60,_btnRetro.txt.w);_btnRetro.txt.h=max(60,_btnRetro.txt.h);;_prop=_name+&amp;squot;.visible&amp;squot;;_btnRetro.visible=_Eval_(_prop);' algorithm='true'"
+			name="A_45">
+		<param
+			value="id='calcPolActivoFromRetro()' expresion='1' local='_tmpA,_isIdx' do='_isIdx=(activoCtr&gt;=0)&amp;(activoCtr&lt;nCtrRetro);_tmpIdx=(_isIdx)?activoCtr:0;getGrafCfgFor(_tmpIdx);;;_polAct.x=_btnRetro.x;_polAct.y=_btnRetro.y;_polAct.w=_btnRetro.w;_polAct.h=_btnRetro.h;;_polAct.anchoB=3;_tmpA=_polAct.anchoB;_polAct.x1=_polAct.x;_polAct.y1=_polAct.y;;_polAct.x2=_polAct.x+_polAct.w;_polAct.y2=_polAct.y+_polAct.h' algorithm='true'"
+			name="A_46">
+		<param
+			value="id='calcPolActivoFromMacro()' expresion='(activoCtr&gt;-1)' local='_tmpA' do='_strMat=(editarGols)?&amp;squot;opciones.golsProp[&amp;squot;:&amp;squot;opciones.ctrProp[&amp;squot;;_tmpIdx=(activoCtr&gt;=0)?activoCtr:0;;_polAct.x=_strMat+activoCtr+&amp;squot;,opciones.X]&amp;squot;;_polAct.x=_Eval_(_polAct.x);;_polAct.y=_strMat+activoCtr+&amp;squot;,opciones.Y]&amp;squot;;_polAct.y=_Eval_(_polAct.y);;_polAct.w=_strMat+activoCtr+&amp;squot;,opciones.W]&amp;squot;;_polAct.w=_Eval_(_polAct.w);;_polAct.h=_strMat+activoCtr+&amp;squot;,opciones.H]&amp;squot;;_polAct.h=_Eval_(_polAct.h);;_polAct.anchoB=0;_tmpA=_polAct.anchoB;_polAct.x1=_polAct.x-_tmpA;_polAct.y1=_polAct.y-_tmpA;;_polAct.x2=_polAct.x+_polAct.w+_tmpA;_polAct.y2=_polAct.y+_polAct.h+_tmpA;;;;' algorithm='true'"
+			name="A_47">
+		<param
+			value="id='calcPolActivo()' expresion='_isVisible' local='_tmpA,_res' do='_tmpA=(editarGols&lt;2);_isVisible=(_tmpA)?calcPolActivoFromMacro():calcPolActivoFromRetro();;' algorithm='true'"
+			name="A_48">
+		<param
+			value="id='calcCGMarkActivo()' expresion='(activoCtr&gt;-1)' local='strCG,varN' do='strCG=nombresCtrRetro[activoCtr]+&amp;squot;.&amp;squot;;;varN=strCG+&amp;squot;x&amp;squot;;_polAct.x=_Eval_(varN);varN=strCG+&amp;squot;y&amp;squot;;_polAct.y=_Eval_(varN);_polAct.wP=7' algorithm='true'"
+			name="A_49">
+		<param
+			value="id='getMaxIdxForActivo()' expresion='_res' local='_res,' do='_res=((editarGols2==1)?opciones.n_gols:opciones.n_ctr)-1;_res=((editarGols2==2)?(nCtrRetro-1):_res)' algorithm='true'"
+			name="A_50">
+		<param
+			value="id='setVisibleTab(idxTab)' expresion='0' init='tabActivo=idxTab' do='PropWinPos.visible	= (idxTab==0);PropWinColor.visible	= (idxTab==1);PropWinCont.visible	= (idxTab==2);PropWinVerif.visible	= (idxTab==3)' algorithm='true'"
+			name="A_51">
+		<param
+			value="id='getPosTab(idxP)' expresion='idxP&lt;4' do='tabBtn.w=65;tabBtn.h=25;tabBtn.y=5;;tabP.x=idxP*tabBtn.w;tabP.y=0;tabP.w=65;tabP.h=25' algorithm='true'"
+			name="A_52">
+		<param
+			value="id='isNoControlG_Edit_Activo()' expresion='!(_res)' do='_res=retroBien.active;_res=_res|btnVerificar.active;_res=_res|retroMal.active;_res=_res|btnOtroEjer.active;_res=_res|btnAnt.active;_res=_res|btnSig.active;_res=_res|btnNavTxt.active' algorithm='true'"
+			name="A_53">
+		<param
+			value="id='openSpaceToEjer(idxWhere)' local='idxProp,pasNext,idxEjer,idxEjerNext' init='idxEjer=numEjerc;numEjerc=numEjerc+1;idxProp=0' do='idxEjerAnt=idxEjer-1;allCfg[idxEjer,idxProp]=allCfg[idxEjerAnt,idxProp];idxProp=(idxProp+1)%3000;pasNext=(idxProp==0);idxEjer=idxEjer-pasNext' while='idxEjer&gt;idxWhere' algorithm='true'"
+			name="A_54">
+		<param
+			value="id='copyFromPlantilla(idxPlant,idxEjerWhere)' expresion='x' local='idxProp,valPropPlan' init='idxProp=0' do='valPropPlan=plantillasCfg[idxPlant,idxProp+2];allCfg[idxEjerWhere,idxProp]=valPropPlan;idxProp=(idxProp+1)' while='idxProp&lt;=3000' algorithm='true'"
+			name="A_55">
+		<param value="id='__TOOLBAR__'" name="A_56">
+		<param
+			value="id='muestraToolBar()' do='toolbar.visible=1;toolbarBtn.y=toolbar.y-toolbarBtn.h' algorithm='true'"
+			name="A_57">
+		<param
+			value="id='muestraToolBarUp()' do='toolBarUp.visible=1;openToolBarUp.y=toolBarUp._h' algorithm='true'"
+			name="A_58">
+		<param
+			value="id='ocultaToolBar()' do='toolbarBtn.y=E1._h-toolbarBtn.h;toolbar.visible=0' algorithm='true'"
+			name="A_59">
+		<param
+			value="id='ocultaToolBarUp()' do='toolBarUp.visible=0;openToolBarUp.y=0' algorithm='true'"
+			name="A_60">
+		<param
+			value="id='addCtr()' local='CtrW,CtrH,idx,_X,_Y,_gap' init='idx=opciones.n_ctr;opciones.n_ctr=opciones.n_ctr+1;' do='CtrW=100;CtrH=30;despX=(idx%6)*10;despY=ent(idx/6)%2;despY=despX*((despY)?-1:1);_X=30+despX;_Y=(E1._h-CtrH)/2+despY;opciones.ctrProp[idx,opciones.W]=CtrW;opciones.ctrProp[idx,opciones.H]=CtrH;opciones.ctrProp[idx,opciones.X]=_X;opciones.ctrProp[idx,opciones.Y]=_Y;opciones.ctrProp[idx,opciones.initX]=_X;opciones.ctrProp[idx,opciones.initY]=_Y;;opciones.ctrProp[idx,opciones.TXT]=&amp;squot;Palabra&amp;squot;;opciones.ctrProp[idx,opciones.TXT_Dx]=5;opciones.ctrProp[idx,opciones.TXT_Dy]=5;opciones.ctrProp[idx,opciones.IMG]=&amp;squot;&amp;squot;;opciones.ctrProp[idx,opciones.IMG_Dx]=0;opciones.ctrProp[idx,opciones.IMG_Dy]=0;;opciones.ctrProp[idx,opciones.borde.W]=2;opciones.ctrProp[idx,opciones.borde.A]=0;opciones.ctrProp[idx,opciones.borde.R]=0;opciones.ctrProp[idx,opciones.borde.G]=0;opciones.ctrProp[idx,opciones.borde.B]=0;;opciones.ctrProp[idx,opciones.A]=0;opciones.ctrProp[idx,opciones.R]=1;opciones.ctrProp[idx,opciones.G]=0;opciones.ctrProp[idx,opciones.B]=0;;opciones.ctrProp[idx,idxEnGol]=-1' algorithm='true'"
+			name="A_61">
+		<param
+			value="id='rmCtr(_iCtr)' local='idx,idxN,nextCtr,idxP,nProp' init='opciones.n_ctr=max(0,opciones.n_ctr-1);idx=_iCtr;idxP=0;nProp=idxEnGol+1' do='idxN=idx+1;opciones.ctrProp[idx,idxP]=opciones.ctrProp[idxN,idxP];idxP=(idxP+1)%nProp;nextCtr=(idxP==0);idx=idx+nextCtr;' while='idx&lt;opciones.n_ctr' algorithm='true'"
+			name="A_62">
+		<param
+			value="id='addGol()' local='golW,golH,idx,despY,despX' init='idx=opciones.n_gols;opciones.n_gols=opciones.n_gols+1;' do='golW=100;golH=100;despX=(idx%6)*10;despY=ent(idx/6)%2;despY=despX*((despY)?-1:1);opciones.golsProp[idx,opciones.W]=golW;opciones.golsProp[idx,opciones.H]=golH;opciones.golsProp[idx,opciones.X]=(E1._w-golW-30)-despX;opciones.golsProp[idx,opciones.Y]=((E1._h-golH)/2)+despY;;opciones.golsProp[idx,opciones.TXT]=&amp;squot;GOL&amp;squot;;opciones.golsProp[idx,opciones.TXT_Dx]=5;opciones.golsProp[idx,opciones.TXT_Dy]=5;opciones.golsProp[idx,opciones.IMG]=&amp;squot;&amp;squot;;opciones.golsProp[idx,opciones.IMG_Dx]=0;opciones.golsProp[idx,opciones.IMG_Dy]=0;;opciones.golsProp[idx,opciones.borde.W]=2;opciones.golsProp[idx,opciones.borde.A]=0;opciones.golsProp[idx,opciones.borde.R]=0;opciones.golsProp[idx,opciones.borde.G]=0;opciones.golsProp[idx,opciones.borde.B]=0;;opciones.golsProp[idx,opciones.A]=0;opciones.golsProp[idx,opciones.R]=1;opciones.golsProp[idx,opciones.G]=1;opciones.golsProp[idx,opciones.B]=0.5;;opciones.golsProp[idx,opciones.margenX]=0;opciones.golsProp[idx,opciones.margenY]=0;opciones.golsProp[idx,opciones.GAPX]=5;opciones.golsProp[idx,opciones.GAPY]=5;' algorithm='true'"
+			name="A_63">
+		<param
+			value="id='rmGol(_iGol)' local='idx,idxN,nextCtr,idxP,nProp' init='opciones.n_gols=max(0,opciones.n_gols-1);idx=_iGol;idxP=0;nProp=idxEnGol+1' do='idxN=idx+1;opciones.golsProp[idx,idxP]=opciones.golsProp[idxN,idxP];idxP=(idxP+1)%nProp;nextCtr=(idxP==0);idx=idx+nextCtr;' while='idx&lt;opciones.n_ctr' algorithm='true'"
+			name="A_64">
+		<param
+			value="id='addEjercicioDefault()' init='numEjerc=numEjerc+1' do='imagenFondo=&amp;squot;images/fondoapplet.png&amp;squot;;textoInstrucciones=&amp;squot;Texto de las intruccioones para este ejercicio. Se pueden simular saltos de línea agregando suficientes espacios en blanco&amp;squot;;imagenFondoPleca=&amp;squot;images/instrucciones.jpg&amp;squot;;txtImgBien=&amp;squot;images/bien.png&amp;squot;;txtImgMal=&amp;squot;images/mal.png&amp;squot;;;ctrRand=0;golsRand=0;verifMode=0;;retroBien.x=E1._w/2-100;retroBien.y=-(E1._h/2-30);retroBien.img=&amp;squot;&amp;squot;;retroBien.img.dx=0;retroBien.img.dy=0;retroBien.txt=&amp;squot;¡Correcto!&amp;squot;;retroBien.txt.dx=0;retroBien.txt.dy=0;;retroMal.x=retroBien.x;retroMal.y=retroBien.y;retroMal.img=&amp;squot;&amp;squot;;retroMal.img.dx=0;retroMal.img.dy=0;retroMal.txt=&amp;squot;Verifica tu respuesta&amp;squot;;retroMal.txt.dx=0;retroMal.txt.dy=0;;btnVerificar.w=100;btnVerificar.h=30;btnVerificar.x=E1._w/2-100;btnVerificar.y=-(E1._w/2-100);btnVerificar.img=&amp;squot;images/btn_100.png&amp;squot;;btnVerificar.img.dx=0;btnVerificar.img.dy=0;btnVerificar.txt=&amp;squot;Verificar&amp;squot;;btnVerificar.txt.dx=20;btnVerificar.txt.dy=0;;btnSig.w=21;btnSig.h=btnSig.w;btnAnt.w=btnSig.w;btnAnt.h=btnSig.h;_tamTxt=50;;btnAnt.x=E1._w-(2*btnAnt.w+_tamTxt+10);btnAnt.y=-(E1._h-btnAnt.h-10);btnAnt.w=20;btnAnt.h=20;btnAnt.img=&amp;squot;images/btn_20x20.png&amp;squot;;btnAnt.txt=&amp;squot;&lt;&amp;squot;;btnAnt.txt.dx=0;btnAnt.txt.dy=0;;btnNavTxt.x=btnAnt.x+btnAnt.w+2;btnNavTxt.y=btnAnt.y-5;btnNavTxt.w=20;btnNavTxt.h=20;btnNavTxt.img=&amp;squot;images/btn_20x20.png&amp;squot;;btnNavTxt.txt=&amp;squot;&amp;squot;;btnNavTxt.txt.dx=0;btnNavTxt.txt.dy=0;;;btnSig.x=btnAnt.x+btnAnt.w+_tamTxt;btnSig.y=btnAnt.y;btnSig.w=20;btnSig.h=20;btnSig.img=&amp;squot;images/btn_20x20.png&amp;squot;;btnSig.txt=&amp;squot;&lt;&amp;squot;;btnSig.txt.dx=0;btnSig.txt.dy=0;;;;opciones.n_ctr=0;opciones.n_gols=0;addGol();addCtr()' algorithm='true'"
+			name="A_65">
+		<param
+			value="id='addEjercicio_Callback()' do='storeConfig(ejercicioActReal);ejercicioAct=ejercicioAct+1;ponEjercicio(ejercicioAct);addEjercicioDefault();' algorithm='true'"
+			name="A_66">
+		<param
+			value="id='addEjerFromPlantilla(idxPlan)' do='menuPlantillas.visible=0;storeConfig(ejercicioAct);;ejercicioAct=ejercicioAct+1;;openSpaceToEjer(ejercicioAct);copyFromPlantilla(idxPlan,ejercicioAct);ponEjercicio(ejercicioAct)' algorithm='true'"
+			name="A_67">
+		<param
+			value="id='addEjercicio()' do='menuPlantillas.visible=1;' algorithm='true'"
+			name="A_68">
+		<param
+			value="id='rmEjercicio(idxEjerToDel)' expresion='x' local='idxProp,pasNext,idxEjer,idxEjerNext' init='numEjerc=max(0,numEjerc-1);idxEjer=idxEjerToDel;idxProp=0' do='idxEjerNext=idxEjer+1;allCfg[idxEjer,idxProp]=allCfg[idxEjerNext,idxProp];idxProp=(idxProp+1)%3000;pasNext=(idxProp==0);idxEjer=idxEjer+pasNext' while='idxEjer&lt;numEjerc' algorithm='true'"
+			name="A_69">
+		<param value="id='__INIT__'" name="A_70">
+		<param
+			value="id='initMacro()' do='sync_esp();opciones.initAuxGol();opciones.initAux()' algorithm='true'"
+			name="A_71">
+		<param
+			value="id='initEjercicios()' do='cargaEjercicios();numEjerc=max(0,numEjerc);;myRnd.minRango=0;myRnd.maxRango=numEjerc;myRnd.creaAleatorios();ejercicioAct=0;ejercicioActReal=-1;antEjercicio();' algorithm='true'"
+			name="A_72">
+		<param value="id='initBtns()' do=';;' algorithm='true'" name="A_73">
+		<param
+			value="id='iniPropWin()' do='PropWin.x=20;PropWin.y=20;PropWin.w=PropWin._w;PropWin.h=PropWin._h;PropWin.visble=0;PropWinPos.visible=0;PropWinVerif.visible=0;PropWinColor.visible=0;;winTitle.img.w=300;winTitle.img.h=20;;WinMsg.x=E1.x+(E1._w-WinMsg._w)/2;WinMsg.y=E1.y+(E1._h-WinMsg._h)/2;;PropEjercicio.x=E1.x+(E1._w-PropEjercicio._w)/2;PropEjercicio.y=E1.y+(E1._h-PropEjercicio._h)/2;;mvVentanaProp();iniPropWin_Btns()' algorithm='true'"
+			name="A_74">
+		<param
+			value="id='initBtnToolBar()' expresion='x' local='gapX,gapY' init='gapX=10;gapY=5' do='ô=&amp;squot;***************************************&amp;squot;;ô=&amp;squot;* Configurar elementos, TOOlBAR Abajo *&amp;squot;;ô=&amp;squot;***************************************&amp;squot;;toolbar.x=0;toolbar.y=(E1._h-toolbar._h);toolbar.visible=0;;toolbarBtn.w=30;toolbarBtn.h=15;toolbarBtn.x=(E1._w-toolbarBtn.w)/2;toolbarBtn.y=E1._h-toolbarBtn.h;;EditarEjercicio.x=gapX;EditarEjercicio.y=gapX;EditarEjercicio.w=120;EditarEjercicio.h=25;;GetCorrecto.x=EditarEjercicio.x+EditarEjercicio.w+gapX;GetCorrecto.y=EditarEjercicio.y;GetCorrecto.w=150;GetCorrecto.h=EditarEjercicio.h;;Editar.x=EditarEjercicio.x;Editar.y=GetCorrecto.y+GetCorrecto.h+gapY;Editar.w=EditarEjercicio.w;Editar.h=GetCorrecto.h;;editarGols.x=Editar.x+Editar.w+gapX;editarGols.y=Editar.y;editarGols.w=GetCorrecto.w;editarGols.h=Editar.h;;activoCtr.x=editarGols.x+editarGols.w+gapX;activoCtr.y=editarGols.y;activoCtr.w=100;activoCtr.h=Editar.h;;addBtn.w=activoCtr.h;addBtn.h=activoCtr.h;addBtn.x=activoCtr.x+activoCtr.w+gapX+20;addBtn.y=activoCtr.y;;rmBtn.x=addBtn.x+addBtn.w+gapX;rmBtn.y=addBtn.y;rmBtn.w=addBtn.w;rmBtn.h=addBtn.h;;ô=&amp;squot;*******************************************&amp;squot;;ô=&amp;squot;*   CFG GENERAL ESCENA, TOOLBAR ARRIBA    *&amp;squot;;ô=&amp;squot;*******************************************&amp;squot;;openToolBarUp.w=25;openToolBarUp.h=15;openToolBarUp.x=(E1._w-openToolBarUp.w);openToolBarUp.y=0;;;ejerRndOrder.x=300;ejerRndOrder.y=10;ejerRndOrder.w=220;ejerRndOrder.h=25;;addEjerBtn.w=ejerRndOrder.h;addEjerBtn.h=ejerRndOrder.h;addEjerBtn.x=ejerRndOrder.x;addEjerBtn.y=ejerRndOrder.y+ejerRndOrder.h+gapY;;rmEjerBtn.w=addEjerBtn.w;rmEjerBtn.h=addEjerBtn.h;rmEjerBtn.x=addEjerBtn.x+addEjerBtn.w+gapX;rmEjerBtn.y=addEjerBtn.y;;;file.w=200;file.h=25;file.x=10;file.y=10;;openBtn.x=file.x+gapX;openBtn.y=file.y+file.h+5;openBtn.w=30;openBtn.h=30;;guarBtn.x=openBtn.x+openBtn.w+5;guarBtn.y=openBtn.y;guarBtn.w=openBtn.w;guarBtn.h=openBtn.h;;loadBtn.x=guarBtn.x+guarBtn.w+5;loadBtn.y=guarBtn.y;loadBtn.w=guarBtn.w;loadBtn.h=guarBtn.h;;enEditor.w=100;enEditor.h=25;enEditor.x=toolBarUp._w-enEditor.w-3;enEditor.y=3;;ô=&amp;squot;************************************************&amp;squot;;ô=&amp;squot;*Para las PLANTILLAS*&amp;squot;;ô=&amp;squot;************************************************&amp;squot;;menuPlantillas.x=(E1._w-menuPlantillas._w)/2;menuPlantillas.y=(E1._h-menuPlantillas._h)/2' algorithm='true'"
+			name="A_75">
+		<param
+			value="id='iniPropWin_Btns()' local='_margX,_margY,_btnW,_btnH,_gapX,_gapY,_gapY2Text' init='_gapY2Text=32' do='_margX=10;_margY=10;_btnW = PropWin._w-2*_margX;_btnH = 25; ;ô=&amp;squot;***********************************&amp;squot;;ô=&amp;squot;*PANEL POSICIONES*&amp;squot;;ô=&amp;squot;***********************************&amp;squot;;_gapX=10 ;_gapY=5 ;activoX.x = _margX;activoX.y = _margY;activoX.w = _btnW;activoX.h = _btnH;;activoY.x=activoX.x;activoY.y=activoX.y+activoX.h+_gapY;activoY.w=activoX.w;activoY.h=activoX.h;;activoW.x=activoY.x;activoW.y=activoY.y+activoY.h+_gapY;activoW.w=activoY.w;activoW.h=activoY.h;;activoH.x=activoW.x;activoH.y=activoW.y+activoW.h+_gapY;activoH.w=activoW.w;activoH.h=activoW.h;;ô=&amp;squot;***********************************&amp;squot;;ô=&amp;squot;*        PANEL CONTENIDO          *&amp;squot;;ô=&amp;squot;***********************************&amp;squot;;activoTXT.x=_margX;activoTXT.y=_margY;activoTXT.w=_btnW;activoTXT.h=_btnH;;activoDX.x=activoTXT.x+_gapX+10;activoDX.y=activoTXT.y+activoTXT.h+_gapY;activoDX.w=100;activoDX.h=activoTXT.h;;activoDY.x=activoDX.x+activoDX.w+_gapX;activoDY.y=activoDX.y;activoDY.w=activoDX.w;activoDY.h=activoDX.h;;activoIMG.x=activoTXT.x;activoIMG.y=activoDY.y+activoDY.h+_gapY;activoIMG.w=activoTXT.w;activoIMG.h=activoTXT.h;;activoIMG_DX.x=activoDX.x;activoIMG_DX.y=activoIMG.y+activoIMG.h+_gapY;activoIMG_DX.w=activoDX.w;activoIMG_DX.h=activoDX.h;;activoIMG_DY.x=activoDY.x;activoIMG_DY.y=activoIMG_DX.y;activoIMG_DY.w=activoIMG_DX.w;activoIMG_DY.h=activoIMG_DX.h;;activoImgRot.x=activoIMG_DX.x;activoImgRot.y=activoIMG_DY.y+activoIMG_DY.h+_gapY;activoImgRot.w=150;activoImgRot.h=activoIMG_DY.h;;;activoIMG_INFO.x=activoIMG.x;activoIMG_INFO.y=activoImgRot.y+activoImgRot.h+_gapY;activoIMG_INFO.w=activoIMG.w;activoIMG_INFO.h=activoIMG.h;ô=&amp;squot;***********************************&amp;squot;;ô=&amp;squot;*   PANEL COLORES  *&amp;squot;;ô=&amp;squot;***********************************&amp;squot;;_btnH = 25;;activoA.x=_margX;activoA.y=_margY;activoA.w=_btnW;activoA.h=_btnH;;activoR.x=activoA.x;activoR.y=activoA.y+activoA.h+_gapY;activoR.w=activoA.w;activoR.h=activoA.h;;activoG.x=activoR.x;activoG.y=activoR.y+activoR.h+_gapY;activoG.w=activoR.w;activoG.h=activoR.h;;activoB.x=activoG.x;activoB.y=activoG.y+activoG.h+_gapY;activoB.w=activoG.w;activoB.h=activoG.h;;activoBW.x=activoB.x;activoBW.y=activoB.y+activoB.h+_gapY+20;activoBW.w=activoB.w;activoBW.h=activoB.h;;activoBA.x=activoBW.x;activoBA.y=activoBW.y+activoBW.h+_gapY;activoBA.w=activoBW.w;activoBA.h=activoBW.h;;activoBR.x=activoBA.x;activoBR.y=activoBA.y+activoBA.h+_gapY;activoBR.w=activoBA.w;activoBR.h=activoBA.h;;activoBG.x=activoBR.x;activoBG.y=activoBR.y+activoBR.h+_gapY;activoBG.w=activoBR.w;activoBG.h=activoBR.h;;activoBB.x=activoBG.x;activoBB.y=activoBG.y+activoBG.h+_gapY;activoBB.w=activoBG.w;activoBB.h=activoBG.h;;ô=&amp;squot;***********************************&amp;squot;;ô=&amp;squot;*   PANEL Verificacion /Visual 2  *&amp;squot;;ô=&amp;squot;***********************************&amp;squot;;;enGolMargen.x=_margX;enGolMargen.y=_margY;enGolMargen.w=_btnW;enGolMargen.h=_btnH;;actMargenX.x=enGolMargen.x;actMargenX.y=enGolMargen.y;actMargenX.w=enGolMargen.w;actMargenX.h=enGolMargen.h;;actMargenY.x=actMargenX.x;actMargenY.y=actMargenX.y+actMargenX.h+_gapY;actMargenY.w=actMargenX.w;actMargenY.h=actMargenX.h;;activoGAPX.x=actMargenY.x;activoGAPX.y=actMargenY.y+actMargenY.h+30;activoGAPX.w=actMargenY.w;activoGAPX.h=actMargenY.h;;activoGAPY.x=activoGAPX.x;activoGAPY.y=activoGAPX.y+activoGAPX.h+_gapY;activoGAPY.w=activoGAPX.w;activoGAPY.h=activoGAPX.h;;;ô=&amp;squot;***********************************&amp;squot;;ô=&amp;squot;*   PANEL Ejercicio  *&amp;squot;;ô=&amp;squot;***********************************&amp;squot;;btnClosePE.w=20;btnClosePE.h=20;btnClosePE.x=PropEjercicio._w-btnClosePE.w;btnClosePE.y=0;;textoInstrucciones.x=10;textoInstrucciones.y=_gapY2Text;textoInstrucciones.w=PropEjercicio._w-textoInstrucciones.x*2;textoInstrucciones.h=25;;imagenFondoPleca.x=textoInstrucciones.x;imagenFondoPleca.y=textoInstrucciones.y+textoInstrucciones.h+5;imagenFondoPleca.w=textoInstrucciones.w;imagenFondoPleca.h=textoInstrucciones.h;;imagenFondo.w=imagenFondoPleca.w;imagenFondo.h=imagenFondoPleca.h;imagenFondo.x=imagenFondoPleca.x;imagenFondo.y=imagenFondoPleca.y+imagenFondoPleca.h+_gapY2Text;;ctrRand.x=imagenFondo.x;ctrRand.y=imagenFondo.y+imagenFondo.h+_gapY;ctrRand.w=imagenFondo.w;ctrRand.h=imagenFondo.h;;golsRand.x=ctrRand.x;golsRand.y=ctrRand.y+ctrRand.h+_gapY;golsRand.w=ctrRand.w;golsRand.h=ctrRand.h;;verifMode.x=golsRand.x;verifMode.y=golsRand.y+golsRand.h+_gapY;verifMode.w=golsRand.w;verifMode.h=golsRand.h;;txtImgBien.w=(PropEjercicio._w-_gapX-2*verifMode.x)/2;txtImgBien.h=golsRand.h;txtImgBien.x=verifMode.x;txtImgBien.y=verifMode.y+verifMode.h+_gapY2Text;;txtImgMal.x=txtImgBien.x+txtImgBien.w+_gapX;txtImgMal.y=txtImgBien.y;txtImgMal.w=txtImgBien.w;txtImgMal.h=txtImgBien.h;;;nGoles.w=(PropEjercicio._w-_gapX-2*ctrRand.x)/2;nGoles.h=ctrRand.h;nGoles.x=ctrRand.x;nGoles.y=(PropEjercicio._h-nGoles.h)-_gapY;;;nControles.w=nGoles.w;nControles.h=nGoles.h;nControles.x=nGoles.x+nGoles.w+_gapX;nControles.y=nGoles.y;;ô=&amp;squot;***********************************&amp;squot;;ô=&amp;squot;*   MENSAGES  *&amp;squot;;ô=&amp;squot;***********************************&amp;squot;;msgOkBtn.w=100;msgOkBtn.h=30;msgOkBtn.x=(WinMsg._w-msgOkBtn.w)/2;msgOkBtn.y=(WinMsg._h-msgOkBtn.h-10);;ô=&amp;squot;***********************************&amp;squot;;ô=&amp;squot;*         MENÚ PLANTILLAS         *&amp;squot;;ô=&amp;squot;***********************************&amp;squot;;btnCancelPlan.w=100;btnCancelPlan.h=25;btnCancelPlan.x=(menuPlantillas._w-btnCancelPlan.w)/2;btnCancelPlan.y=(menuPlantillas._h-btnCancelPlan.h)-10;' algorithm='true'"
+			name="A_76">
+		<param value="id='__INTER_EJER__'" name="A_77">
+		<param
+			value="id='opciones.puedeSoltarEn(_iLSol,_iGEn)' expresion='_puedeSol' local='_tmpA,_resTmp,_rel2,_rel1' do='_rel1=opciones.ctrProp[_iLSol,idxEnGol];_rel2=_iGEn;_resTmp=(_rel1==_rel2);_tmpA=(verifMode)&amp;(!_resTmp);;nVerificadas=nVerificadas+(_tmpA);;;_puedeSol=(acomodandoCorectos)|(!verifMode)|(_resTmp);verificado=(!_puedeSol);STR_DBG = _iLSol+&amp;squot;,&amp;squot;+_rel1+&amp;squot;,&amp;squot;+_rel2+&amp;squot; = &amp;squot;+_resTmp+ &amp;squot; =&gt; &amp;squot;+_puedeSol;opciones.ctrProp[_iCtr,opciones.enGol]=(_puedeSol)?_iGEn:-1' algorithm='true'"
+			name="A_78">
+		<param
+			value="id='opciones.puedeTomar(_iCtr)' expresion='(!verifMode)|(_resTmp)' local='_resTmp,_rel1,_rel2' do='_rel1=opciones.ctrProp[_iCtr,idxEnGol];_rel2=opciones.ctrProp[_iCtr,opciones.enGol];_resTmp=(_rel2&lt;0)|(_rel1!=_rel2)' algorithm='true'"
+			name="A_79">
+		<param
+			value="id='allCtrBien()' expresion='_resTmp' local='idxC,rel1,rel2' init='idxC=0;_resTmp=1' do='rel1=opciones.ctrProp[idxC,idxEnGol];rel2=opciones.ctrProp[idxC,opciones.enGol];_resTmp=(_resTmp)&amp;(rel1==rel2);;idxC=idxC+1' while='(idxC&lt;opciones.n_ctr)&amp;(_resTmp)' algorithm='true'"
+			name="A_80">
+		<param
+			value="id='verificarAux()' expresion='_res' local='_rel2,_rel1,_resTmp' init='_index=0;_res=1;numCorrectas=0;sinColocar=0;strDebug=&amp;squot;&amp;squot;' do='_rel1=opciones.ctrProp[_index,idxEnGol];_rel2=opciones.ctrProp[_index,opciones.enGol];;_resTmp=(_rel1==_rel2);_res=(_res)&amp;(_resTmp);;strDebug=strDebug+&amp;squot;(&amp;squot;+_rel1+&amp;squot;,&amp;squot;+_rel2+&amp;squot;)&amp;squot;;;numCorrectas=numCorrectas+_resTmp;sinColocar=sinColocar+(_rel2==-1);;_index=_index+1' while='(_index&lt;opciones.n_ctr)' algorithm='true'"
+			name="A_81">
+		<param
+			value="id='verificaResp()' do='correcto=verificarAux();nVerificadas=nVerificadas+1;opciones.enabled=(!correcto);verificado=1;;;' algorithm='true'"
+			name="A_82">
+		<param
+			value="id='sigEjercicio()' do='((enEditor)&amp;(ejercicioActReal&gt;-1))?storeConfig(ejercicioActReal):0;_rndOrd=(!enEditor)&amp;(ejerRndOrder);ejercicioAct=min(ejercicioAct+1,numEjerc-1);_tmpIndex=(_rndOrd)?myRnd.resultadoVec[ejercicioAct]:ejercicioAct;ponEjercicio(_tmpIndex);' algorithm='true'"
+			name="A_83">
+		<param
+			value="id='antEjercicio()' do='((enEditor)&amp;(ejercicioActReal&gt;-1))?storeConfig(ejercicioActReal):0;ejercicioAct=max(ejercicioAct-1,0);_rndOrd=(!enEditor)&amp;(ejerRndOrder);_tmpIndex=(_rndOrd)?myRnd.resultadoVec[ejercicioAct]:ejercicioAct;ponEjercicio(_tmpIndex);;;' algorithm='true'"
+			name="A_84">
+		<param
+			value="id='calcIMGBienMal(_iCtr)' expresion='(verificado)&amp;(!verifMode)' do='_rel1=opciones.ctrProp[_iCtr,idxEnGol];_rel2=opciones.ctrProp[_iCtr,opciones.enGol];;_ctrCorrecto=(_rel1==_rel2);;;;_img.x=opciones.ctrProp[_iCtr,opciones.X];_img.x=_img.x+opciones.ctrProp[_iCtr,opciones.W];_img.y=opciones.ctrProp[_iCtr,opciones.Y];_img.y=_img.y+opciones.ctrProp[_iCtr,opciones.H];;_img.x=_img.x;_img.y=_img.y;_img.url=(_ctrCorrecto)?txtImgBien:txtImgMal;' algorithm='true'"
+			name="A_85">
+		<param value="id='__ALGORITMOS__'" name="A_86">
+		<param
+			value="id='sync_esp()' do='opciones.Esp.Ox=E1.Ox;opciones.Esp.Oy=E1.Oy;opciones.Esp.escala=E1.escala;opciones.Esp.mousePressed=(E1.mouse_pressed)&amp;(opciones.enabled);opciones.Esp.mouse_x=E1.mouse_x;opciones.Esp.mouse_y=E1.mouse_y;opciones.Esp.w=E1._w;opciones.Esp.h=E1._h;opciones.update()' algorithm='true'"
+			name="A_87">
+		<param
+			value="id='sync_btns()' local='_editando,' do='btnAnt.activo_si=(ejercicioAct&gt;0);btnSig.activo_si=(ejercicioAct&lt;(numEjerc-1));;ô=&amp;squot;***************************************************&amp;squot;;ô=&amp;squot;* Vemos si hay que ocultar algo                   *&amp;squot;;ô=&amp;squot;***************************************************&amp;squot;;retroBien.visible=((verificado)&amp;(correcto));retroMal.visible=((verificado)&amp;(!correcto));btnVerificar.visible=(!verifMode)&amp;((!verificado)|(!correcto));btnOtroEjer.visible=(verificado)&amp;(correcto);                    ;btnAnt.visible=1;btnSig.visible=1;btnNavTxt.visible=1;;_editando=(opciones.edicion==1);retroBien.visible=(retroBien.visible)|(_editando);retroMal.visible=(retroMal.visible)|(_editando);btnVerificar.visible=(btnVerificar.visible)|(_editando);btnOtroEjer.visible=(btnOtroEjer.visible)|(_editando)' algorithm='true'"
+			name="A_88">
+		<param
+			value="id='sync_txtEscena()' expresion='x' do='textoInstrucciones2=textoInstrucciones;imagenFondoPleca2=imagenFondoPleca;imagenFondo2=imagenFondo;txtImgMal2=txtImgMal;txtImgBien2=txtImgBien' algorithm='true'"
+			name="A_89">
+		<param
+			value="id='mvVentanaProp()' local='win.txt1,win.txt2,idxT' do='PropWin.x=E1.x+winTitle.x-PropWin._w/2;PropWin.y=E1.y-winTitle.y+winTitle.img.h/2;;PropWinPos.x=PropWin.x;PropWinPos.y=PropWin.y+PropWin._h-PropWinPos._h;;PropWinColor.x=PropWinPos.x;PropWinColor.y=PropWinPos.y;;PropWinVerif.x=PropWinPos.x;PropWinVerif.y=PropWinPos.y;;PropWinCont.x=PropWinPos.x;PropWinCont.y=PropWinPos.y;' algorithm='true'"
+			name="A_90">
+		<param
+			value="id='seMovioCG(idxCG,X2,Y2)' expresion='res' local='strCG' init='strCG=nombresCtrRetro[idxCG];' do='_X1=strCG+&amp;squot;.x&amp;squot;;_Y1=strCG+&amp;squot;.y&amp;squot;;_X1=_Eval_(_X1);_Y1=_Eval_(_Y1);res=(_X1!=X2)|(_Y1!=Y2) ;' algorithm='true'"
+			name="A_91">
+		<param
+			value="id='calcPropChg_CtrG()' do='selCG=(retroBien.active    &amp;1)?0:-1;selCG=(retroMal.active     &amp;1)?1:selCG;selCG=(btnVerificar.active &amp;1)?2:selCG;selCG=(btnOtroEjer.active  &amp;1)?3:selCG;selCG=(btnAnt.active       &amp;1)?4:selCG;selCG=(btnSig.active       &amp;1)?5:selCG;selCG=(btnNavTxt.active    &amp;1)?6:selCG;;selCG=(isInitEdit)?activoCtr:selCG;;mvCG=(selCG&gt;-1)&amp;(seMovioCG(selCG,Xant,Yant));;tt=(enTiempoReal)?copiaCtrToCG(activoCtr):0;tt=((mvCG)&amp;(!enTiempoReal))?copiaCGToCtr(selCG):0;;(selCG&gt;-1)?seMovioCG(selCG,0,0):0;Xant=_X1;Yant=_Y1;;_X1=-1000;_Y1=-1000' algorithm='true'"
+			name="A_92">
+		<param
+			value="id='calcPropChg_macro()' do='tt=(enTiempoReal)?((editarGols)?copiaCtrToGol(activoCtr):copiaCtrToLabel(activoCtr)):0;_actualizarFromCtr=(opciones.activo&gt;-1);_actualizarFromGol=(!_actualizarFromCtr)&amp;(opciones.activoGol&gt;-1);tt=(_actualizarFromCtr)?copiaLabelToCtr(opciones.activo):0;tt=(_actualizarFromGol)?copiaGolToCtr(opciones.activoGol):0;;;;enTiempoReal=0' algorithm='true'"
+			name="A_93">
+		<param
+			value="id='calcPropChg()' do='noSelCG=isNoControlG_Edit_Activo();esCG=(editarGols==2)|(!noSelCG);esCG=(esCG)&amp;(opciones.activo&lt;0)&amp;(opciones.activoGol&lt;0);tt=(esCG)?calcPropChg_CtrG():calcPropChg_macro();;Xant=(noSelCG)?10000:Xant;Yant=(noSelCG)?10000:Yant;;enTiempoReal=0' algorithm='true'"
+			name="A_94">
+		<param
+			value="id='calcEdicion()' local='idxT,' do='mvWin=(winTitle.activo)?(abs(winTitle.xAnt-winTitle.x)+abs(winTitle.yAnt-winTitle.y)):0;mvWin=(mvWin&gt;0);(mvWin)?mvVentanaProp():calcPropChg();;cambioTipoObj=(editarGols2.ant!=editarGols2);tt=(cambioTipoObj)?setVisibleTab(0):0;;winTitle.xAnt=winTitle.x;winTitle.yAnt=winTitle.y;;editarGols2.ant=editarGols2;activoCtr2.ant=activoCtr2activoCtr2;;;idxT=editarGols2;win.txt1=(idxT==0)?&amp;squot;control&amp;squot;:((idxT==1)?&amp;squot;gol&amp;squot;:&amp;squot;retro&amp;squot;);winTitle.txt=&amp;squot;Editando &amp;squot;+win.txt1+&amp;squot; número &amp;squot;+activoCtr2;' algorithm='true'"
+			name="A_95">
+		<param value="id='__ALG_EJERCICIO__'" name="A_96">
+		<param
+			value="id='getImageInfoFor(idxObj,isControl)' expresion='strImg' local='strImg2,idxPrp,_noImg' do='idxObj=max(0,idxObj);idxPrp=idxImgInfo;strImg=(isControl)?opciones.ctrProp[idxObj,idxPrp]:opciones.golsProp[idxObj,idxPrp];idxPrp=opciones.IMG;strImg2=(isControl)?opciones.ctrProp[idxObj,idxPrp]:opciones.golsProp[idxObj,idxPrp];_noImg=(strImg==-1)|(strImg==0)|(strImg==&amp;squot;&amp;squot;)|(strImg==&amp;squot; &amp;squot;)|(strImg==&amp;squot;   &amp;squot;)|(strImg==&amp;squot;    &amp;squot;);;strImg=(_noImg)?strImg2:strImg;_noImg=(strImg==-1)|(strImg==0)|(strImg==&amp;squot;&amp;squot;)|(strImg==&amp;squot; &amp;squot;)|(strImg==&amp;squot;   &amp;squot;)|(strImg==&amp;squot;    &amp;squot;);strImg=(_noImg)?0:strImg' algorithm='true'"
+			name="A_97">
+		<param
+			value="id='calcEjer_Modal()' expresion='x' do='verModal=(mask.mouse_pressed)?0:verModal;imgModal=(verModal)?imgModal:0' algorithm='true'"
+			name="A_98">
+		<param
+			value="id='calcEjer_isModal()' local='_mY,_mX,_soltado,_mMov,_showModal' init='entroAFuncionModal=entroAFuncionModal+1' do='idxObj=(verModal)?idxObj:-1;_mX=E1.mouse_x;_mY=E1.mouse_y;_mX=(_mX*E1.escala)+E1._w/2+E1.Ox;_mY=-(_mY*E1.escala)+E1._h/2+E1.Oy;;_soltado=(!E1.mouse_pressed)&amp;(E1.mouse_pressed_ant);_initPress=(E1.mouse_pressed)&amp;(!E1.mouse_pressed_ant);_mMov=abs(E1.mouse_x_ant-_mX)+abs(E1.mouse_y_ant-_mY) ;_mMov=(_mMov&gt;0.0000001);;;idxObj=((_soltado)&amp;(!_mMov))?opciones.sobreCual(_mX,_mY):idxObj;isCtr=(idxObj&gt;-1);idxObj=(isCtr)?idxObj:opciones.sobreCualSoltado(_mX,_mY,1,1);;_showModal=(!_mMov)&amp;(idxObj&gt;-1)&amp;(enEditor==0);strImg=0;imgModal=(_showModal)?getImageInfoFor(idxObj,isCtr):imgModal;imgModal=strImg;verModal=(imgModal!=0);;E1.mouse_pressed_ant=E1.mouse_pressed;E1.mouse_y_ant=(_initPress)?_mY:E1.mouse_y;E1.mouse_x_ant=(_initPress)?_mX:E1.mouse_x;' algorithm='true'"
+			name="A_99">
+		<param
+			value="id='calcEjer()' local='_mX,_mY,_tmpAlSol' do=';tt=(verModal)?calcEjer_Modal():calcEjer_isModal();;_tmpAlSol=(!acomodandoCorectos)&amp;(verifMode);correcto=(_tmpAlSol)?verificarAux():correcto;verificado=((_tmpAlSol)&amp;(correcto))|(verificado);;verificado=verificado|((verifMode==1)&amp;(allCtrBien()));verificado=(opciones.activo&gt;-1)?0:verificado;activoCtr=-1' algorithm='true'"
+			name="A_100">
+		<param
+			value="id='INICIO_alg_101()' init='enEditor=1' do='E1.y=toolBarUp._h;toolbar.y=E1.y+E1._h;toolbar.visible=1;toolBarUp.visible=1;;loadPlantillas();idxImgInfo=26;idxEnGol=27;;initBtns();iniPropWin();initBtnToolBar();initMacro();initEjercicios();' algorithm='true' evaluate='only-once'"
+			name="A_101">
+		<param
+			value="id='CALCULOS' do='tt=(isInitEdit)?ponParaEditar():0;sync_esp();;_forzarEdit=(opciones.activo&gt;-1)|(opciones.activoGol&gt;-1);_forzarEdit=(!acomodandoCorectos)&amp;(!opciones.edicion)&amp;(enEditor==1)&amp;(_forzarEdit);tt=(_forzarEdit)?forzarEdicion():0;;;tt=(opciones.edicion)?calcEdicion():calcEjer();tt=(isInitEdit)?limpiaParaEditarInit():0;sync_btns();;;E1.y=toolBarUp._h;toolbar.y=E1.y+E1._h;toolbar.visible=enEditor;toolBarUp.visible=enEditor;' algorithm='true' evaluate='always'"
+			name="A_102">
+		<param
+			value="id='INICIO' do=';INICIO_alg_101()' algorithm='true' evaluate='only-once'"
+			name="A_103">
+		<param
+			value="id='graphic_0' type='text' space='PropWinColor' expresion='[activoBW.x,activoBW.y-25]' text='Borde' font='SansSerif,BOLD,18' fixed='true'"
+			name="G_00">
+		<param
+			value="id='graphic_1' type='text' space='PropWinVerif' draw-if='editarGols==1' expresion='[activoGAPX.x,activoGAPX.y-20]' text='Separación' font='SansSerif,BOLD,16' fixed='true'"
+			name="G_01">
+		<param
+			value="id='graphic_2' type='text' space='PropEjercicio' expresion='[textoInstrucciones.x,textoInstrucciones.y-20]' text='Instrucciones' font='SansSerif,BOLD,18' fixed='true'"
+			name="G_02">
+		<param
+			value="id='graphic_3' type='text' space='PropEjercicio' expresion='[imagenFondo.x,imagenFondo.y-20]' text='Fondo ejercicio' font='SansSerif,BOLD,18' fixed='true'"
+			name="G_03">
+		<param
+			value="id='graphic_4' type='text' space='PropEjercicio' expresion='[txtImgBien.x,txtImgBien.y-20]' text='Imágenes retroalimentación' font='SansSerif,BOLD,18' fixed='true'"
+			name="G_04">
+		<param
+			value="space='PropEjercicio' type='image' abs_coord='true' expresion='(txtImgMal.x,txtImgMal.y+txtImgMal.h+5)' file='[txtImgMal]' id='graphic_5'"
+			name="G_05">
+		<param
+			value="space='PropEjercicio' type='image' abs_coord='true' expresion='(txtImgBien.x,txtImgBien.y+txtImgBien.h+5)' file='[txtImgBien]' id='graphic_6'"
+			name="G_06">
+		<param
+			value="id='graphic_7' type='text' space='WinMsg' expresion='[20,40]' text='Posiciones correctas capturadas para la verificación' font='SansSerif,BOLD,18' fixed='true' width='260' color_text_border='ffffff'"
+			name="G_07">
+		<param
+			value="id='graphic_8' type='text' space='E1' background='true' draw-if='0' expresion='[_INTERACTIVO_,20]' fixed='true'"
+			name="G_08">
+		<param
+			value="space='E1' type='image' abs_coord='true' expresion='(0,0)' file='[imagenFondo]' id='graphic_9'"
+			name="G_09">
+		<param
+			value="space='E1' type='macro' expresion='macros/clasificar.txt' name='options' id='graphic_10'"
+			name="G_10">
+		<param
+			value="space='E1' type='macro' draw-if='0' expresion='macros/randoms.txt' name='myRnd' id='graphic_11'"
+			name="G_11">
+		<param
+			value="space='E1' type='image' draw-if='calcIMGBienMal(s)' abs_coord='true' expresion='(_img.x,_img.y,1,1)' family='s' s.interval='[0,opciones.n_ctr-1]' s.steps='opciones.n_ctr-1' file='[_img.url]' id='graphic_12'"
+			name="G_12">
+		<param
+			value="space='E1' type='image' abs_coord='true' expresion='(0,0)' file='[imagenFondoPleca]' id='graphic_13'"
+			name="G_13">
+		<param
+			value="id='graphic_14' type='text' space='E1' color='ffffff' expresion='[10,5]' text='[textoInstrucciones]' font='SansSerif,PLAIN,20' fixed='true' width='750' color_text_border='020000'"
+			name="G_14">
+		<param
+			value="space='E1' type='point' color='da0000' draw-if='(editarGols&gt;=2)&amp;(opciones.edicion==1)&amp;(activoCtr&gt;-1)&amp;(calcCGMarkActivo())' expresion='(_polAct.x,_polAct.y)' fixed='true' size='_polAct.wP' id='graphic_15'"
+			name="G_15">
+		<param
+			value="space='E1' type='polygon' color='81ff0000' draw-if='(opciones.edicion==1)&amp;(activoCtr&gt;-1)&amp;(calcPolActivo())' abs_coord='true' expresion='(_polAct.x1,_polAct.y1)(_polAct.x1,_polAct.y2)(_polAct.x2,_polAct.y2)(_polAct.x2,_polAct.y1)(_polAct.x1,_polAct.y1)' fill='92ffffff' width='_polAct.anchoB' id='graphic_16'"
+			name="G_16">
+		<param
+			value="id='graphic_17' type='text' space='E1' background='true' draw-if='0' expresion='[__RETRO__,20]' fixed='true'"
+			name="G_17">
+		<param
+			value="space='E1' type='image' draw-if='(getGrafCfgFor(s))' abs_coord='true' expresion='(_btnRetro.x,_btnRetro.y)' family='s' s.interval='[0,nCtrRetro-1]' s.steps='nCtrRetro-1' file='[_btnRetro.img]' id='graphic_18'"
+			name="G_18">
+		<param
+			value="id='graphic_19' type='text' space='E1' info='RETRO BIEN' color='00a000' draw-if='getGrafCfgFor(0)' expresion='[_btnRetro.txt.x,_btnRetro.txt.y]' text='[_btnRetro.txt]' font='SansSerif,BOLD,17' fixed='true' width='_btnRetro.txt.w' color_text_border='60ffffff'"
+			name="G_19">
+		<param
+			value="id='graphic_20' type='text' space='E1' info='RETRO MAL' color='930000' draw-if='getGrafCfgFor(1)' expresion='[_btnRetro.txt.x,_btnRetro.txt.y]' text='[_btnRetro.txt]' font='SansSerif,BOLD,20' fixed='false' width='_btnRetro.txt.w'"
+			name="G_20">
+		<param
+			value="id='graphic_21' type='text' space='E1' info='RETRO MAL' color='20303c' draw-if='getGrafCfgFor(1)' expresion='[_btnRetro.txt.x,_btnRetro.txt.y+20]' text='Llevas [nVerificadas] intentos' font='SansSerif,BOLD,14' fixed='false' width='_btnRetro.txt.w'"
+			name="G_21">
+		<param
+			value="id='graphic_22' type='text' space='E1' info='CONTADOR EJERCICIO' color='20303b' draw-if='getGrafCfgFor(6)' expresion='[_btnRetro.txt.x,_btnRetro.txt.y]' text='[ejercicioAct+1]/[numEjerc]' font='SansSerif,BOLD,16' fixed='false' width='_btnRetro.txt.w' color_text_border='ffffff'"
+			name="G_22">
+		<param
+			value="id='graphic_23' type='text' space='E1' color='20303b' draw-if='(s&gt;1)&amp;(getGrafCfgFor(s))' expresion='[_btnRetro.txt.x,_btnRetro.txt.y]' family='s' s.interval='[0,nCtrRetro-1]' s.steps='nCtrRetro-1' text='[_btnRetro.txt]' font='SansSerif,BOLD,12' fixed='false' width='_btnRetro.txt.w' color_text_border='ffffff'"
+			name="G_23">
+		<param
+			value="space='mask' type='image' abs_coord='true' expresion='(mask._w/2,mask._h/2,1,1)' file='[imgModal]' id='graphic_24'"
+			name="G_24">
+		<param
+			value="id='graphic_25' type='text' space='E1' background='true' draw-if='0' expresion='[__WINPARAM__,20]' fixed='true'"
+			name="G_25">
+		<param
+			value="space='PropWin' type='segment' color='42a262' draw-if='getPosTab(tabActivo)' abs_coord='true' expresion='(tabP.x+2,tabP.y+tabP.h+2)(tabP.x+tabP.w-3,tabP.y+tabP.h+2)' fixed='true' size='0' width='6' id='graphic_26'"
+			name="G_26">
+		<param
+			value="space='E1' type='image' draw-if='opciones.edicion==1' abs_coord='true' expresion='(winTitle.x,-winTitle.y,1,1)' file='images/edicion/winTitleProp.png' id='graphic_27'"
+			name="G_27">
+		<param
+			value="id='graphic_28' type='text' space='E1' color='ffffff' draw-if='opciones.edicion==1' expresion='[winTitle.x-winTitle.img.w/2+5,-winTitle.y-5]' text='[winTitle.txt]' font='SansSerif,BOLD,15' fixed='false' width='2' color_text_border='000000'"
+			name="G_28">
+		<param
+			value="id='graphic_29' type='text' space='E1' background='true' draw-if='0' expresion='[__PLANTILLAS__,20]' fixed='true'"
+			name="G_29">
+		<param
+			value="id='graphic_30' type='text' space='menuPlantillas' color='20303b' expresion='[10,10]' text='Selecciona una plantilla' font='SansSerif,BOLD,18' fixed='true' color_text_border='ffffff'"
+			name="G_30">
+		<param
+			value="space='menuPlantillas' type='image' draw-if='getConfigBtnPantilla(s)' abs_coord='true' expresion='(_btn.x,_btn.y)' family='s' s.interval='[0,nPlantillas-1]' s.steps='nPlantillas-1' file='[_btn.img]' id='graphic_31'"
+			name="G_31">
+		<param
+			value="id='graphic_32' type='text' space='menuPlantillas' draw-if='getConfigBtnPantilla(s)' expresion='[_btn.txt.x,_btn.txt.y]' family='s' s.interval='[0,nPlantillas-1]' s.steps='nPlantillas-1' text='[_btn.txt]' font='SansSerif,BOLD,16' fixed='false' width='_btn.txt.w' color_text_border='ffffff'"
+			name="G_32">
+		<param
+			value="id='graphic_33' type='text' space='E1' background='true' draw-if='0' expresion='[__DBG__,20]' fixed='true'"
+			name="G_33">
+		<param
+			value="id='graphic_34' type='text' space='E1' draw-if='debug=1' expresion='[20,120]' text='nPlantillas=[nPlantillas] ejercicioActReal=[ejercicioActReal]' fixed='true'"
+			name="G_34">
+	</applet>
+
+</body>
+</html>
+</body>
+</html>
+

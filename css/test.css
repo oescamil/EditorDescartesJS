@@ -1,0 +1,265 @@
+@CHARSET "UTF-8";
+html,body{
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+.descartes-editor-main{
+	height: 100%;
+	min-width: 600px;
+	min-height:290px;
+	overflow:auto;
+	padding: 0px;
+	background-image: url('img/bgEdito.png'); 
+}
+
+.descartes-editor-main .main-content{
+	height: 94%;
+	min-height: 250px;
+}
+
+.tootlbar{
+	height: 30px;
+	overflow: hidden;
+}
+.program-pane{
+
+}
+
+.program-pane .ui-tabs-panel,
+.program-pane .ui-layout-content.ui-widget-content{
+	padding: 0;
+	margin: 0;
+}
+
+
+.descartes-editor-main .menu-preconfig-pane,
+.descartes-editor-main .menu-objects-pane,
+.descartes-editor-main .menu-preconfig-pane{
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+}
+
+
+.descartes-editor-main .menu-preconfig-pane div.ui-accordion h3,
+.descartes-editor-main .menu-objects-pane div.ui-accordion h3,
+.descartes-editor-main .menu-preconfig-pane div.ui-accordion h3
+{
+	margin: 0;
+}
+
+.descartes-editor-main .descartes-objects-list-objects,
+.descartes-editor-main .descartes-objects-list-auxilars
+ {
+	height: 100%;
+	overflow: auto;
+}
+.descartes-editor-main .descartes-objects-list-objects table.content_ext,
+.descartes-editor-main .descartes-objects-list-auxilars table.content_ext{
+	margin: 0;
+	padding: 0;
+	width:100%;
+	height:100%;
+	border-collapse: collapse;
+	table-layout: auto;
+	
+}
+.descartes-editor-main .descartes-objects-list-objects table td,
+.descartes-editor-main .descartes-objects-list-auxilars table td{
+	margin:0;
+	padding:0;
+	vertical-align: top;
+	
+}
+.descartes-editor-main .descartes-objects-list-objects table td.toolbar,
+.descartes-editor-main .descartes-objects-list-auxilars table td.toolbar {
+	height: 5px;
+}
+.descartes-editor-main .descartes-objects-list-objects table td.tree ,
+.descartes-editor-main .descartes-objects-list-auxilars table td.tree {
+}
+
+.descartes-editor-main .descartes-objects-list-objects table td.tree div.descartes-object-list-list.jstree,
+.descartes-editor-main .descartes-objects-list-auxilars table td.tree div.descartes-auxiliar-list-list.jstree{
+	height: 100%;
+	overflow: auto;
+	
+} 
+
+.descartes-editor-main .menu-preconfig-pane div.ui-accordion-content,
+.descartes-editor-main .menu-objects-pane div.ui-accordion-content,
+.descartes-editor-main .menu-preconfig-pane div.ui-accordion-content
+{
+	padding: 0;
+	margin: 0;
+}
+
+.programa-pane div.container{
+}
+
+.menu-objects-pane{
+
+	
+}
+.menu-preconfig-pane{
+
+	
+}
+.escens-pane{
+
+}
+
+.CodeMirror{
+	height: 100%;
+		
+}
+/*
+*********************************************************************
+*Properties pane*
+*********************************************************************
+
+*/
+
+.auxiliar-prop-popuot{
+	width:100%;
+	clear:both;
+	text-align: center;
+	vertical-align: middle;
+}
+.auxiliar-prop-popuot input{
+	width: 100%;
+}
+
+
+
+.descartes-object-editor-container {
+	white-space: nowrap;
+}
+
+
+
+
+
+.scenes-pane{
+	overflow: hidden;
+	margin: 0;
+	padding: 0;
+}
+
+.scenes-pane iframe{
+	margin: 0;
+	padding: 0;
+	border: 0;
+}
+
+.program-pane-scene{
+	padding: 5px;
+	margin: 0;
+}
+.program-pane-scene .field-wrapper{
+	display: inline-block;
+	margin-right: 5px;
+}
+
+.program-pane-scene h2 {
+	margin: 0;
+	margin-bottom: 5px;
+}
+
+
+.program-pane-scene .config-global-wrapper {
+	margin: 0px;
+	display: block;
+	width: 46%;
+	top: 0;
+	padding: 5px;
+	overflow: auto;
+	float: left;
+	height: 100%;
+}
+
+.program-pane-scene .config-global-wrapper .field-wrapper label{
+	margin-right: 5px;
+}
+
+.program-pane-scene .config-global-wrapper.buttons-wrapper {
+	margin-left:10px; 
+}
+
+.program-pane-scene .config-global-wrapper.app-config-wrapper {
+	border-right: 1px white dashed;
+	
+}
+	
+	
+	
+	
+.field-container {
+	margin-bottom: 5px;
+}
+
+.field-container legend.field-label{
+	width: auto;
+	min-width:30px;
+	max-width:none;
+	overflow: visible;
+	font-weight: bold;
+	
+}
+
+
+
+
+
+/*
+*******************************************************
+	Poperties list layout 
+*******************************************************
+*/
+
+
+.descartes-object-editor-container .field-container .field-label{
+	display:inline-block;
+	width: 70px;
+	white-space: normal;
+}
+
+
+.descartes-object-editor-container .field-container .field-input-wrapper{
+	
+}
+
+.descartes-object-editor-container  div.field-container > .field-input{
+	width: 120px;
+}
+
+
+
+.inline-container > div{
+	display: inline-block;
+}
+
+.inline-container > div > label.field-label{
+	width: auto;
+	min-width: 0;
+	max-width: 30px;
+}
+
+div.field-container.label-right label{
+	float: right;
+	
+}
+
+div.field-container.label-top label{
+	display: block;
+	clear: both;
+}
+
+div.field-container.label-top .field-input{
+	width : 100%;
+	display: block;
+	clear: both;
+}
+
+

@@ -1,0 +1,6 @@
+@CHARSET "UTF-8";
+.WYSWYG_editor.activado {
+	border: 2px dashed black;
+	-moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+	
+}

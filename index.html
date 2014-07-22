@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Editor HTML Descartes  version 0.1</title>
+	
+	<!-- BEGIN LIBS --> 
+		<!-- LIBS CSS-->
+	<link rel="stylesheet" href="javascript/libs/codemirror-3.16/lib/codemirror.css">
+	<link rel="stylesheet" href="javascript/libs/codemirror-3.16/addon/hint/show-hint.css">
+
+<!-- 
+	<link href="css/themes/dot-luv/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+	<link href="javascript/libs/jquery/jquery-ui-1.10.3/css/dot-luv/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+	<link href="css/themes/start/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+	<link href="css/themes/desc_orange/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+	<link href="css/themes/descartes-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+ -->
+ 
+	<link href="javascript/libs/jquery/jquery-ui-1.10.3/css/descartes-black-blue-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet">
+	<link href="javascript/libs/jquery/layout/css/layout-default-latest.css" rel="stylesheet">
+	<link href="javascript/libs/contribute/jquery_switchbutton/ui.switchbutton.css" rel="stylesheet">
+	<link href="javascript/libs/jquery/layout/css/layout-editor-descartes.css" rel="stylesheet">
+	
+	
+	<link href="css/test.css" rel="stylesheet">
+	<link href="css/jstree-style.css" rel="stylesheet">
+	<link href="css/dialogs.css" rel="stylesheet">
+	
+	<!-- LIBS JS-->
+
+	<script src="javascript/libs/utilities/DomParserAdapt.js"></script>
+	<script src="javascript/libs/codemirror-3.16/lib/codemirror.js"></script>
+	<script src="javascript/libs/codemirror-3.16/addon/hint/show-hint.js"></script>
+	<script src="javascript/libs/codemirror-3.16/addon/hint/javascript-hint.js"></script>
+	<script src="javascript/libs/codemirror-3.16//mode/javascript/javascript.js"></script>
+
+	<script src="javascript/libs/jquery/jquery-1.10.2.min.js"></script>
+	<script src="javascript/libs/jquery/jquery-ui-1.10.3/js/jquery-ui-1.10.3.custom.js"></script>
+	<script src="javascript/libs/jquery/layout/jquery.layout-latest.js"></script>
+	<script src="javascript/libs/jquery/jsTree/jquery.jstree.js"></script>
+	<script src="javascript/libs/jquery/noIdTabs/jquery-ui-selector-tabs.js"></script>
+	
+	<script src="javascript/libs/contribute/jquery_switchbutton/jquery.switchbutton.min.js"></script>
+	<script src="javascript/libs/contribute/jquery_switchbutton/jquery.tmpl.min.js"></script>
+	
+	<!-- END LIBS -->
+	
+	<!--  Editor Pane BASES -->
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/DescartesEditObjectPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/spaces/DescartesSpaceEditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/controls/DescartesControlEditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/auxiliars/DescartesAuxiliarObjectPane.js"></script>
+
+
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/controls/numeric/DescartesNumericControlEditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/controls/numeric/DescartesNumericControlSpinnerEditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/controls/numeric/DescartesNumericControlButtonEditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/controls/numeric/DescartesNumericControlMenuEditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/controls/numeric/DescartesNumericControlScrollEditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/controls/numeric/DescartesNumericControlTextfieldEditPane.js"></script>
+	
+	<script src="javascript/libs/descartes_editor/cfg_layout.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/descartes-ui-babel.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/descartes-editor-ui-utils.js"></script>
+	
+	<script src="javascript/libs/descartes_editor/ui/ui_cfg_object_panes.js"></script>
+	<script src="javascript/libs/descartes_editor/descartes_editor_scenes_configuration.js"></script>
+	<script src="javascript/libs/descartes_editor/descartes_editor_io.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/descartes-objects-list.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/descartes-auxiliar-list.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/descartes-properties-editor-pane.js"></script>
+
+	<!-- ELEMENTS AUTO - REGISTERED FOR ui_cfg_object_panes.js -->
+	
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/controls/DescartesGraphicControlEditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/controls/DescartesTextControlEditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/controls/DescartesAudioControlEditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/controls/DescartesVideoControlEditPane.js"></script>
+
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/spaces/DescartesSpaceR2EditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/spaces/DescartesSpaceR3EditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/spaces/DescartesSpaceHTMLIFrameEditPane.js"></script>
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/spaces/DescartesSpaceAPEditPane.js"></script>
+
+	<script src="javascript/libs/descartes_editor/ui/object_edit_forms/auxiliars/DescartesAuxiliarArrayObjectPane.js"></script>
+
+
+
+
+	<script src="javascript/EditorDescartes.js"></script>
+	<script src="javascript/EditorMain.js"></script>
+
+</head>
+<body >
+
+
+<div id='descartes-editor-0' class='descartes-editor-main'>
+	<div class='tootlbar'></div>
+	<div class='main-content'>
+		
+		<div class='menu-preconfig-pane'>
+			<div class='container'>
+			<!--  
+				<h3>Controles</h3>
+				<div> VEctores, funciones, Variables </div>
+				
+				<h3>Graficos</h3>
+				<div> VEctores, funciones, Variables </div>
+			-->
+				
+				<h3>
+					<span class = 'object-proprties-pane-title'>Properties </span>
+					<span class = 'object-proprties-pane-subtitle'></span>
+				</h3>
+				<div class='object-properties-pane-content'> Properties</div>
+				
+			</div>
+		</div>
+		
+		
+		<div class='menu-objects-pane'>
+			<div class='container'>
+				<h3>Object</h3>
+				<div><div class='descartes-objects-list descartes-objects-list-objects' ></div> </div>
+				
+				<h3>Auxiliares</h3>
+				<div><div class='descartes-objects-list descartes-objects-list-auxilars' ></div> </div>
+			</div>
+		</div>
+		<!-- 
+		<div class='scene-properties-pane'> <h1>Escene properties</h1></div>
+		 -->
+		
+		<div class ='scenes-pane'> 
+			Una Escdena de descartes
+			<div style="width: 500px; height: 300px;;">BLA BLA BAL</div>
+		</div>
+	
+	
+		<div class='program-pane' >
+				<ul>
+					<li><a href=".program-pane-scene">Scene general</a></li>
+					<li><a href=".program-pane-init">Init</a></li>
+					<li><a href=".program-pane-calculus">Calculus</a></li>
+					<li><a href=".program-pane-animation">Animation</a></li>
+				</ul>
+				<div class='ui-layout-content ui-widget-content'>
+					<div class="program-pane-scene">
+					</div>
+					
+					
+					
+					<div class="program-pane-init"></div>
+					<div class="program-pane-calculus"></div>
+					
+					
+					
+					<div class="program-pane-animation">
+					</div>
+				</div>
+		</div>
+</div>		
+		
+		
+</div>
+</body>
+</html>
