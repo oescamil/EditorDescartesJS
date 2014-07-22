@@ -1,4 +1,4 @@
-var DescartesAuxiliarArrayEditPane = (function(){
+var DescartesAuxiliarMatrixEditPane = (function(){
 	var _super_ = DescartesAuxiliarEditPane;
 
 	var Class = function(objectToBind,descartes_context){
@@ -21,14 +21,14 @@ var DescartesAuxiliarArrayEditPane = (function(){
 		var operativeGroup	= origCfg.operativeGroup;
 		var visualGroup 	= origCfg.visualGroup;
 		//id='a2' type='audio' region='external' space='E1' expresion='(01,01)' draw-if='aaa' file='aaa'
-
+//columns='6' rows='6'
 		delete origCfg.operativeGroup;
 		delete origCfg.visualGroup;
 		delete origCfg.commentsGroup;
 		
-		origCfg.array = {
+		origCfg.matrix = {
 				type		: 'checkbox', 
-				label		: 'Array',
+				label		: 'Matrix',
 				value		: 'yes',
 				visible 	: false,
 				enable  	: false,
@@ -46,18 +46,22 @@ var DescartesAuxiliarArrayEditPane = (function(){
 				forcevalue 		: true,
 		};
 		
+
 		origCfg.file = {
 				type		: 'file', 
 				label		: 'File',
 				value		: '',
 		};
-		
-		origCfg.size = {
+		origCfg.columns = {
 				type		: 'textfield', 
-				label		: 'Size',
+				label		: 'Columns',
 				value		: '3',
 		};
-
+		origCfg.rows = {
+				type		: 'textfield', 
+				label		: 'Rows',
+				value		: '3',
+		};
 		
 		origCfg.expresion = {
 				type			: 'codetextarea', 
@@ -71,6 +75,6 @@ var DescartesAuxiliarArrayEditPane = (function(){
 		return origCfg ;
 	};
 
-	DescartesEditObjectPane.registerHandler('auxiliar.array',Class);
+	DescartesEditObjectPane.registerHandler('auxiliar.matrix',Class);
 	
 	return Class; })();

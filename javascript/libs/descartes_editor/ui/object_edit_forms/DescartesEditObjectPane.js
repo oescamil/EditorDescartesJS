@@ -58,22 +58,79 @@ var DescartesEditObjectPane = (function(){
 	 */
 	prototype._updateValue = function (fieldName,newValue){
 		var input = $('.field-input-'+fieldName,this.visualComponent).get(0);
-		input = $(input);
-		var value = newValue;
-		
-		if(input.attr('type') == 'radios'){
-			var allSelector = 'input[name=radio_'+fieldName+']';
-			$(allSelector,input).prop('checked',null);
-			
-			var $element = $(allSelector+'[value='+ value + ']',input);
-			$element.attr('checked', true).button('refresh');
-			$element.trigger('change');
-		} else {
-			input.val(value);
+		input = $(input); // Just First
+		this.updateInputValue(input,fieldName,newValue);
+	};
+	
+	
+	/**
+	 * 
+	 */
+	prototype._updateInputValue = function (input,fieldName,newValue){
+		var inputType = input.attr('type');
+		switch (inputType) {
+		case 'radios':
+			this._updateValueRadiosField(input, fieldName, newValue);
+			break;
+		case 'checkbox':
+			this._updateValueCheckboxField(input, fieldName, newValue);
+			break;
+		case 'codetextarea':
+			this._updateValueCodeTextField(input,fieldName, newValue);
+			break;
+		default:
+			input.val(newValue);
+			break;
 		}
+	};
+	
+	/**
+	 * 
+	 */
+	prototype._updateValueRadiosField = function (input,fieldName,newValue){
+		var allSelector = 'input[name=radio_'+fieldName+']';
+		$allRadios = $(allSelector,input); 
+		$allRadios.removeAttr('checked');
 		
+		var $element = $(allSelector+'[value='+ newValue + ']',input);
+		$element.prop('checked','checked');
+		
+		input.buttonset('refresh');
+		
+		// FORCE VISUAL UPDATE
+		var idR = "label[for="+$element.attr('id')+"]"; 
+		labelSel = 	$(idR,input);
+		labelSel.attr('aria-pressed','true');
+		labelSel.addClass('ui-state-active');
+		$element.trigger('change');
+	};
+	
+	
+	/**
+	 * 
+	 */
+	prototype._updateValueCodeTextField = function (input,fieldName,newValue){
+		
+		newValue = new String(newValue || '');
+		var value = newValue.replace(/;/g,'\n');
+		input.val(value);
+	};
+
+	/**
+	 * 
+	 */
+	prototype._updateValueCheckboxField = function (input,fieldName,newValue){
+		if(newValue == 'yes' || newValue == true) 
+			input.attr('checked','checked');
+		else
+			input.removeAttr('checked');
 		
 	};
+	
+	
+	
+	
+	
 
 	/**
 	 * 
@@ -96,11 +153,13 @@ var DescartesEditObjectPane = (function(){
 					var obj = cfgRec[propKey];
 					if($.isFunction(obj) ||	!$.isPlainObject(obj))
 						continue;
-					if(! obj.hasOwnProperty('children')){
-						checkRecursive(obj,unknownFields);
+					if(obj.hasOwnProperty('children')){
+						checkRecursive(obj['children'],unknownFields);
 					} else {
-						delete(unknownFields[propKey]);
-						someUnkownField = true;
+						if(unknownFields.hasOwnProperty(propKey)){
+							delete(unknownFields[propKey]);
+							someUnkownField = true;
+						}
 					}
 					
 				}
@@ -109,19 +168,23 @@ var DescartesEditObjectPane = (function(){
 		})(cfgObj,unknownFields);
 		
 		if(someUnkownField){
-			cfgObj.unknows = {
+			var childCount = 0;
+			var unknows = {
 				type : 'fieldset',
 				label : 'Unknow',
 				children : {},
 			};
-			var children = cfgObj.unknows.children;
+			var children = unknows.children;
 			for(var fieldName in unknownFields){
 				if(fieldName.substring(0,1) == '#') continue;
 				children[fieldName] = {
 					type  : 'textfield',
 					label : fieldName,
-				};	
+				};
+				childCount ++;
 			}
+			if(childCount > 0)
+				cfgObj.unknows = unknows;
 		}
 		
 		for(var fieldName in cfgObj){
@@ -167,7 +230,7 @@ var DescartesEditObjectPane = (function(){
 		var currVal = fieldValues[fieldName];
 		
 		
-		var htmlFieldCont	= $('<div>',{'class':'field-container field-container--'+fieldName}); 
+		var htmlFieldCont	= $('<div>',{'class':'field-container '+fieldType+'--field-container field-container--'+fieldName}); 
 		var htmlFieldLabel	= $('<label>',{'class':'field-label'}); 
 		var input = $('<input>',{type:'textfield'});
 		var addAuxBtn = false;
@@ -232,8 +295,7 @@ var DescartesEditObjectPane = (function(){
 			options = fieldCfg['options'];
 			
 			if($.isFunction(options)){
-				var optionCallBack = options; 
-				options = optionCallBack();
+				options = options();
 			}
 			
 			if($.isArray(options)){
@@ -269,7 +331,7 @@ var DescartesEditObjectPane = (function(){
 			}
 			break;
 		case 'radios':
-			input = $('<div>',{'class':'radio-buttons-group'});
+			input = $('<div>',{'class':'radio-buttons-group',type:'radios'});
 			options = fieldCfg['options'];
 			
 			if($.isFunction(options)){
@@ -306,14 +368,16 @@ var DescartesEditObjectPane = (function(){
 				labelR.appendTo(input);
 				currR ++ ; 
 			}
-			
+			input.buttonset();
 			break;
 		case 'checkbox':
 			input	= $('<input>',{type:'checkbox'});
 			break;
-		case 'textarea':
+		case 'codetextarea':
 		case 'richtext':
-			input	= $('<textarea>');
+		case 'textarea':
+			var nLines = (fieldType == 'textarea')?4:6;
+			input	= $('<textarea>',{type:fieldType,rows:nLines});
 			addAuxBtn = true;
 			break;
 			
@@ -328,20 +392,16 @@ var DescartesEditObjectPane = (function(){
 		
 		
 		
+		htmlFieldCont.data('fieldCfg',fieldCfg);
 		if(fieldCfg.attr){
 			for ( var attrName in fieldCfg.attr) {
-				
 				if(attrName == 'class')
 					htmlFieldCont.addClass(fieldCfg.attr[attrName]);
 				else
 					htmlFieldCont.attr(attrName,fieldCfg.attr[attrName]);
 			}
 		}
-		htmlFieldCont.data('fieldCfg',fieldCfg);
-		
-		if(!fieldCfg.visible){
-			htmlFieldCont.hide();
-		}
+		if(!fieldCfg.visible){htmlFieldCont.hide();}
 		
 		if(fieldCfg['label']){
 			var txtNode = document.createTextNode(fieldLabel);
@@ -353,29 +413,32 @@ var DescartesEditObjectPane = (function(){
 		}
 		
 		if(input){
-			input.addClass('field-editor-'+fieldType+' field-input field-input-'+fieldName);
-			if(input.attr('type') == 'checkbox'){
-				if(currVal == 'yes' || currVal == true) 
-					input.attr('checked','checked');
-				else
-					input.removeAttr('checked');
-			} else if(fieldType == 'radios'){
-				var selector =  'input[name=x][value=' + currVal + ']';
-				var $element = $(selector,input); 
-				$element.attr('checked', true).button('refresh');
-				$element.trigger('change');
-			} else {
-				input.val(currVal);
-			}
-			
+			// Class are needed to update values
 			input.attr('placeholder',fieldDefVal);
+			input.addClass('field-editor-'+fieldType+' field-input field-input-'+fieldName);
+			
+			if(fieldType != 'checkboxfieldset') // Was added after
+				input.appendTo(htmlFieldCont);
+		
+			if(addAuxBtn){ // button for aux widget 
+				var btnAux = this._getAuxWidgetFor(input,fieldName,fieldValues,fieldCfg);
+				btnAux.appendTo(htmlFieldCont);
+			}			
+			
+			this._updateInputValue(input,fieldName,currVal);
+			
+			
+			// LISTENER TO UPDATE VALUES ON CONTEXT OBJECT
 			var listenerVisualComponent = $(this.visualComponent);
 			input.on(bindEvent,$.proxy(function(e){
 				var val = input.val();
 				if(input.attr('type') == 'checkbox'){
 					val = (input.prop('checked'))?'yes':'no';
+				} else if(input.attr('type') == 'radios'){
+					val = input.attr('value');
 				}
-				console.log('Cambiado ',fieldName,val);
+				
+				console.log('2 Cambiado ',fieldName,val);
 				if(!fieldJustCallBack)
 					fieldValues[fieldName] = val;
 				if(fieldCallBack)
@@ -385,18 +448,6 @@ var DescartesEditObjectPane = (function(){
 			},this));
 			
 			
-			if(fieldType != 'checkboxfieldset'){
-				input.appendTo(htmlFieldCont);
-			}
-			
-			if(fieldType == 'radios'){
-				input.buttonset();
-			}
-			
-			if(addAuxBtn){
-				var btnAux = this._getAuxWidgetFor(input,fieldName,fieldValues,fieldCfg);
-				btnAux.appendTo(htmlFieldCont);
-			}
 		}
 
 		//Label position

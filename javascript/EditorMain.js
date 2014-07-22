@@ -64,7 +64,7 @@ function generateDescartesEditorTestData(){
     	
     	 
     
-    "	<param name=\"A_01\" value=\"id='V3' vector='s&iacute;' evaluar='una-sola-vez' expresi&oacute;n='V3[0]=0;V3[1]=0;V3[2]=0'\">"+
+    "	<param name=\"A_01\" value=\"id='V3' vector='s&iacute;' evaluar='always' expresi&oacute;n='V3[0]=0;V3[1]=0;V3[2]=0'\">"+
     "	<param name=\"A_02\" value=\"id='V3_2' vector='s&iacute;' evaluar='una-sola-vez' expresi&oacute;n='V3[0]=0;V3[1]=0;V3[2]=0'\">"+
     "	<param name=\"A_03\" value=\"id='M4' matriz='s&iacute;' evaluar='una-sola-vez' expresi&oacute;n='M4[0,0]=0;M4[1,0]=0;M4[2,0]=0;M4[0,1]=0;M4[1,1]=0;M4[2,1]=0;M4[0,2]=0;M4[1,2]=0;M4[2,2]=0;'\">"+
     "	<param name=\"A_04\" value=\"id='M4_2' matriz='s&iacute;' evaluar='una-sola-vez' expresi&oacute;n='M4[0,0]=0;M4[1,0]=0;M4[2,0]=0;M4[0,1]=0;M4[1,1]=0;M4[2,1]=0;M4[0,2]=0;M4[1,2]=0;M4[2,2]=0;'\">"+
@@ -122,7 +122,7 @@ function generateDescartesEditorTestData(){
 "<param name=\"C_09\" value=\"id='test_1' type='numeric' gui='textfield' only_text='yes' region='interior' space='E1' name='text_1' expresion='(10,10,200,25)' value='&squot;&squot;' fixed='yes'\">"+
 "<param name=\"C_10\" value=\"id='test_2' type='numeric' gui='textfield' only_text='yes' region='interior' space='E1' name='text_2' expresion='(10,60,200,25)' value='&squot;Texto prueba&squot;' fixed='yes'\">"+
 "<param name=\"C_11\" value=\"id='activoTXT' type='numeric' gui='textfield' only_text='yes' region='interior' space='Sp2' name='Texto act' expresion='(activoTXT.x,activoTXT.y,100,100)' value='&squot;&squot;' incr='1' fixed='yes' action='calculate' parameter.font='Monospaced,PLAIN,12'\">"+
-"<param name=\"A_01\" value=\"id='V3' array='yes' evaluate='only-once' expresion='V3[0]=0;V3[1]=0;V3[2]=0'\">"+
+"<param name=\"A_01\" value=\"id='V3' array='yes' evaluate='always' expresion='V3[0]=0;V3[1]=0;V3[2]=0'\">"+
 "<param name=\"A_02\" value=\"id='V3_2' array='yes' evaluate='only-once' expresion='V3[0]=0;V3[1]=0;V3[2]=0'\">"+
 "<param name=\"A_03\" value=\"id='M4' matrix='yes' evaluate='only-once' expresion='M4[0,0]=0;M4[1,0]=0;M4[2,0]=0;M4[0,1]=0;M4[1,1]=0;M4[2,1]=0;M4[0,2]=0;M4[1,2]=0;M4[2,2]=0;'\">"+
 "<param name=\"A_04\" value=\"id='M4_2' matrix='yes' evaluate='only-once' expresion='M4[0,0]=0;M4[1,0]=0;M4[2,0]=0;M4[0,1]=0;M4[1,1]=0;M4[2,1]=0;M4[0,2]=0;M4[1,2]=0;M4[2,2]=0;'\">"+

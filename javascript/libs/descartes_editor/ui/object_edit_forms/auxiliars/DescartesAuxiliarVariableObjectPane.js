@@ -1,4 +1,4 @@
-var DescartesAuxiliarArrayEditPane = (function(){
+var DescartesAuxiliarVariableEditPane = (function(){
 	var _super_ = DescartesAuxiliarEditPane;
 
 	var Class = function(objectToBind,descartes_context){
@@ -26,51 +26,25 @@ var DescartesAuxiliarArrayEditPane = (function(){
 		delete origCfg.visualGroup;
 		delete origCfg.commentsGroup;
 		
-		origCfg.array = {
-				type		: 'checkbox', 
-				label		: 'Array',
-				value		: 'yes',
-				visible 	: false,
-				enable  	: false,
-				forceValue	: true,
-		};
-
-		origCfg.evaluate = {
-				type			: 'radios', 
-				label			: 'Evaluate',
-				value			: 'only-once',
-				options			: {
-					'only-once' : 'Only once',
-					always 		: 'Always',
-				},
-				forcevalue 		: true,
-		};
 		
-		origCfg.file = {
-				type		: 'file', 
-				label		: 'File',
-				value		: '',
-		};
-		
-		origCfg.size = {
-				type		: 'textfield', 
-				label		: 'Size',
-				value		: '3',
-		};
 
+		
 		
 		origCfg.expresion = {
-				type			: 'codetextarea', 
-				label			: 'Values algorithm',
-				labelposition	: 'top',
-				value			: 'yes',
-		};	
+				type		: 'textfield', 
+				label 		: '=',
+				value		: '0',
+				forcevalue	: true,
+		};
+
+		
+		
 		
 		
 		origCfg.commentsGroup = commentsGroup;	
 		return origCfg ;
 	};
 
-	DescartesEditObjectPane.registerHandler('auxiliar.array',Class);
+	DescartesEditObjectPane.registerHandler('auxiliar.variable',Class);
 	
 	return Class; })();

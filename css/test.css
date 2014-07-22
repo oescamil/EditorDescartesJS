@@ -249,11 +249,14 @@ html,body{
 div.field-container.label-right label{
 	float: right;
 	
+	
 }
 
-div.field-container.label-top label{
+div.field-container.label-top .field-label{
 	display: block;
 	clear: both;
+	width: auto;
+	margin-bottom: 5px;
 }
 
 div.field-container.label-top .field-input{
@@ -262,4 +265,16 @@ div.field-container.label-top .field-input{
 	clear: both;
 }
 
+div.field-container.label-top button.aux-editor{
+	margin-left: auto;
+	display: block;
+}
+
+/* FOR FIELD TYPE*/
+.descartes-object-editor-container .field-container.codetextarea--field-container{
+	
+}
+.descartes-object-editor-container .field-container.codetextarea--field-container button.aux-editor{
+
+}
 

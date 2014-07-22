@@ -1,4 +1,4 @@
-var DescartesAuxiliarArrayEditPane = (function(){
+var DescartesAuxiliarVariableEditPane = (function(){
 	var _super_ = DescartesAuxiliarEditPane;
 
 	var Class = function(objectToBind,descartes_context){
@@ -26,13 +26,24 @@ var DescartesAuxiliarArrayEditPane = (function(){
 		delete origCfg.visualGroup;
 		delete origCfg.commentsGroup;
 		
-		origCfg.array = {
+		
+
+		
+		
+		origCfg.expresion = {
+				type		: 'textfield', 
+				label 		: '=',
+				value		: '0',
+				forcevalue	: true,
+		};
+		
+		origCfg.constant = {
 				type		: 'checkbox', 
-				label		: 'Array',
+				label 		: 'Constant',
 				value		: 'yes',
-				visible 	: false,
-				enable  	: false,
-				forceValue	: true,
+				visible		: false,
+				enable 		: false, 
+				forcevalue	: true,
 		};
 
 		origCfg.evaluate = {
@@ -44,33 +55,14 @@ var DescartesAuxiliarArrayEditPane = (function(){
 					always 		: 'Always',
 				},
 				forcevalue 		: true,
-		};
+		};		
 		
-		origCfg.file = {
-				type		: 'file', 
-				label		: 'File',
-				value		: '',
-		};
-		
-		origCfg.size = {
-				type		: 'textfield', 
-				label		: 'Size',
-				value		: '3',
-		};
-
-		
-		origCfg.expresion = {
-				type			: 'codetextarea', 
-				label			: 'Values algorithm',
-				labelposition	: 'top',
-				value			: 'yes',
-		};	
 		
 		
 		origCfg.commentsGroup = commentsGroup;	
 		return origCfg ;
 	};
 
-	DescartesEditObjectPane.registerHandler('auxiliar.array',Class);
+	DescartesEditObjectPane.registerHandler('auxiliar.constant',Class);
 	
 	return Class; })();

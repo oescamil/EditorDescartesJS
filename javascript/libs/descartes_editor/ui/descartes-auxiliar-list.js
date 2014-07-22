@@ -755,7 +755,6 @@ $.widget( "descartes_editor.descartesAuxiliarsList",
 	_get_objects_type_list: function() {
 		var res = descartes.editor.ui_config.utils.getObjectTypeTree();
 		// We don't wanna auxiliars in this list
-		console.log("Los tipos de contenido: ",res);
 		delete res.control;
 		delete res.space;
 		delete res.graphic;
@@ -851,7 +850,6 @@ $.widget( "descartes_editor.descartesAuxiliarsList",
 				top += position.top;
 				
 			}
-			console.log("parent :",parent);
 			parent = parent.parent();
 		}
 		
