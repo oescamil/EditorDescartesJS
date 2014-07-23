@@ -609,7 +609,7 @@ $.widget( "descartes_editor.descartesAuxiliarsList",
 		var where = originalData[typeToInst[0]+"s"];
 		var cfgProtoObj = {};
 		
-		try{ cfgProtoObj = descartes.editor.ui_config.getCfgFor(typeToInst,this.options.data); } catch(e){ console.log(e);	}
+		try{ cfgProtoObj = descartes.editor.ui_config.getBindingCfgFor(typeToInst,this.options.data); } catch(e){ console.log(e);	}
 		var cfgObj = {};
 		if(cfgProtoObj){
 			for (var prop in cfgProtoObj) {

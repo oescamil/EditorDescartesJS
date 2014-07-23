@@ -20,6 +20,28 @@ var DescartesEditObjectPane = (function(){
 	var prototype = DescartesEditObjectPane.prototype;
 	
 		
+	
+	/**
+	 * 
+	 * @returns {___anonymous533_534}
+	 */
+	prototype.getSpaceOptionsList = function(){
+		var utils = descartes.editor.ui_config.utils;
+		var ctx = this.descartesContext;
+		var spaces = utils.getSpacesListForMenu(ctx);
+		var options = {};
+		for ( var i = 0, space; space = spaces[i]; i++) {
+			spaceType = space['#superType'][1];
+			if($.inArray(spaceType,['R2','R3']) == -1)
+				continue;
+			var id = space.id;
+			options[id] = id;
+			
+		}
+		return options;
+	};
+	
+	
 	/**
 	 * 
 	 */
@@ -59,7 +81,7 @@ var DescartesEditObjectPane = (function(){
 	prototype._updateValue = function (fieldName,newValue){
 		var input = $('.field-input-'+fieldName,this.visualComponent).get(0);
 		input = $(input); // Just First
-		this.updateInputValue(input,fieldName,newValue);
+		this._updateInputValue(input,fieldName,newValue);
 	};
 	
 	
@@ -88,20 +110,25 @@ var DescartesEditObjectPane = (function(){
 	 * 
 	 */
 	prototype._updateValueRadiosField = function (input,fieldName,newValue){
+		console.log("Actualizando el valor para un radios",fieldName,newValue,input);
 		var allSelector = 'input[name=radio_'+fieldName+']';
 		$allRadios = $(allSelector,input); 
 		$allRadios.removeAttr('checked');
 		
 		var $element = $(allSelector+'[value='+ newValue + ']',input);
+		
+		if($element.length <= 0){  // Value not in the list of options, select default
+			$element = $(allSelector+'[isdefault=1]',input);
+		}
+		
 		$element.prop('checked','checked');
-		
 		input.buttonset('refresh');
-		
 		// FORCE VISUAL UPDATE
 		var idR = "label[for="+$element.attr('id')+"]"; 
 		labelSel = 	$(idR,input);
 		labelSel.attr('aria-pressed','true');
 		labelSel.addClass('ui-state-active');
+		
 		$element.trigger('change');
 	};
 	
@@ -147,25 +174,16 @@ var DescartesEditObjectPane = (function(){
 		
 		var unknownFields = $.extend({},this.fields);
 		var someUnkownField = false; 
-		(function (cfg,unknownFields){
-			function checkRecursive(cfgRec,unknownFields){
-				for (var propKey in cfgRec) {
-					var obj = cfgRec[propKey];
-					if($.isFunction(obj) ||	!$.isPlainObject(obj))
-						continue;
-					if(obj.hasOwnProperty('children')){
-						checkRecursive(obj['children'],unknownFields);
-					} else {
-						if(unknownFields.hasOwnProperty(propKey)){
-							delete(unknownFields[propKey]);
-							someUnkownField = true;
-						}
-					}
-					
-				}
+		var knownFields = this.getBindingCfg();
+		
+		for (var propKey in unknownFields) {
+			if(!knownFields.hasOwnProperty(propKey)){
+				someUnkownField = true;
+			} else {
+				delete (unknownFields[propKey]);
 			}
-			checkRecursive(cfg,unknownFields);
-		})(cfgObj,unknownFields);
+		}
+		
 		
 		if(someUnkownField){
 			var childCount = 0;
@@ -219,7 +237,7 @@ var DescartesEditObjectPane = (function(){
 	 * 
 	 */
 	prototype.createVisualComponentForType = function(fieldName,fieldCfgOrig, fieldValues){
-		fieldCfg				= $.extend({label : fieldName},this.defaults,fieldCfgOrig);
+		var fieldCfg			= $.extend({label : fieldName},this.defaults,fieldCfgOrig);
 		var fieldType			= fieldCfg['type'];
 		var fieldDefVal			= fieldCfg['value'];
 		var fieldLabel			= fieldCfg['label'];
@@ -358,6 +376,10 @@ var DescartesEditObjectPane = (function(){
 				var name = 'radio_'+fieldName;
 				var rId = name+"_value"+currR; 
 				var htmlOpt = $('<input>', {type:'radio',	value : valOp,	name : name, id : rId});
+				console.log("Checando si el el default ", valOp,valOp,fieldDefVal == valOp);
+				if(fieldDefVal == valOp){
+					htmlOpt.attr('isdefault',"1");
+				}
 				var labelR = $('<label>' , {'for':rId, });
 				labelR.text(this.babel.t(currLabel));
 				htmlOpt.on('change',function(event){
@@ -438,7 +460,7 @@ var DescartesEditObjectPane = (function(){
 					val = input.attr('value');
 				}
 				
-				console.log('2 Cambiado ',fieldName,val);
+				console.log('Cambiado ',fieldName,val);
 				if(!fieldJustCallBack)
 					fieldValues[fieldName] = val;
 				if(fieldCallBack)
@@ -512,6 +534,41 @@ var DescartesEditObjectPane = (function(){
 		var btn = $("<button>",{'class':'aux-editor'}).append(wrapLabel).button(btnSettings);
 		btn.click(openDialog);
 		return btn;
+	};
+	
+	
+	
+	/**
+	 * 
+	 */
+	prototype.getBindingCfg = function(){
+		var cfgPane = this.getConfig();
+		var onlyBindingFields = {};
+		var clearFunction = function(origCfg,store){
+			function auxRecursive(origCfg,store){
+				for (var propKey in origCfg) {
+					var obj = origCfg[propKey];
+					if($.isFunction(obj) ||	!$.isPlainObject(obj))
+						continue;
+					if(obj.hasOwnProperty('children')){
+						auxRecursive(obj['children'],store);
+					} 
+					var isBindable =
+						$.inArray(obj.type,['fieldset','container']) ==-1 ||
+						!obj.hasOwnProperty('justcallback') || 
+						obj.justcallbak == true ;
+					
+					if(isBindable){
+						store[propKey] = obj;
+					}
+				}
+			};
+			
+			auxRecursive(origCfg,store); //check recursive for binding fields 
+		};
+		
+		clearFunction(cfgPane,onlyBindingFields);
+		return onlyBindingFields;
 	};
 	
 	/**

@@ -114,11 +114,12 @@
 		}
 		
 		
+		
 
 		this._completeRequiereInfoIfNeed(cfgScene);
 		
 		//Search for Algorithms (not algorithm functions) to translate into functions and add calls to INIT OR CALCULOS depends in
-		//the 'evluate' attribute.
+		//the 'evaluate' attribute.
 		var bodys = {init:{idx:1000,prefix:'',suffix:''},calc:{idx:1000,prefix:'',suffix:''}};
 		for ( var i = 0; i < cfgScene.auxiliars.length; i++) {
 			var auxCfg = cfgScene.auxiliars[i];
@@ -155,7 +156,7 @@
 		
 		cfgScene.program.initial = bodys.init.prefix+bodys.init.suffix;
 		cfgScene.program.calculus = bodys.calc.prefix+bodys.calc.suffix;
-		
+		console.log('Como quedo la configuracion leida : ',cfgScene);
 		return cfgScene;
 	};
 	
@@ -168,7 +169,7 @@
 	
 	
 	/**
-	 * Check if the objCfg define a function. The check prosses use the id properti to find it.
+	 * Check if the objCfg define a function. The check process use the id property to find it.
 	 */
 	scenesCfgProto.isFunction = function(objCfg){
 		var regExp = /\s*([a-zA-Z]|_)\w*\s*\(\s*(([a-zA-Z]|_)\w*\s*(,\s*([a-zA-Z]|_)\w*\s*)*)*\)/;
@@ -392,7 +393,7 @@
 				if(!tmpObj.hasOwnProperty(attrActName)){
 					tmpObj[attrActName] = {};
 				} else if(typeof(tmpObj[attrActName]) === 'string'){
-					tmpObj[attrActName] ={ value:tmpObj[attrActName] };
+					tmpObj[attrActName] = {value:tmpObj[attrActName] };
 				} 
 				tmpObj = tmpObj[attrActName];
 			}
@@ -400,7 +401,7 @@
 			toPutIn = tmpObj;
 		}
 		attrName = this.t(attrName);
-		if(toPutIn.hasOwnProperty(attrName) &&  (typeof(toPutIn[attrName]) !== 'string')){
+		if(toPutIn.hasOwnProperty(attrName) &&  $.isPlainObject(toPutIn[attrName])){
 			toPutIn[attrName].value = valueInn;
 		} else {
 			toPutIn[attrName] = valueInn; 
@@ -500,70 +501,61 @@
 		var currType = currCfg['#superType'];
 		var currMetaCfg = {};
 		try{
-			currMetaCfg = cfgMeta.getCfgFor(currType);
+			currMetaCfg = cfgMeta.getBindingCfgFor(currType);
 		} catch(e){
 			//console.warn("No se pudo obtener la configuración para :",currType);
 		}
 		var currCfgStr = '';
 		
-		var CfgForKeys = $.extend(currMetaCfg,currCfg);		
+		var CfgForKeys = $.extend(currCfg,currMetaCfg);		
 		
 		// We need get the keys in the order within cfgMeta
 		// Plus que extract object an serialize the params, for example in family, parameter in controls, etc.
-		var arraySortKeys =  [];
-		for (var key in CfgForKeys) {
+		var arraySortKeys = {};
+		for (var key2 in CfgForKeys) {
+			var key = key2;
 			if(!currCfg.hasOwnProperty(key))
 				continue;
-			
 			var value = currCfg[key];
-			var typeObj = (typeof value);
+			if(key == 'family'){ // family='t' t.steps = '0' t.interval = '[0,2]';
+				arraySortKeys[key] = value;
+				
+				key		= value; 
+				value	= currCfg[key];
+			}
 			
-			if(key == 'family'){
-				var fKey = value;
-				arraySortKeys.push(key);
-				if(currCfg.hasOwnProperty(fKey)){
-					var tmpObj = currCfg[fKey];
-					delete currCfg[fKey];
-					for ( var keyInt in tmpObj) {
-						var valInt = tmpObj[keyInt];
-						var newKey = fKey+"."+keyInt;
-						arraySortKeys.push();
-						currCfg[newKey] = valInt;
-						arraySortKeys.push(newKey);
-					}
-				}
-			} else if((typeObj != 'string') || (''+value) == '[object Object]'){
+			if($.isPlainObject(value)){
 				var tmpObj = value;
-				for (var keyInt in tmpObj) {
+				for (var keyInt in tmpObj) { // Just have 1 level of nested
 					var valInt = tmpObj[keyInt];
 					var newKey = key+((keyInt == 'value')?'':"."+keyInt);
-					arraySortKeys.push();
-					currCfg[newKey] = valInt;
-					arraySortKeys.push(newKey);
+					arraySortKeys[newKey] = valInt;
 				}
 			} else {
-				arraySortKeys.push(key);
+				arraySortKeys[key] = value;
 			}
 		}
 		
-		for (var i=0; i < arraySortKeys.length;i++) {
-			var key = arraySortKeys[i];
-			if(key.indexOf('#') == 0 || !currCfg.hasOwnProperty(key)){
+		for (var propName in arraySortKeys) {
+			if(propName.indexOf('#') == 0){
 				continue;
 			}
-			var value = currCfg[key];
-			var metaVal = currMetaCfg[key];
-			value = $.trim(value);
-			metaVal = (metaVal && metaVal.hasOwnProperty('value'))?metaVal.value:'';
-			if(value.length <= 0 || metaVal == value)
+			var value 			= $.trim(arraySortKeys[propName]);
+			var metaFieldCfg	= currMetaCfg[propName];
+			
+			metaVal 			= (metaFieldCfg && metaFieldCfg.hasOwnProperty('value'))?metaFieldCfg.value:'';
+			var forceVal 		= (metaFieldCfg && metaFieldCfg.hasOwnProperty('forcevalue'))?metaFieldCfg.forcevalue:false;
+			
+			if(value.length <= 0 && forceVal )
+				value = metaVal;
+			if(value.length < 1 || metaVal == value)
 				continue;
+			
 			var valueEncode = value.encodeHTML();
-			currCfgStr += key+"='"+valueEncode+"' "; 
+			currCfgStr = propName+"='"+valueEncode+"' "+currCfgStr; 
 			
 		}
 		currCfgStr = $.trim(currCfgStr);
-		
-		
 		return currCfgStr;
 	};
 	

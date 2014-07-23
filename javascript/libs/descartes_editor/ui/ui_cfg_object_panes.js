@@ -254,14 +254,27 @@ var nsUiCfg = descartes.editor.ui_config;
  */	
 nsUiCfg.getCfgFor = function(cfgPathArray,descartesContext){
 	try{
-			
 		var cfgPane = this.getClassHandlerFor(cfgPathArray);
 		var objHandler = new cfgPane({},descartesContext);
 		cfgPane = objHandler.getConfig();
-		console.log("Creando el objecto : ",cfgPane); 
+		cfgPane = $.extend(true,{},cfgPane);
+		return cfgPane;
+	} catch (e){
+		throw e;
+	}
+};
+
+
+
+nsUiCfg.getBindingCfgFor = function(cfgPathArray,descartesContext){
+	try{
+		
+		var cfgPane = this.getClassHandlerFor(cfgPathArray);
+		var objHandler = new cfgPane({},descartesContext);
+		cfgPane = objHandler.getBindingCfg();
 		cfgPane = $.extend(true,{},cfgPane);
 		cfgPane['#superType'] = cfgPathArray.slice(); 
-			
+		
 		return cfgPane;
 	} catch (e){
 		throw e;
@@ -315,10 +328,10 @@ nsUiCfg.panes = {
 				scrollbar	: DescartesNumericControlScrollEditPane,
 				button		: DescartesNumericControlButtonEditPane
 			},
-			text	: DescartesEditObjectPane, //TODO implementar
-			video	: DescartesEditObjectPane, //TODO implementar
-			audio 	: DescartesEditObjectPane, //TODO implementar
-			graphic : DescartesEditObjectPane, //TODO implementar
+			text	: DescartesEditObjectPane, 
+			video	: DescartesEditObjectPane, 
+			audio 	: DescartesEditObjectPane, 
+			graphic : DescartesEditObjectPane, 
 		},
 		
 		
@@ -329,11 +342,20 @@ nsUiCfg.panes = {
 			 * ******************************************************************
 			 */
 			R2 : {
-				equation	: DescartesEditObjectPane,  //TODO implementar
-				text		: DescartesEditObjectPane, //TODO implementar
-				curve		: DescartesEditObjectPane, //TODO implementar
-				
+				equation : DescartesGraphics2DEditPane,
+				curve	 : DescartesGraphics2DEditPane,
+				sequence : DescartesGraphics2DEditPane,
+				point	 : DescartesGraphics2DEditPane,
+				segment	 : DescartesGraphics2DEditPane,
+				arrow	 : DescartesGraphics2DEditPane,
+				polygon	 : DescartesGraphics2DEditPane,
+				arc		 : DescartesGraphics2DEditPane,
+				fill	 : DescartesGraphics2DEditPane,
+				text	 : DescartesGraphics2DEditPane,
+				image	 : DescartesGraphics2DEditPane,
+				macro	 : DescartesGraphics2DEditPane,
 			},
+			
 			/*
 			 * ******************************************************************
 			 * *                   GRAPHICS R3                                  *
@@ -360,12 +382,12 @@ nsUiCfg.panes = {
 		 * ******************************************************************
 		 */
 		auxiliar : {
-			array		: DescartesAuxiliarEditPane, //TODO implementar
-			matrix		: DescartesAuxiliarEditPane, //TODO implementar
-			constant 	: DescartesAuxiliarEditPane, //TODO implementar
-			variable	: DescartesAuxiliarEditPane, //TODO implementar
-			algorithm	: DescartesAuxiliarEditPane, //TODO implementar
-			'function'	: DescartesAuxiliarEditPane, //TODO implementar
+			array		: DescartesAuxiliarEditPane, 
+			matrix		: DescartesAuxiliarEditPane, 
+			constant 	: DescartesAuxiliarEditPane, 
+			variable	: DescartesAuxiliarEditPane, 
+			algorithm	: DescartesAuxiliarEditPane, 
+			'function'	: DescartesAuxiliarEditPane, 
 		},
 	};
 

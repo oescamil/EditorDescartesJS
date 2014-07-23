@@ -28,7 +28,14 @@ String.prototype.lpad = function(padString, length) {
  */
 function generateDescartesEditorTestData(){
 	exampleData = "<html>"+
-	"<body>"+
+	"<head>"+
+	"	<title>ARchivo de prueba </title>"+
+	'	<link href="css/dialogs.css" rel="stylesheet">'+
+	'	<script src="javascript/libs/codemirror-3.16//mode/javascript/javascript.js"></script>'+
+	"</head>"+
+	"<body>";
+	
+	exampleData +=
 	"<p align='center'>"+
 	"\n<applet name=\"Descartes\" width=920 height=560"+
     "  code=\"Descartes.class\""+
@@ -89,13 +96,10 @@ function generateDescartesEditorTestData(){
     
     "   <param name=\"Animaci&oacute;n\" value=\"pausa='100000' controles='s&iacute;' auto='s&iacute;' repetir='s&iacute;' inicio='x=2;b=3' hacer='llamadaAFuncion()' mientras='x!=2'\">"+
     "</applet>\n"+
-    "</p>"+
-	"</body>"+
-	"</html>"+
-	"";
+    "</p>";
 	
 	
-	exampleData = "<applet name=\"Descartes\" width=920 height=560"+
+	exampleData += "<applet name=\"Descartes\" width=920 height=560"+
     " code=\"Descartes.class\""+
     " codebase=\"./\""+
     " archive=\"lib/Descartes5.jar\""+
@@ -121,7 +125,7 @@ function generateDescartesEditorTestData(){
 "<param name=\"C_08\" value=\"id='n4' type='numeric' gui='button' space='E1' name='n4' fixed='yes' colour='222622' int-colour='f3f8ff' bold='yes' italics='yes' underlined='yes' action='message' parameter.font='Monospaced,BOLD,9'\">"+
 "<param name=\"C_09\" value=\"id='test_1' type='numeric' gui='textfield' only_text='yes' region='interior' space='E1' name='text_1' expresion='(10,10,200,25)' value='&squot;&squot;' fixed='yes'\">"+
 "<param name=\"C_10\" value=\"id='test_2' type='numeric' gui='textfield' only_text='yes' region='interior' space='E1' name='text_2' expresion='(10,60,200,25)' value='&squot;Texto prueba&squot;' fixed='yes'\">"+
-"<param name=\"C_11\" value=\"id='activoTXT' type='numeric' gui='textfield' only_text='yes' region='interior' space='Sp2' name='Texto act' expresion='(activoTXT.x,activoTXT.y,100,100)' value='&squot;&squot;' incr='1' fixed='yes' action='calculate' parameter.font='Monospaced,PLAIN,12'\">"+
+"<param name=\"C_11\" value=\"id='activoTXT' type='numeric' gui='textfield' only_text='yes' region='interior' space='Sp2' name='Texto act' expresion='(activoTXT.x,activoTXT.y,100,100)' value='&squot;&squot;' incr='1' fixed='yes' action='calculate' parameter='TEXTO DEL PARAMETRO' parameter.font='Monospaced,PLAIN,12'\">"+
 "<param name=\"A_01\" value=\"id='V3' array='yes' evaluate='always' expresion='V3[0]=0;V3[1]=0;V3[2]=0'\">"+
 "<param name=\"A_02\" value=\"id='V3_2' array='yes' evaluate='only-once' expresion='V3[0]=0;V3[1]=0;V3[2]=0'\">"+
 "<param name=\"A_03\" value=\"id='M4' matrix='yes' evaluate='only-once' expresion='M4[0,0]=0;M4[1,0]=0;M4[2,0]=0;M4[0,1]=0;M4[1,1]=0;M4[2,1]=0;M4[0,2]=0;M4[1,2]=0;M4[2,2]=0;'\">"+
@@ -145,7 +149,10 @@ function generateDescartesEditorTestData(){
 "<param name=\"Animation\" value=\"delay='10000' controls='yes' auto='yes' loop='yes' init='x=2;b=3' do='llamadaAFuncion()' while='x!=2'\">"+
 "_no_Java_"+"</applet>"+
 "";
-	
+
+	exampleData += "</body>"+
+	"</html>"+
+	"";
 	
 	return exampleData;
 }

@@ -104,9 +104,9 @@ var DescartesNumericControlButtonEditPane = (function(){
 						label		: 'Style',
 						attr 		: {'class' : 'inline-container'},
 						children	: {
-							bold 		: { type : 'checkbox', label:'Bold', 		value:'no', labelposition:'right'	},
-							italics 	: { type : 'checkbox', label:'Italics',		value:'no', labelposition:'right'	},
-							underlined	: { type : 'checkbox', label:'underline',	value:'no', labelposition:'right'	},
+							bold 		: { type : 'checkbox', label:'Bold', 		value:'no', },
+							italics 	: { type : 'checkbox', label:'Italics',		value:'no', },
+							underlined	: { type : 'checkbox', label:'underline',	value:'no', },
 						}
 					}
 				}

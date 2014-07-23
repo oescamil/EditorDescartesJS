@@ -56,7 +56,6 @@ var DescartesNumericControlTextfieldEditPane = (function(){
 	 * 
 	 */
 	proto.getConfig = function(){
-		console.log("LLamado desde el control Scroll");
 		var origCfg = _super_.prototype.getConfig.call(this);
 		
 		var operativeGroup	= origCfg.operativeGroup.children;

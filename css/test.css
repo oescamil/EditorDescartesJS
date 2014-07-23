@@ -72,6 +72,10 @@ html,body{
 	vertical-align: top;
 	
 }
+.descartes-editor-main .descartes-objects-list-objects table td.tree,
+.descartes-editor-main .descartes-objects-list-auxilars table td.tree{
+		background-color: whitesmoke;
+}
 .descartes-editor-main .descartes-objects-list-objects table td.toolbar,
 .descartes-editor-main .descartes-objects-list-auxilars table td.toolbar {
 	height: 5px;

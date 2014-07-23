@@ -43,8 +43,6 @@ $.widget( "descartes_editor.descartesPropEditorPane", {
 		try{
 			
 		var classHandler = descartes.editor.ui_config.getClassHandlerFor(stType);
-		console.log("Vamos a llamar el handler para : ",stType,classHandler);
-		
 		handler = new classHandler(object,context);
 		}catch(e){
 			console.log('NO SE ENCONTRO LA CLASE PARA EXPONER : ',stType,e);
@@ -60,8 +58,10 @@ $.widget( "descartes_editor.descartesPropEditorPane", {
 	 */
 	update: function (){
 		var editorPane = this.element.editor;
-		editorPane.updateValues();
-		return; // EXPERIMENTANDO CON EL NUEVO MODELO 
+		if(editorPane.updateValues)
+			editorPane.updateValues();
+		else 
+			console.log("No tiene el emtodo :",editorPane);
 	},
 	
 	// the constructor

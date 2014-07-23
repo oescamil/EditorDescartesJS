@@ -26,7 +26,7 @@ $.widget( "descartes_editor.descartesObjectsList", {
 			},
 			spaceSubContainers : 
 				{
-					controls 	: {label: 'Controls', forSpaceTypes : [['space'],['region']], contentTypes: [['control']]},
+					controls 	: {label: 'Controls', forSpaceTypes : [['space','R2'],['space','R3'],['region']], contentTypes: [['control']]},
 					graphics 	: {label: 'Graphics', forSpaceTypes : [['space','R2']], contentTypes: [['graphic','R2']]},
 					graphics3D 	: {label: 'Graphics', forSpaceTypes : [['space','R3']], contentTypes: [['graphic','R3']]},
 				},
@@ -588,7 +588,6 @@ $.widget( "descartes_editor.descartesObjectsList", {
 		 * 
 		 */
 		_callback_showCode: function(){
-			console.log(this.options.data);
 			var descCfg = this.options.data;
 			 
 			var babel = this.options.babel;
@@ -604,8 +603,8 @@ $.widget( "descartes_editor.descartesObjectsList", {
 			}
 			
 			//TODO falta implementar si es que se cambia algo en la configuración manualmente
-			var funcOk 		= $.proxy(function(cfgDialog){console.log("Ok",cfgDialog);});
-			var funcCancel 	= $.proxy(function(cfgDialog){console.log('Cancel',cfgDialog);});
+			var funcOk 		= $.proxy(function(cfgDialog){console.log("Ok \n",cfgDialog);});
+			var funcCancel 	= $.proxy(function(cfgDialog){console.log('Cancel  \n',cfgDialog);});
 			
 			descartes.editor.ui.utils.showTabbedDialogForm(cfgDialog,funcOk,funcCancel,550,350,babel);
 		},
@@ -748,7 +747,7 @@ $.widget( "descartes_editor.descartesObjectsList", {
 			var where = originalData[typeToInst[0]+"s"];
 			var cfgProtoObj = {};
 			
-			try{ cfgProtoObj =  descartes.editor.ui_config.getCfgFor(typeToInst,this.options.data); } catch(e){ console.log(e);	}
+			try{ cfgProtoObj =  descartes.editor.ui_config.getBindingCfgFor(typeToInst,this.options.data); } catch(e){ console.log(e);	}
 			var cfgObj = {};
 			if(cfgProtoObj){
 				for (var prop in cfgProtoObj) {
@@ -793,9 +792,7 @@ $.widget( "descartes_editor.descartesObjectsList", {
 				selectedNode = selectedNode[0];
 				var tmpCfgObj = $(selectedNode).data(this.objectCfgkey);
 				idxDest = $.inArray(tmpCfgObj,where);
-				console.log("Checando si esta : ",where,tmpCfgObj);
 			}
-			var canInsertInSpace = $.proxy(this,"_canInsertInSpace");
 			if(!isSpace){ //It's not a space, search for one space id to insert
 				var parentSp = false;
 				var parentNd = false;
@@ -815,16 +812,17 @@ $.widget( "descartes_editor.descartesObjectsList", {
 				if(parentSp == false) { //Selected don't have a suitable space, search for any
 					var liList = $(this.list).children('ul').children('li'); // get space node list, root nodes
 					 
-					liList.each(function(idx,element){
+					liList.each($.proxy(function(idx,element){
 						var tmpSp = $(element).data(this.objectCfgkey);
-						if(canInsertInSpace(cfgObj,tmpSp)){
+						console.log("Revisando otros espacios : ",tmpSp,this.objectCfgkey);
+						if(this._canInsertInSpace(cfgObj,tmpSp)){
 							parentSp = tmpSp.id;
 							parentNd = jstreeRef._get_node(element)[0];
 							idxDest = -1;
 							selectedNode = this._getContainerFromSpaceFor(cfgObj,parentNd);
 							return false;
 						}
-					});
+					},this));
 				}
 				
 				if(parentSp == false){
@@ -1136,6 +1134,18 @@ $.widget( "descartes_editor.descartesObjectsList", {
 						var whereIns = _testForContainers(treeObjInt,spType,treeObj.children,this);
 						if(whereIns != false){
 							whereIns.children.unshift(treeObjInt); //The list of object is traversed in inverse order
+							
+							if(spCfg['#superType'][0] == 'space'){
+								treeObjInt.metadata.objectCfg.space = spCfg.id;
+								if(spType[0] == 'control')
+									treeObjInt.metadata.objectCfg.region = 'interior';
+							} else {
+								if(spType[0] == 'control'){
+									treeObjInt.metadata.objectCfg.region = spCfg.id;
+									treeObjInt.metadata.objectCfg.space = '';
+								} 
+							}
+							
 							listObj.splice(j,1);
 						}
 					}

@@ -102,7 +102,6 @@ proto.getSpacesListForMenu = function (){
  * 
  */
 proto.getConfig = function(){
-	console.log('LLamando desde el hijo Numeric');
 	var origCfg = _super_.prototype.getConfig.call(this);
 	
 	

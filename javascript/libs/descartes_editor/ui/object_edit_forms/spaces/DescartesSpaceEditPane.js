@@ -109,7 +109,7 @@ var DescartesSpaceEditPane = (function(){
 
 		var  imageGroup = {
 				type	: 'fieldset',
-				label	: 'Position',
+				label	: 'Image',
 				children:[],
 		};
 		origCfg.imageGroup = imageGroup;

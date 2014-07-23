@@ -28,27 +28,6 @@ var DescartesControlEditPane = (function(){
 		return options;
 	};
 	
-	/**
-	 * 
-	 * @returns {___anonymous533_534}
-	 */
-	proto.getSpaceOptionsList = function(){
-		var utils = descartes.editor.ui_config.utils;
-		var ctx = this.descartesContext;
-		var spaces = utils.getSpacesListForMenu(ctx);
-		var options = {};
-		for ( var i = 0, space; space = spaces[i]; i++) {
-			spaceType = space['#superType'][1];
-			if($.inArray(spaceType,['R2','R3']) == -1)
-				continue;
-			var id = space.id;
-			options[id] = id;
-			
-		}
-		return options;
-	};
-	
-
 
 	/**
 	 * 
@@ -95,7 +74,6 @@ var DescartesControlEditPane = (function(){
 		visualGroup['draw-if']		= {type : 'codetextfield',	label : 'Draw if',				value:'',	};
 		visualGroup['active-if']	= {type : 'codetextfield',	label : 'Enable if',			value:'',	};
 	  
-		console.log("Vamos a regresaar la configuracion ", origCfg);
 		return origCfg ;
 	};
 
