@@ -64,7 +64,7 @@ function generateDescartesEditorTestData(){
     "	<param name=\"C_07\" value=\"id='n3'  name='n3' type='numeric' fixed='yes' space='Sp2'  \">"+
     "	<param name=\"C_08\" value=\"id='n4' type='numeric' gui='button' space='E1' name='n4' fixed='yes' colour='222622' int-colour='f3f8ff' bold='yes' italics='yes' underlined='yes' font size='18' action='message' parameter='A=1' parameter.font='Monospaced,BOLD,9'\">"+
     "   <param name=\"C_09\" value=\"id='test2' tipo='num&eacute;rico' interfaz='campo de texto' solo_texto='s&iacute;' regi&oacute;n='interior' espacio='E1' nombre='text2' expresi&oacute;n='(10,10,200,25)' valor='&squot;&squot;' fijo='s&iacute;' visible='s&iacute;'\">"+
-    "	<param name=\"C_10\" value=\"id='test3' tipo='numérico' interfaz='campo de texto' solo_texto='sí' región='interior' espacio='E1' nombre='text3' expresión='(10,60,200,25)' valor='&squot;Texto prueba&squot;' fijo='sí' visible='sí'\">"+
+    "	<param name=\"C_10\" value=\"id='test3' tipo='num&eacute;rico' interfaz='campo de texto' solo_texto='sí' región='interior' espacio='E1' nombre='text3' expresión='(10,60,200,25)' valor='&squot;Texto prueba&squot;' fijo='sí' visible='sí'\">"+
     "	<param name=\"C_11\" value=\"id='activoTXT' tipo='num&eacute;rico' interfaz='campo de texto' solo_texto='s&iacute;' regi&oacute;n='interior' espacio='Sp2' nombre='Texto' expresi&oacute;n='(activoTXT.x,activoTXT.y,100,100)' valor='&squot;&squot;' incr='1' fijo='s&iacute;' visible='s&iacute;' acci&oacute;n='calcular' par&aacute;metro='enTiempoReal=1' par&aacute;metro.fuente='Monospaced,PLAIN,12' pos_mensajes='centro'\">"+
     
     

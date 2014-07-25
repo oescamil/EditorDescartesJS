@@ -77,5 +77,7 @@ var DescartesNumericControlTextfieldEditPane = (function(){
 		*/
 		return origCfg ;
 	};
+	
+	//DescartesEditObjectPane.registerHandler('control.numeric.textfield',Class);
 
 	return Class; })();

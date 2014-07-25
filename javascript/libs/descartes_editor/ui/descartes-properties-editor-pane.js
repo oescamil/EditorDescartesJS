@@ -45,7 +45,8 @@ $.widget( "descartes_editor.descartesPropEditorPane", {
 		var classHandler = descartes.editor.ui_config.getClassHandlerFor(stType);
 		handler = new classHandler(object,context);
 		}catch(e){
-			console.log('NO SE ENCONTRO LA CLASE PARA EXPONER : ',stType,e);
+			alert("El tipo no se encontro :"+stType.join(','))
+			console.log('NO SE ENCONTRO LA CLASE PARA EXPONER : '+stType,e);
 			handler = new DescartesEditObjectPane(object,context);
 		}
 		

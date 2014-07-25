@@ -11,6 +11,64 @@ var DescartesGraphics2DEditPane = (function(){
 	proto = proto.prototype;
 
 	
+	
+	
+	
+	
+	
+	
+	/**
+	 * 
+	 * @param fieldName
+	 * @param value
+	 * @param fieldValues
+	 */
+	proto.updateFamilyParamFromInput = function(fieldName,value,fieldValues){
+		value = $.trim(value);
+		if(!value || value.length <= 0){
+			console.log("Invalid value for family param : ",value);
+			value = 't';
+			$input = $()
+		}
+		
+		
+		
+		
+		
+		var origVal = $.trim(fieldValues['family']);
+		var orgFamValues = {};
+		if(origVal && origVal.length > 0 ){
+			if(fieldValues.hasOwnProperty(origVal)){
+				orgFamValues = fieldValues[origVal];
+				delete fieldValues[origVal];
+			}
+		} 
+		
+		fieldValues[value] = orgFamValues;
+	};
+	
+	/**
+	 * 
+	 * @param fieldName
+	 * @param value
+	 * @param fieldValues
+	 */
+	proto.updateFamilyIntervalInitFromInput = function(fieldName,value,fieldValues){
+		var origVal = $.trim(fieldValues['family']);
+		if(origVal && origVal.length > 0 ){
+			var orgFamValues = {};
+			if(fieldValues.hasOwnProperty(origVal)){
+				orgFamValues = fieldValues[origVal];
+				delete fieldValues[origVal];
+			}
+			
+			fieldValues[origVal] = orgFamValues;
+		} else {
+			console.log("El valor del parametro para la familia no era un string valido. valor :",origVal);
+		}
+	};
+	
+	
 	/**
 	 * 
 	 */
@@ -68,6 +126,7 @@ var DescartesGraphics2DEditPane = (function(){
 						label 	: 'Parameter',
 						value	: 't',
 						justcallback: true,
+						callback : $.proxy(this.updateFamilyParamFromInput,this),
 					},
 					interevalGroup :{
 						type		: 'fieldset',	

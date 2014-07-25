@@ -380,7 +380,7 @@
 		var attr		= domAttribute;
 		var toPutIn		= cfgObjToAppend;
 		var attrName	= this.t(attr.name);
-		var valueInn	= attr.value.decodeHTML()	;
+		var valueInn	= this.t(attr.value.decodeHTML())	;
 		var superType 	= cfgObjToAppend['#superType'];
 		var isSpace 	= (superType) && (superType[0] == 'space');
 		
@@ -764,7 +764,7 @@
 		babel["fuente"] = babel["font"] = babel["iturri"] = babel["source"] = babel["fonte"] = "font";
 			//  babel["deshacer"] = babel["undo"] = babel["desf\u00E9s"] = babel["desegin"] = babel["d\u00E9faire"] = babel["desfacer"] = babel["desfazer"] = babel["desf\u00E9s"] = "";
 			//  babel["rehacer"] = babel["redo"] = babel["ref\u00E9s"] = babel["berregin"] = babel["refaire"] = babel["refacer"] = babel["refazer"] = babel["ref\u00E9s"] = "";
-		babel["num\u00E9rico"] = babel["numeric"] = babel["num\u00E8ric"] = babel["zenbakizko"] = babel["num\u00E9rique"] = "numeric";
+		babel["num\u00E9rico"] = babel["numeric"] = babel["num\u00E8ric"] = babel["zenbakizko"] = babel['numérico'] = babel["num\u00E9rique"] = "numeric";
 		babel["gr\u00E1fico"] = babel["graphic"] = babel["gr\u00E0fic"] = babel["grafiko"] = babel["graphique"] = "graphic";
 		babel["texto"] = babel["text"] = babel["testu"] = babel["texte"] = "text";
 			//  babel["pos"] = babel["pos"] = babel["pos"] = babel["pos"] = babel["pos"] = babel["pos"] = babel["pos"] = babel["pos"] = "";

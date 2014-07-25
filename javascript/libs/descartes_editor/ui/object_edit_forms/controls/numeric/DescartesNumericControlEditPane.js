@@ -12,6 +12,26 @@ proto = proto.prototype;
 
 var regSpcSep = '--';
 
+
+/**
+ * Override 
+ * @param input
+ * @param fieldName
+ * @param currVal
+ */
+proto._updateInputValue = function(input,fieldName,currVal){
+	var newValue = currVal;
+	if(fieldName == 'parameter'){
+		if(newValue && newValue.hasOwnProperty('value')){
+			newValue = newValue.value;
+		}
+	} 
+	
+	
+	_super_.prototype._updateInputValue(input,fieldName,newValue);
+};
+
+
 /**
  * 
  */
@@ -53,7 +73,10 @@ proto.getVisualGUIAlter = function(htmlNodeToAlter){
 	return htmlNodeToAlter;
 };
 
-
+/**
+ * 
+ * @returns {___anonymous1338_1481}
+ */
 proto.getCtrNumericGUIActions = function(){
 	return {
 		calculate	: 'Calculate',
@@ -66,7 +89,10 @@ proto.getCtrNumericGUIActions = function(){
 	};
 };
 
-
+/**
+ * 
+ * @returns {___anonymous1880_2015}
+ */
 proto.getSpacesListForMenu = function (){
 	
 	var regOpt = this.getRegionOptionsList();
@@ -97,6 +123,16 @@ proto.getSpacesListForMenu = function (){
 	};
 };
 
+proto.setValueToParameterFormField = function (fieldName,value,fieldValues){
+	
+	console.log("Valor original : ",fieldValues[fieldName]);
+	if(fieldName == 'parameter'){
+		if(!fieldValues.hasOwnProperty('parameter')){
+			fieldValues.parameter = {};
+		} 
+		fieldValues.parameter.value = value;
+	}
+};
 
 /**
  * 
@@ -134,8 +170,19 @@ proto.getConfig = function(){
 			type	: 'fieldset',
 			label	: 'Action',
 			children : {
-				action			: {type:'combobox',			label:'Action',					value:'',			options:$.proxy(this.getCtrNumericGUIActions,this)	},
-				parameter		: {type:'textfield',		label:'Parameter',				value:'',												},
+				action : {
+					type	: 'combobox',
+					label	: 'Action',
+					value	: '',
+					options	: $.proxy(this.getCtrNumericGUIActions,this),
+				},
+				parameter : {
+					type			: 'textfield',
+					label			: 'Parameter',
+					value			: '',
+					justCallBack	: true,
+					callback		: $.proxy(this.setValueToParameterFormField,this),
+				},
 			}
 	};
 	
