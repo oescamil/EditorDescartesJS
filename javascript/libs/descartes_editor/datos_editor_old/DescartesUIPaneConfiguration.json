@@ -1,5 +1,5 @@
 {
-		space : {
+		"space" : {
 			R2			: getCfgSpaceR2(),
 			R3 			: getCfgSpaceR3(),
 			HTMLIFrame	: getCfgSpaceHTMLIFrame(),

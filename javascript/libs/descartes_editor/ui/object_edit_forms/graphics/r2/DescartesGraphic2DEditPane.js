@@ -13,7 +13,7 @@ var DescartesGraphics2DEditPane = (function(){
 	
 	
 	
-	
+	var regExpInterval = /^\[(.+)\,(.+)\]$/;
 	
 	/**
 	 * OVERIDE
@@ -41,6 +41,53 @@ var DescartesGraphics2DEditPane = (function(){
 	
 	
 	
+	
+	/**
+	 * 
+	 */
+	proto._updateInputValue = function (input,fieldName,currVal){
+		
+		var familyName = this.fields['family'];
+		familyName = familyName || false;
+		
+		switch (fieldName) {
+			case 'family' :
+				$famParamIn = $('field-input-familyparam',this.visualComponent);
+				$famParamIn.val(currVal);
+				$famCheck = $('field-input-family',this.visualComponent);
+				$famCheck.val(familyName !== false); 
+				break;
+			
+			case familyName:
+				$initIn		= $('field-input-familyinit',	this.visualComponent);
+				$initEnd 	= $('field-input-familyend',	this.visualComponent);
+				$initSteps 	= $('field-input-familysteps',	this.visualComponent);
+				var interVal = currVal['interval'];
+				var regExp = regExpInterval;
+				
+				if(!regExp.test(interVal)){
+					console.log("Invalid value for field family interval : ",fieldValue,fieldFamilyValue,fieldValues);
+					interVal = '[0,1]';
+				} 
+				
+				var initVal = interVal.replace(regExp,'$1');
+				var initEnd = interVal.replace(regExp,'$2');
+				
+				$initIn.val(initVal);
+				$initEnd.val(initEnd);
+				$intiSteps.val(currVal['steps']);
+			break;
+	
+			default:
+				_super_.prototype._updateInputValue.call(this,input,fieldName,currVal);
+				break;
+		}
+		
+		
+		
+		
+		
+	};
 	/**
 	 * 
 	 * @param fieldName
@@ -86,7 +133,7 @@ var DescartesGraphics2DEditPane = (function(){
 		}
 		
 		var fieldValue = fieldFamilyValue.interval;
-		var regExp = /^\[(.+)\,(.+)\]$/;
+		var regExp = regExpInterval;
 		if(!regExp.test(fieldValue)){
 			console.log("Invalid value for field family interval : ",fieldValue,fieldFamilyValue,fieldValues);
 		} 
@@ -116,7 +163,7 @@ var DescartesGraphics2DEditPane = (function(){
 		}
 		
 		var fieldValue = fieldFamilyValue.interval;
-		var regExp = /^\[(.+)\,(.+)\]$/;
+		var regExp = regExpInterval;
 		if(!regExp.test(fieldValue)){
 			console.log("Invalid value for field family interval : ",fieldValue,fieldFamilyValue,fieldValues);
 		} 
