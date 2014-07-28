@@ -20,7 +20,6 @@ var DescartesNumericControlButtonEditPane = (function(){
 		
 		if(fieldName == 'fontStyleGroup'){
 			var styleChecks = $('.field-container',htmlNodeToAlter);
-			console.log('Vamos a modificar los botones fe font style',styleChecks);
 			styleChecks.each(function(idx, element){
 				$this = $(this);
 				var idCheck = (new Date().getTime())+"_CK_"+idx;
@@ -53,7 +52,6 @@ var DescartesNumericControlButtonEditPane = (function(){
 	 */
 	proto.getConfig = function(){
 		var origCfg = _super_.prototype.getConfig.call(this);
-		console.log("LLamado desde el control button");
 		
 		var operativeGroup	= origCfg.operativeGroup.children;
 		var visualGroup 	= origCfg.visualGroup.children;
@@ -89,7 +87,7 @@ var DescartesNumericControlButtonEditPane = (function(){
 				type : 'fieldset',
 				label : 'Font',
 				children: {
-					colour : {
+					color : {
 						type	: 'colorpicker',
 						label	: 'colour',
 						value	: '242222',

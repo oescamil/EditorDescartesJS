@@ -529,7 +529,7 @@ var DescartesEditObjectPane = (function(){
 					primary : "ui-icon-newwin",
 				},
 		};
-		var wrapLabel = $(descartes.editor.ui_config.utils.getWrapperTraductorLabel());
+		var wrapLabel = $("<span>");
 		wrapLabel.text('Open in a new window');
 		var btn = $("<button>",{'class':'aux-editor'}).append(wrapLabel).button(btnSettings);
 		btn.click(openDialog);
@@ -545,21 +545,24 @@ var DescartesEditObjectPane = (function(){
 		var cfgPane = this.getConfig();
 		var onlyBindingFields = {};
 		var clearFunction = function(origCfg,store){
+			
 			function auxRecursive(origCfg,store){
 				for (var propKey in origCfg) {
 					var obj = origCfg[propKey];
 					if($.isFunction(obj) ||	!$.isPlainObject(obj))
 						continue;
-					if(obj.hasOwnProperty('children')){
-						auxRecursive(obj['children'],store);
-					} 
-					var isBindable =
-						$.inArray(obj.type,['fieldset','container']) ==-1 ||
-						!obj.hasOwnProperty('justcallback') || 
-						obj.justcallbak == true ;
 					
+					var isBindable =
+						$.inArray(obj.type,['fieldset','container']) < 0	&&
+						!obj['justcallbak'] ; 
+						
 					if(isBindable){
 						store[propKey] = obj;
+					}
+					
+					if(obj.hasOwnProperty('children')){
+						var children = obj.children;
+						auxRecursive(children,store);
 					}
 				}
 			};

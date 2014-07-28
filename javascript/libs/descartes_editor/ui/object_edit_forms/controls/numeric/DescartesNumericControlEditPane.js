@@ -22,13 +22,12 @@ var regSpcSep = '--';
 proto._updateInputValue = function(input,fieldName,currVal){
 	var newValue = currVal;
 	if(fieldName == 'parameter'){
-		if(newValue && newValue.hasOwnProperty('value')){
-			newValue = newValue.value;
+		if(!newValue){
+			this.fields.parameter = {value : ''};
 		}
+		newValue = newValue.value; //Extrac the real value for parameter input
 	} 
-	
-	
-	_super_.prototype._updateInputValue(input,fieldName,newValue);
+	_super_.prototype._updateInputValue.call(this,input,fieldName,newValue);
 };
 
 
@@ -37,7 +36,7 @@ proto._updateInputValue = function(input,fieldName,currVal){
  */
 proto.getCtrNumericGUITypes = function (){
 	
-	var ctrsCfg = descartes.editor.ui_config.utils.getObjectTypeTree();;
+	var ctrsCfg = descartes.editor.ui_config.utils.getObjectTypeTree();
 	
 	var options = {};
 	for(var guiId in ctrsCfg.numeric){
@@ -50,6 +49,8 @@ proto.getCtrNumericGUITypes = function (){
  * 
  */
 proto.createVisualComponentForTypeAlter = function(fieldName, fieldCfg, fieldValues,htmlNodeToAlter){
+	_super_.prototype.createVisualComponentForTypeAlter.call(this,fieldName, fieldCfg, fieldValues,htmlNodeToAlter);
+
 	if(fieldName == 'regionOrSpace'){
 		var regionOrSpace = $('.field-input-regionOrSpace', htmlNodeToAlter);
 		var space 	= fieldValues.space || '';
@@ -62,7 +63,8 @@ proto.createVisualComponentForTypeAlter = function(fieldName, fieldCfg, fieldVal
 			value = 'region'+regSpcSep+region;
 		}
 		regionOrSpace.val(value);
-	}
+	} 
+	
 	return htmlNodeToAlter;
 };
 
@@ -70,7 +72,7 @@ proto.createVisualComponentForTypeAlter = function(fieldName, fieldCfg, fieldVal
  * 
  */
 proto.getVisualGUIAlter = function(htmlNodeToAlter){
-	return htmlNodeToAlter;
+	return _super_.prototype.getVisualGUIAlter.call(this,htmlNodeToAlter);
 };
 
 /**
@@ -123,6 +125,14 @@ proto.getSpacesListForMenu = function (){
 	};
 };
 
+
+/**
+ * Callback of parameter field. Handle paramter value (Object) and assing to correct <input>.
+ * Implementes callback from the DesccartesObjectEditorPane change value callback. 
+ * @param fieldName
+ * @param value
+ * @param fieldValues
+ */
 proto.setValueToParameterFormField = function (fieldName,value,fieldValues){
 	
 	console.log("Valor original : ",fieldValues[fieldName]);

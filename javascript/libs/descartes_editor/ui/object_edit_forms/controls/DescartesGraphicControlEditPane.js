@@ -46,7 +46,7 @@ var DescartesGraphicControlEditPane = (function(){
 				value	: '',
 		};
 		
-		visualGroup.colour = {
+		visualGroup.color = {
 			type	: 'textfield',
 			label	: 'Colour',
 			value	: '00406080',

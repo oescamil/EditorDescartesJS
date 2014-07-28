@@ -5,10 +5,14 @@
 	descartes.editor.ui_config.utils = (descartes.editor.ui_config.utils || {});
 	
 	var nsUtils = descartes.editor.ui_config.utils;
+
+	
+	
 /**
+ * //TODO TODELETE
  * Auxiliar function for config.
  */
-nsUtils.getAuxWidgetFor = function (inputDest,fieldName,objToBind,objWidgetCfg) {
+nsUtils.get_AuxWidgetFor = function (inputDest,fieldName,objToBind,objWidgetCfg) {
 		var dialogTitle = 
 			objWidgetCfg.hasOwnProperty(fieldName) 
 			&& objWidgetCfg[fieldName].hasOwnProperty('label') 
@@ -59,9 +63,9 @@ nsUtils.getAuxWidgetFor = function (inputDest,fieldName,objToBind,objWidgetCfg) 
 
 	
 /**
- * 
+ * //TODO TO DELETE 
  */	
-nsUtils.getWrapperTraductorLabel = function (){
+nsUtils.get_WrapperTraductorLabel = function (){
 		return '<span class="descartes-traductible-label"></span>';
 };
 
@@ -91,9 +95,9 @@ nsUtils.getObjectTypeTree = function(babel){
 	
 	
 /**
- * 
+ *  //TODO TO DELETE
  */	
-nsUtils.getCtrNumericGUITypes = function(babel){
+nsUtils.get_CtrNumericGUITypes = function(babel){
 		if(!babel){
 			babel = descartes.editor.ui_config.babel;
 		}
@@ -109,6 +113,7 @@ nsUtils.getCtrNumericGUITypes = function(babel){
 		}
 		return res;
 	},
+	
 /**
  * 
  */	
@@ -124,6 +129,8 @@ nsUtils.getSpacesListForMenu = function(context){
 		var res = $.extend(true,[],spaces);
 		return res;
 	},
+	
+	
 /**
  * 
  */	
@@ -154,97 +161,7 @@ nsUtils.getStackTrace =  function (){
 		return ret;
 };
 
-/**
- * 
- */
-function isInAdvanceMod(paneContext){
-	return (paneContext.hasOwnProperty('advance')) &&(paneContext.advance == true);
-}
 
-
-/**
- * 
- */
-function getCfgSpaceR2(){
-	var cfg = {};
-		cfg.id 			= {type : 'textfield',		label : 'ID', 						value : '', 		'#weight' : (idx=0),	};
-		cfg.type		= {type:'textfield',		label:'Type',						value:'R2',			'#weight' : (++idx),	};
-		cfg.left		= {type:'codetextfield',	label:'X',							value:'',			'#weight' : (++idx),	}; 
-		cfg.top			= {type:'codetextfield',	label:'Y',							value:'',			'#weight' : (++idx),	}; 
-		cfg.width		= {type:'textfield',		label:'Width',						value:'',			'#weight' : (++idx),	}; 
-		cfg.height		= {type:'textfield',		label:'Height',						value:'',			'#weight' : (++idx),	}; 
-		cfg['draw-if']	= {type:'codetextfield',	label:'Draw if',					value:'',			'#weight' : (++idx),	}; 
-		cfg.fixed		= {type:'checkbox',			label:'Fixed',						value:false,		'#weight' : (++idx),	}; 
-		cfg.scale		= {type:'textfield',		label:'Escale',						value:32,			'#weight' : (++idx),	}; 
-		cfg['O.x']		= {type:'textfield',		label:'Ox',							value:0,			'#weight' : (++idx),	}; 
-		cfg['O.y']		= {type:'textfield',		label:'Oy',							value:0,			'#weight' : (++idx),	}; 
-		cfg.bg_image	= {type:'image',			label:'Background image',			value:'',			'#weight' : (++idx),	};
-		cfg.bg_display 	= {type:'combobox',			label:'Background display type',	value:0,			'#weight' : (++idx),	}; 
-		cfg.background	= {type:'color', 			label:'Color',						value:'00f0f8fA',	'#weight' : (++idx),	}; 
-		cfg.net			= {type:'checkbox_color', 	label:'Net color',					value:'no,gray',	'#weight' : (++idx),	}; 
-		cfg.net10		= {type:'checkbox_color', 	label:'Net 10 color',				value:'no,gray',	'#weight' : (++idx),	}; 
-		cfg.axes		= {type:'checkbox_color', 	label:'Axes color',					value:'no,gray',	'#weight' : (++idx),	}; 
-		cfg.text		= {type:'checkbox_color', 	label:'Text color',					value:'no,gray',	'#weight' : (++idx),	}; 
-		cfg.sensitive_to_mouse_movements
-						= {type:'checkbox',			label:'Mouse move listener',		value:false,		'#weight' : (++idx),	};
-		cfg.numbers		= {type:'checkbox',			label:'Show escale',				value:false,		'#weight' : (++idx),	}; 
-		cfg['x-axis']	= {type:'textfield',		label:'X axis label',				value:'',			'#weight' : (++idx),	}; 
-		cfg['y-axis']	= {type:'textfield',		label:'Y axis label',				value:'',			'#weight' : (++idx),	};
-
-		cfg['#form']		= function(form,form_values,all_scene_data){}; 
-		cfg['#validate']	= function(form,form_values,all_scene_data){};
-	
-	return cfg;
-}
-
-/**
- * 
- */
-function getCfgSpaceR3(){
-	var cfg = getCfgSpaceR2();
-	cfg.type['value'] = 'R3';
-	delete cfg.net;
-	delete cfg.net10;
-	delete cfg.net;
-	delete cfg.net; 
-	delete cfg.net10; 
-	delete cfg.axes; 
-	delete cfg.text; 
-	delete	cfg.numbers; 
-	delete cfg['x-axis']; 
-	delete cfg['y-axis'];
-	cfg['#form']		= function(form,form_values,all_scene_data){};
-	cfg['#validate']	= function(form,form_values,all_scene_data){};
-	return cfg;		
-}
-
-
-/**
- * 
- */
-function getCfgSpaceHTMLIFrame(){
-	var cfg = getCfgSpaceR2();
-		cfg.type['value'] = 'HTMLIFrame';
-		cfg.file = {type:'file', label:'File', value:'', enable:true};
-		
-		delete  //Unset unused properties 
-			cfg.scale, 
-			cfg['O.x'], 
-			cfg['O.y'], 
-			cfg.fixed, 
-			cfg.net, 
-			cfg.net10, 
-			cfg.axes, 
-			cfg.text, 
-			cfg.numbers, 
-			cfg['x-axis'], 
-			cfg['y-axis'],
-			cfg.sensitive_to_mouse_movements;
-		
-		cfg['#form']		= function(form,form_values,all_scene_data){};
-		cfg['#validate']	= function(form,form_values,all_scene_data){};
-	return cfg;
-}
 
 
 var nsUiCfg = descartes.editor.ui_config;
@@ -290,12 +207,14 @@ nsUiCfg.getClassHandlerFor = function(cfgPathArray,descartesContext){
 		throw exception;
 		return;
 	}
+	
 	var cfgPane = descartes.editor.ui_config.panes;
 	var sType = cfgPathArray.join(',');
 	for ( var i = 0; i < cfgPathArray.length; i++) {
 		var cfgName = cfgPathArray[i];
 		if(!cfgPane.hasOwnProperty(cfgName) || !cfgPane[cfgName]){
-			var exception = {message : "Internal. Configuration for ["+sType+"] not found",stackTrace: nsUtils.getStackTrace()};
+			console.log("Ya no encontré : ",cfgName," en : ",cfgPane);
+			var exception = {message : "Internal. Configuration for ["+sType+"] not found",stackTrace: nsUtils.getStackTrace(), lastCfg:cfgPane};
 			throw exception;
 		}
 		cfgPane = cfgPane[cfgName];
@@ -310,9 +229,9 @@ nsUiCfg.panes = {
 		 * ******************************************************************
 		 */
 		space : {
-			R2			: DescartesEditObjectPane, //TODO implementar 
-			R3 			: DescartesEditObjectPane, //TODO implementar
-			HTMLIFrame	: DescartesEditObjectPane, //TODO implementar
+			R2			: DescartesEditObjectPane, 
+			R3 			: DescartesEditObjectPane, 
+			HTMLIFrame	: DescartesEditObjectPane, 
 		},
 		
 		/*
