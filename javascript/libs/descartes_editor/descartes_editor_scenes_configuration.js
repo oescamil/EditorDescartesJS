@@ -380,7 +380,7 @@
 		var attr		= domAttribute;
 		var toPutIn		= cfgObjToAppend;
 		var attrName	= this.t(attr.name);
-		var valueInn	= attr.value.decodeHTML()	;
+		var valueInn	= this.t(attr.value.decodeHTML(),true);
 		var superType 	= cfgObjToAppend['#superType'];
 		var isSpace 	= (superType) && (superType[0] == 'space');
 		
@@ -411,7 +411,13 @@
 	/**
 	 * Auxiliar function to translate strings from configuration
 	 */
-	scenesCfgProto.t = function(strToTranslate){
+	scenesCfgProto.t = function(strToTranslate,isParamVal)
+	{
+		if(isParamVal){
+			var isColour = strToTranslate == 'red';
+			strToTranslate = (isColour)?'rojo':strToTranslate;
+		}
+		
 		var res = this.babel[strToTranslate];
 		return (res)?res:strToTranslate;
 	};
@@ -723,7 +729,7 @@
 		babel["este"] = babel["east"] = babel["est"] = babel["ekialde"] = babel["leste"] = "east";
 		babel["oeste"] = babel["west"] = babel["oest"] = babel["hegoalde"] = babel["ouest"] = "west";
 		babel["exterior"] = babel["external"] = babel["kanpoalde"] = babel["externo"] = "external";
-		babel["expresi\u00F3n"] = babel["expresion"] = babel["expresi\u00F3"] = babel["adierazpen"] = babel["express\u00E3o"] = "expresion";
+		babel["expresi\u00F3n"] = babel["expression"] = babel["expresion"] = babel["expresi\u00F3"] = babel["adierazpen"] = babel["express\u00E3o"] = "expresion";
 		babel["tipo"] = babel["type"] = babel["tipus"] = babel["mota"] = "type";
 		babel["posici\u00F3n"] = babel["position"] = babel["posici\u00F3"] = babel["posizio"] = babel["posi\u00E7\u00E3o"] = "position";
 		babel["constricci\u00F3n"] = babel["constraint"] = babel["constricci\u00F3"] = babel["beharte"] = babel["constriction"] = babel["constrici\u00F3n"] = babel["restri\u00E7\u00E3o"] = "constraint";
@@ -764,7 +770,7 @@
 		babel["fuente"] = babel["font"] = babel["iturri"] = babel["source"] = babel["fonte"] = "font";
 			//  babel["deshacer"] = babel["undo"] = babel["desf\u00E9s"] = babel["desegin"] = babel["d\u00E9faire"] = babel["desfacer"] = babel["desfazer"] = babel["desf\u00E9s"] = "";
 			//  babel["rehacer"] = babel["redo"] = babel["ref\u00E9s"] = babel["berregin"] = babel["refaire"] = babel["refacer"] = babel["refazer"] = babel["ref\u00E9s"] = "";
-		babel["num\u00E9rico"] = babel["numeric"] = babel["num\u00E8ric"] = babel["zenbakizko"] = babel["num\u00E9rique"] = "numeric";
+		babel["num\u00E9rico"] = babel["numeric"] = babel["num\u00E8ric"] = babel["zenbakizko"] = babel['numérico'] = babel["num\u00E9rique"] = "numeric";
 		babel["gr\u00E1fico"] = babel["graphic"] = babel["gr\u00E0fic"] = babel["grafiko"] = babel["graphique"] = "graphic";
 		babel["texto"] = babel["text"] = babel["testu"] = babel["texte"] = "text";
 			//  babel["pos"] = babel["pos"] = babel["pos"] = babel["pos"] = babel["pos"] = babel["pos"] = babel["pos"] = babel["pos"] = "";

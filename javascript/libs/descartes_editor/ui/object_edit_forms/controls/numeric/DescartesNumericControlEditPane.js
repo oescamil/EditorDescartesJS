@@ -12,12 +12,31 @@ proto = proto.prototype;
 
 var regSpcSep = '--';
 
+
+/**
+ * Override 
+ * @param input
+ * @param fieldName
+ * @param currVal
+ */
+proto._updateInputValue = function(input,fieldName,currVal){
+	var newValue = currVal;
+	if(fieldName == 'parameter'){
+		if(!newValue){
+			this.fields.parameter = {value : ''};
+		}
+		newValue = newValue.value; //Extrac the real value for parameter input
+	} 
+	_super_.prototype._updateInputValue.call(this,input,fieldName,newValue);
+};
+
+
 /**
  * 
  */
 proto.getCtrNumericGUITypes = function (){
 	
-	var ctrsCfg = descartes.editor.ui_config.utils.getObjectTypeTree();;
+	var ctrsCfg = descartes.editor.ui_config.utils.getObjectTypeTree();
 	
 	var options = {};
 	for(var guiId in ctrsCfg.numeric){
@@ -30,6 +49,8 @@ proto.getCtrNumericGUITypes = function (){
  * 
  */
 proto.createVisualComponentForTypeAlter = function(fieldName, fieldCfg, fieldValues,htmlNodeToAlter){
+	_super_.prototype.createVisualComponentForTypeAlter.call(this,fieldName, fieldCfg, fieldValues,htmlNodeToAlter);
+
 	if(fieldName == 'regionOrSpace'){
 		var regionOrSpace = $('.field-input-regionOrSpace', htmlNodeToAlter);
 		var space 	= fieldValues.space || '';
@@ -42,7 +63,8 @@ proto.createVisualComponentForTypeAlter = function(fieldName, fieldCfg, fieldVal
 			value = 'region'+regSpcSep+region;
 		}
 		regionOrSpace.val(value);
-	}
+	} 
+	
 	return htmlNodeToAlter;
 };
 
@@ -50,10 +72,13 @@ proto.createVisualComponentForTypeAlter = function(fieldName, fieldCfg, fieldVal
  * 
  */
 proto.getVisualGUIAlter = function(htmlNodeToAlter){
-	return htmlNodeToAlter;
+	return _super_.prototype.getVisualGUIAlter.call(this,htmlNodeToAlter);
 };
 
-
+/**
+ * 
+ * @returns {___anonymous1338_1481}
+ */
 proto.getCtrNumericGUIActions = function(){
 	return {
 		calculate	: 'Calculate',
@@ -66,7 +91,10 @@ proto.getCtrNumericGUIActions = function(){
 	};
 };
 
-
+/**
+ * 
+ * @returns {___anonymous1880_2015}
+ */
 proto.getSpacesListForMenu = function (){
 	
 	var regOpt = this.getRegionOptionsList();
@@ -97,6 +125,24 @@ proto.getSpacesListForMenu = function (){
 	};
 };
 
+
+/**
+ * Callback of parameter field. Handle paramter value (Object) and assing to correct <input>.
+ * Implementes callback from the DesccartesObjectEditorPane change value callback. 
+ * @param fieldName
+ * @param value
+ * @param fieldValues
+ */
+proto.setValueToParameterFormField = function (fieldName,value,fieldValues){
+	
+	console.log("Valor original : ",fieldValues[fieldName]);
+	if(fieldName == 'parameter'){
+		if(!fieldValues.hasOwnProperty('parameter')){
+			fieldValues.parameter = {};
+		} 
+		fieldValues.parameter.value = value;
+	}
+};
 
 /**
  * 
@@ -134,8 +180,19 @@ proto.getConfig = function(){
 			type	: 'fieldset',
 			label	: 'Action',
 			children : {
-				action			: {type:'combobox',			label:'Action',					value:'',			options:$.proxy(this.getCtrNumericGUIActions,this)	},
-				parameter		: {type:'textfield',		label:'Parameter',				value:'',												},
+				action : {
+					type	: 'combobox',
+					label	: 'Action',
+					value	: '',
+					options	: $.proxy(this.getCtrNumericGUIActions,this),
+				},
+				parameter : {
+					type			: 'textfield',
+					label			: 'Parameter',
+					value			: '',
+					justCallBack	: true,
+					callback		: $.proxy(this.setValueToParameterFormField,this),
+				},
 			}
 	};
 	

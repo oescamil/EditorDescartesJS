@@ -11,10 +11,150 @@ var DescartesGraphics2DEditPane = (function(){
 	proto = proto.prototype;
 
 	
+	
+	
+	
+	
+	/**
+	 * OVERIDE
+	 * @returns {___anonymous455_456}
+	 */
+	proto.getBindingCfg = function(){
+		var onlyBindingFields = _super_.prototype.getBindingCfg.call(this);
+		onlyBindingFields.family = {
+				type 	: 'object',
+				value	: {parameter : 't',steps:8,interval:' [0,1]'},
+		};
+		
+		//Id we have family, we known the object 't' (Or whatever its name is	)
+		if(this.fields['family'] && this.fields['family'].length > 0 ){
+			var famParam = this.fields['family'];
+			onlyBindingFields[famParam] = {
+					type 	: 'object',
+					value	: {steps:8,interval:' [0,1]'},
+			};
+		}
+		
+		console.log("Regrsando como valores conocidos : ",onlyBindingFields);
+		return onlyBindingFields;
+	};
+	
+	
+	
+	/**
+	 * 
+	 * @param fieldName
+	 * @param value
+	 * @param fieldValues
+	 */
+	proto.updateFamilyParamFromInput = function(fieldName,value,fieldValues){
+		value = $.trim(value);
+		if(!value || value.length <= 0){
+			console.log("Invalid value for family param : ",value);
+			value = 't';
+			$input = $('.field-container--familyparam .field-input-sup-familyparam');
+			$input.val(value);
+		}
+		
+		var origVal = $.trim(fieldValues['family']);
+		var orgFamValues = {};
+		if(origVal && origVal.length > 0 ){
+			if(fieldValues.hasOwnProperty(origVal)){
+				orgFamValues = fieldValues[origVal];
+				delete fieldValues[origVal];
+			}
+		} 
+		
+		fieldValues[value] = orgFamValues;
+	};
+	
+	/**
+	 * 
+	 * @param fieldName
+	 * @param value
+	 * @param fieldValues
+	 */
+	proto.updateFamilyIntervalInitFromInput = function(fieldName,value,fieldValues){
+		var paramKey = (fieldValues['family'])?$.trim(fieldValues['family']):'t';
+		if(!fieldValue.hasOwnProperty(paramKey)){
+			fieldValue[paramKey] = {};
+		}
+		
+		var fieldFamilyValue = fieldValues[paramKey];
+		if(!fieldFamilyValue.hasOwnProperty('interval')){
+			fieldFamilyValue.interval = "[0,1]"; 
+		}
+		
+		var fieldValue = fieldFamilyValue.interval;
+		var regExp = /^\[(.+)\,(.+)\]$/;
+		if(!regExp.test(fieldValue)){
+			console.log("Invalid value for field family interval : ",fieldValue,fieldFamilyValue,fieldValues);
+		} 
+		
+		value = $.trim(value);
+		fieldValue = fieldValue.replace(regExp,"["+value+",$1]");
+		fieldFamilyValue.interval = fieldValue;
+		
+	};
+	
+	
+	/**
+	 * 
+	 * @param fieldName
+	 * @param value
+	 * @param fieldValues
+	 */
+	proto.updateFamilyIntervalEndFromInput = function(fieldName,value,fieldValues){
+		var paramKey = (fieldValues['family'])?$.trim(fieldValues['family']):'t';
+		if(!fieldValue.hasOwnProperty(paramKey)){
+			fieldValue[paramKey] = {};
+		}
+		
+		var fieldFamilyValue = fieldValues[paramKey];
+		if(!fieldFamilyValue.hasOwnProperty('interval')){
+			fieldFamilyValue.interval = "[0,1]"; 
+		}
+		
+		var fieldValue = fieldFamilyValue.interval;
+		var regExp = /^\[(.+)\,(.+)\]$/;
+		if(!regExp.test(fieldValue)){
+			console.log("Invalid value for field family interval : ",fieldValue,fieldFamilyValue,fieldValues);
+		} 
+		
+		value = $.trim(value);
+		fieldValue = fieldValue.replace(regExp,"[$1,"+value+"]");
+		fieldFamilyValue.interval = fieldValue;
+		
+	};
+	
+	/**
+	 * 
+	 * @param fieldName
+	 * @param value
+	 * @param fieldValues
+	 */
+	proto.updateFamilyIntervalStepsFromInput = function(fieldName,value,fieldValues){
+		var paramKey = (fieldValues['family'])?$.trim(fieldValues['family']):'t';
+		if(!fieldValue.hasOwnProperty(paramKey)){
+			fieldValue[paramKey] = {};
+		}
+		
+		var fieldFamilyValue = fieldValues[paramKey];
+		if(!fieldFamilyValue.hasOwnProperty('steps')){
+			fieldFamilyValue.steps = 8; 
+		} 
+		
+		fieldFamilyValue.steps = value;
+	};
+	
+	
+	
+	
 	/**
 	 * 
 	 */
 	proto.getConfig = function(){
+		
 		var origCfg = _super_.prototype.getConfig.call(this);
 		
 		var commentsGroup 	= origCfg.commentsGroup;
@@ -63,23 +203,24 @@ var DescartesGraphics2DEditPane = (function(){
 				value	: {param:'t',init:0,end:1,step:8},
 				value	: 'no',
 				children : {
-					param : {
+					familyparam : {
 						type 	: 'textfield',
 						label 	: 'Parameter',
 						value	: 't',
 						justcallback: true,
+						callback : $.proxy(this.updateFamilyParamFromInput,this),
 					},
 					interevalGroup :{
 						type		: 'fieldset',	
 						label		: 'Interval',
 						children	: {
-							init : {
+							familyinit : {
 								type 	: 'textfield',
 								label 	: 'Init',
 								value	: '0',
 								justcallback: true,
 							},
-							end : {
+							familyend : {
 								type 	: 'textfield',
 								label 	: 'End',
 								value	: '1',
@@ -87,7 +228,7 @@ var DescartesGraphics2DEditPane = (function(){
 							},
 						}
 					}, 
-					steps : {
+					familysteps : {
 						type 	: 'textfield',
 						label 	: 'Steps',
 						value	: '8',
@@ -106,7 +247,7 @@ var DescartesGraphics2DEditPane = (function(){
 		
 		origCfg.expresion = { 
 			type:'codetextfield',
-			label:'Expresion',
+			label:'Expression',
 			value:'x=y',
 		};
 		
@@ -115,8 +256,23 @@ var DescartesGraphics2DEditPane = (function(){
 				label:'Widthness',
 				value:'1',
 		};
+		origCfg.size	= {
+				type	: 'textfield',
+				label	: 'Size',
+				value	: '1',
+		};
 		
-		origCfg.colour = { 
+		origCfg.decimalGroup  = {
+			type		: 'fieldset',
+			label		: 'Decimals',
+			attr 		: {'class' : 'inline-container'},
+			children : {
+				decimals			: {type:'codetextfield',	label:'',				value:'2', },
+				fixed				: {type:'checkbox',			label:'Fixed',			value:true, labelposition : 'right'},
+			}
+		};
+		
+		origCfg.color = { 
 			type:'colorpicker',
 			label:'Colour',
 			value:'0020303a',

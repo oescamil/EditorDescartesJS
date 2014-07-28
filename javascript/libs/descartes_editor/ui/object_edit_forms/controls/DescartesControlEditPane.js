@@ -33,7 +33,7 @@ var DescartesControlEditPane = (function(){
 	 * 
 	 */
 	proto.getConfig = function(){
-		console.log("LLamado desde que tipo de Control : ", this.constructor, this);
+	//	console.log("LLamado desde que tipo de Control : ", this.constructor, this);
 		var origCfg = _super_.prototype.getConfig.call(this);
 		var operativeGroup	= origCfg.operativeGroup.children;
 		var visualGroup 	= origCfg.visualGroup.children;
