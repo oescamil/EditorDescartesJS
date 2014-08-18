@@ -282,3 +282,8 @@ div.field-container.label-top button.aux-editor{
 
 }
 
+
+.basePathContainer {
+	display: inline-block;
+	color: white;	
+}
