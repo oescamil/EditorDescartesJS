@@ -119,7 +119,7 @@ function generateDescartesEditorTestData(){
 "<param name=\"C_02\" value=\"id='n1' type='numeric' space='Sp2' name='n1' fixed='yes'\">"+
 "<param name=\"C_03\" value=\"id='g1' type='graphic' space='Sp2' fixed='yes'\">"+
 "<param name=\"C_04\" value=\"id='space_0.Ox' type='numeric' region='north' name='Ox' fixed='yes'\">"+
-"<param name=\"C_05\" value=\"id='n2' type='numeric' space='Sp2' name='n2' fixed='yes'\">"+
+"<param name=\"C_05\" value=\"id='n2' gg=\"hh\" type='numeric' space='Sp2' name='n2' fixed='yes'\">"+
 "<param name=\"C_06\" value=\"id='space_0.Oy' type='numeric' region='north' name='Oy' fixed='yes'\">"+
 "<param name=\"C_07\" value=\"id='n3' type='numeric' space='Sp2' name='n3' fixed='yes'\">"+
 "<param name=\"C_08\" value=\"id='n4' type='numeric' gui='button' space='E1' name='n4' fixed='yes' colour='222622' int-colour='f3f8ff' bold='yes' italics='yes' underlined='yes' action='message' parameter.font='Monospaced,BOLD,9'\">"+

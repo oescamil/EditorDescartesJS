@@ -178,11 +178,6 @@ descartes.editor.EditorDescartes.prototype.init = function(){
 		.button({text:false, icons: {primary:'ui-icon-disk'}});
     btnSave.appendTo(this.toolbar);		
     
-    		
-    		
-    
-    
-    
     var callbackOpen = function(e,fileName,textContent,filePath){
 		filePath = (filePath)?filePath:('file:///media/WinDoc/Documentos/Trabajo/LITE/2013/Herramientas_CONACyT/herramientas/ArrastrarSoltar/'+fileName);
 		console.log('Leyendo el arcivo ',fileName);
@@ -196,13 +191,48 @@ descartes.editor.EditorDescartes.prototype.init = function(){
 	
     btnSave.on('click',this,function(e){
     	var editor = e.data;
-    	
     	var content = editor.getHTMLString([],[],false,false);
     	descartes.editor.io.showDialogToSave(content,'Algo.html');
     });
     btnOpen.on('click',callbackOpen,function(e){
-    		descartes.editor.io.showDialogToOpen(e.data,'');
+    	descartes.editor.io.showDialogToOpen(e.data,'');
     });
+    
+    
+    var btnUpdatePrev = $('<button>',{text : this.babel.t("Update preview") })
+	.button({text:false, icons: {primary:'ui-icon-refresh'}});
+    btnUpdatePrev.appendTo(this.toolbar);
+    btnUpdatePrev.on('click',this, function(e){
+    	var editor = e.data;
+    	var documentBase = $("#basePathInput").val();
+    	if(documentBase.indexOf ('file://') != 0){
+    		documentBase = 'file://'+documentBase;
+    		$("#basePathInput").val(documentBase);
+    	}
+    	editor.scenesCfg.fileBase = documentBase;
+    	editor.updateIframeContent();
+    });
+    
+    
+    var btnTest = $('<button>',{text : this.babel.t("Update preview") })
+	.button({text:false, icons: {primary:'ui-icon-lightbulb'}});
+    btnTest.appendTo(this.toolbar);
+    btnTest.on('click',this, function(e){
+    	var editor = e.data;
+    	var iframe = $('#descartes-editor-prev');
+    	var contents = iframe.contents();
+    	var contentsElem = contents[0];
+    	var wyswygList = $('.WYSWYG_editor',contentsElem);
+    	console.log("Lista de wyswyg : ",wyswygList,contents);
+    	wyswygList.hide();
+    });
+    
+    
+    var basePathC = $('<div class="basePathContainer"><label>Base</label><input id="basePathInput" type="textfield" value = "" /></div>');
+    basePathC.appendTo(this.toolbar);
+    
+    
+    
     
     
     this.mainLayout = cfgOuterDescartesEditorLayout($('> .main-content',this.element));
@@ -391,19 +421,75 @@ descartes.editor.EditorDescartes.prototype.setSceneCfgActiva = function(sceneCfg
  * @param strCfgApplet
  * @returns {this.loadFromString}
  */
-descartes.editor.EditorDescartes.prototype.loadFromString = function(strCfgApplet,fileBase, fileName){
-	this.scenesCfg = new descartes.editor.ScenesConfiguration(strCfgApplet);
+descartes.editor.EditorDescartes.prototype.loadFromString_webview = function(strCfgApplet,fileBase, fileName){
+this.scenesCfg = new descartes.editor.ScenesConfiguration(strCfgApplet);
 	
 
 	
 	this.panes.center.html('');
+	var iframe = document.createElement('webview');
+	
+	$iframe = $(iframe);
+	$iframe.css('width','100%').css('height','100%');
+	$iframe.attr('name','appDescartesContainer');
+	$iframe.attr('id','descartes-player-content-webview');
+	$iframe.attr('src','a');
+	$iframe.appendTo(this.panes.center);
+	
+	iframe =  document.querySelector('#descartes-player-content-webview');
+
+	
+	var stringBase = document.baseURI;
+	stringBase = stringBase.substring(0,stringBase.lastIndexOf('/')+1);
+	
+	
+	iframe.addEventListener('contentload', function() {
+		iframe.executeScript({file: stringBase+"javascript/libs/jquery/jquery-1.10.2.min.js"									});
+		iframe.executeScript({file: stringBase+"javascript/libs/jquery/jquery-ui-1.10.3/js/jquery-ui-1.10.3.custom.js"    });
+		iframe.executeScript({file: stringBase+"javascript/libs/descartes.js"                                           });
+		iframe.executeScript({file: stringBase+"javascript/libs/descartes_editor/ui/descartes-editor-wyswyg.js"        });
+		console.log("El webview",iframe);
+
+		iframe.insertCSS({file: stringBase+'javascript/libs/jquery/jquery-ui-1.10.3/css/start/jquery-ui-1.10.3.custom.css'});
+		iframe.insertCSS({file:stringBase+'css/wysiwyg.css'});	
+	});
+	
+	iframe.src  = "file://"+fileBase+'/'+fileName;
+	
+	
+//	var htmlStr = this.getHTMLString(jsToAdd,cssToAdd,fileBase,false);
+	
+	this.setSceneCfgActiva(this.scenesCfg.scenes[0]);
+};
+
+/**
+ * 
+ * @param strCfgApplet
+ * @param fileBase
+ * @param fileName
+ */
+descartes.editor.EditorDescartes.prototype.loadFromString = function(strCfgApplet,fileBase, fileName){
+	this.scenesCfg = new descartes.editor.ScenesConfiguration(strCfgApplet);
+	
+	
+	
+	this.scenesCfg.fileBase = $("#basePathInput").val();
+	this.updateIframeContent();
+	this.setSceneCfgActiva(this.scenesCfg.scenes[0]);
+};
+
+/**
+ * 
+ */
+descartes.editor.EditorDescartes.prototype.updateIframeContent = function(){
+	this.panes.center.html('');
 	var iframe = $("<iframe>");
 	iframe.css('width','100%').css('height','100%');
 	iframe.attr('name','appDescartesContainer');
-	
+	iframe.attr('id','descartes-editor-prev');
 	iframe.appendTo(this.panes.center);
-	var contents = $(iframe).contents();
-	var contentsElem = contents[0];
+	
+	 
 	
 	
 	var stringBase = document.baseURI;
@@ -418,22 +504,22 @@ descartes.editor.EditorDescartes.prototype.loadFromString = function(strCfgApple
 	cssToAdd.push(stringBase+'javascript/libs/jquery/jquery-ui-1.10.3/css/start/jquery-ui-1.10.3.custom.css');
 	cssToAdd.push(stringBase+'css/wysiwyg.css');
 	
-	var htmlStr = this.getHTMLString(jsToAdd,cssToAdd,fileBase,false);
+	var htmlStr = this.getHTMLString(jsToAdd,cssToAdd,this.scenesCfg.fileBase,false);
 	
+	var contents = $(iframe).contents();
+	var contentsElem = contents[0];
 	
-	
-	contentsElem.open("text/html","replace");
-	contentsElem.write(htmlStr);
-	contentsElem.close();
-
-	
-	this.setSceneCfgActiva(this.scenesCfg.scenes[0]);
+	contentsElem.baseURI = this.scenesCfg.fileBase;
+	var iframeTag = iframe.get(0);
+	iframeTag.srcdoc  = htmlStr;
+	console.log(contentsElem.location);
 };
-
 
 descartes.editor.EditorDescartes.prototype.getHTMLString = function(jsLibsList,cssLibsList, fileBase,mantainRef){
 	var classKeyDelete = 'DESCARTES_EDITOR_DELETE';
 	var contentsElem = document.implementation.createHTMLDocument("Prerender");
+	
+	console.log("********************* File base : "+fileBase);
 	var parser = new DOMParser();
 	var htmlNew = contentsElem;
 	if(mantainRef){
